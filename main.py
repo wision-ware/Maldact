@@ -1,15 +1,16 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow
-import PyQt6 as qt
+import PyQt5.QtWidgets as qtw
+import PyQt5 as qt
 
-class MyWindow(QMainWindow):
+class Maldact_main(qtw.QMainWindow):
+
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('My Window')
+        self.setWindowTitle('Maldact')
         self.setGeometry(100, 100, 800, 600)
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = MyWindow()
+    app = qtw.QApplication(sys.argv)
+    window = Maldact_main()
     window.show()
     sys.exit(app.exec())
