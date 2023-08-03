@@ -1,9 +1,9 @@
 import sys
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
-from widgets import Ui_FileSelector, Ui_MModeButtons
-from ui.ui_switching import Main_modes
-import signal_manager as sm
+from widgets import UiFileSelector, UiMModeButtons
+from signal_manager import SignalManager as sm
+
 
 class MainWindow(qtw.QMainWindow):
 
@@ -13,7 +13,7 @@ class MainWindow(qtw.QMainWindow):
         self.setWindowTitle("Maldact")
 
         # create and set up the UI
-        self.ui = Ui_MModeButtons(self)
+        self.ui = UiMModeButtons(self)
         self.setCentralWidget(self.ui)
 
 def main():

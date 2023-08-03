@@ -1,26 +1,36 @@
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
 import os, sys
-import signal_manager as sm
-from ui.ui_switching import Main_modes
+from signal_manager import SignalManager as sm
+from ui.ui_builder import Transitions
+
 
 class UIManager:
 
-    def __init__(self, main_window):
+    @classmethod
+    def initialize(cls, main_window):
+        cls.main_window = main_window
+        cls.active_ui = None
+        Transitions.initialize(main_window, cls.active_ui)
 
-        self.main_window = main_window
-        self.active_ui = None
+    # switches from a chosen displayed widget to a different one
+    @classmethod
+    def switch_widget(cls, replaced, new):
 
-    def switch_ui(self, new_ui_class):
+        if cls.active_ui:
+            cls.disconnect_signals(cls.active_ui)
+        Transitions.replace_ui(replaced, new)
 
-        if self.active_ui:
-            self.disconnect_signals(self.active_ui)
-            self.main_window.centralWidget().layout().removeWidget(self.active_ui)
-            self.active_ui.deleteLater()
+    # switches from a chosen ui page to a different one
+    @classmethod
+    def switch_ui(cls, ui_class):
+        replaced = main_window.remove(Centr)
 
-        self.active_ui = new_ui_class()
-        self.main_window.centralWidget().layout().addWidget(self.active_ui)
+        if cls.active_ui:
+            cls.disconnect_signals(cls.active_ui)
+        Transitions.replace_ui(main_window.layout())
 
-    def disconnect_signals(self, ui):
+    @classmethod
+    def disconnect_signals(cls, ui):
         # Disconnect any signals that were connected to the previous UI
-        pass
+        sm.disconnect_signals(ui.key)

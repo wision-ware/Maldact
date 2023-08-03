@@ -1,9 +1,8 @@
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
 import os, sys
-import signal_manager as sm
-from ui.ui_switching import Main_modes
-from widgets import Ui_MModeButtons, Ui_FileSelector
+from signal_manager import SignalManager as sm
+from widgets import UiMModeButtons, UiFileSelector
 
 class Menu(qtw.QWidget):
 
@@ -12,6 +11,7 @@ class Menu(qtw.QWidget):
         super().__init__()
 
         main_layout = qtw.QVBoxLayout(self)
+        self.key = 'menu'
 
         # sublayout assembling
         ## sublayout for mode buttons
@@ -20,7 +20,8 @@ class Menu(qtw.QWidget):
 
         # main layout assembling
 
-        main_layout.addWidget(Ui_MModeButtons)
+        main_layout.addWidget(UiMModeButtons)
+
 
 class Training(qtw.QWidget):
 
@@ -29,6 +30,7 @@ class Training(qtw.QWidget):
         super().__init__()
 
         main_layout = qtw.QVBoxLayout(self)
+        self.key = 'train'
 
         # sublayout assembling
         ## sublayout for mode buttons
@@ -37,7 +39,8 @@ class Training(qtw.QWidget):
 
         # main layout assembling
 
-        main_layout.addWidget(Ui_FileSelector)
+        main_layout.addWidget(UiFileSelector)
+
 
 class Sorting(qtw.QWidget):
 
@@ -46,6 +49,7 @@ class Sorting(qtw.QWidget):
         super().__init__()
 
         main_layout = qtw.QVBoxLayout(self)
+        self.key = 'sort'
 
         # sublayout assembling
         ## sublayout for mode buttons

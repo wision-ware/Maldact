@@ -1,10 +1,10 @@
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
 import os, sys
-import signal_manager as sm
-from ui.ui_switching import Main_modes
+from signal_manager import SignalManager as sm
 
-class Ui_MModeButtons(qtw.QWidget):
+
+class UiMModeButtons(qtw.QWidget):
 
     def __init__(self, mw_instance):
 
@@ -33,7 +33,8 @@ class Ui_MModeButtons(qtw.QWidget):
 
         main_layout.addLayout(sub_layout_1)
 
-class Ui_FileSelector(qtw.QWidget):
+
+class UiFileSelector(qtw.QWidget):
 
     def __init__(self):
 

@@ -1,43 +1,50 @@
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
 import os, sys
-import signal_manager as sm
-from ui.ui_switching import Main_modes
+from ui.ui_builder import Transitions
 
 
-class Signal_manager(qtc.QObject):
+class SignalManager(qtc.QObject):
+
+    @classmethod
+    def custom_signal(cls, signal, parameter):
+        signal.emit(parameter)
+
+    @classmethod
+    def connect_signals(cls, ui):
+
+        for sigslot in uis_dict[ui]:
+            signal, slot = sigslot
+            signal.connect(slot)
+
+    @classmethod
+    def disconnect_signals(cls, ui):
+
+        for sigslot in uis_dict[ui]:
+            signal, slot = sigslot
+            signal.disconnect(slot)
 
     # ui signal dictionairy
-    uis_dict = {}
+    uis_dict = {
+        'menu': [],
+        'train': [],
+        'sort': []
+    }
 
     # menu signals
 
-    uis_dict['menu'] = []
-
     t_switch = qtc.pyqtSignal(object)
-    uis_dict['menu'].append([t_switch,Main_modes.switch_train])
+    uis_dict['menu'].append((t_switch,MainModes.switch_train))
     t_switch_trigger = lambda instance : custom_signal(t_switch,instance)
-    t_switch.connect(Main_modes.switch_train)
 
     c_switch = qtc.pyqtSignal(object)
-    uis_dict['menu'].append(c_switch)
+    uis_dict['menu'].append((c_switch, MainModes.switch_sort))
     c_switch_trigger = lambda instance : custom_signal(c_switch,instance)
 
     # training signals
 
-    uis_dict['train'] = []
+    #----
 
     # sorting signals
 
-    uis_dict['sort'] = []
-
-def custom_signal(signal,parameter):
-    signal.emit(parameter)
-
-def connect_signals(ui):
-    pass
-
-def disconnect_signals(ui):
-    pass
-
-signal_manager = Signal_manager
+    #----
