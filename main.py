@@ -2,7 +2,7 @@ import sys
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
 from widgets import UiFileSelector, UiMModeButtons
-from signal_manager import SignalManager as sm
+from ui_manager import UIManager as um
 
 
 class MainWindow(qtw.QMainWindow):
@@ -11,10 +11,12 @@ class MainWindow(qtw.QMainWindow):
 
         super().__init__()
         self.setWindowTitle("Maldact")
+        um.initialize(self)
 
-        # create and set up the UI
-        self.ui = UiMModeButtons(self)
-        self.setCentralWidget(self.ui)
+        # # create and set up the UI
+        # self.ui = UiMModeButtons(self)
+        # self.setCentralWidget(self.ui)
+
 
 def main():
 
@@ -23,6 +25,7 @@ def main():
     window.show()
 
     sys.exit(app.exec_())
+
 
 if __name__ == "__main__":
     main()

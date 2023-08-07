@@ -20,7 +20,7 @@ class Menu(qtw.QWidget):
 
         # main layout assembling
 
-        main_layout.addWidget(UiMModeButtons)
+        main_layout.addWidget(UiMModeButtons())
 
 
 class Training(qtw.QWidget):
@@ -39,7 +39,7 @@ class Training(qtw.QWidget):
 
         # main layout assembling
 
-        main_layout.addWidget(UiFileSelector)
+        main_layout.addWidget(UiFileSelector())
 
 
 class Sorting(qtw.QWidget):

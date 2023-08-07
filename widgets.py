@@ -1,12 +1,11 @@
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
 import os, sys
-from signal_manager import SignalManager as sm
 
 
 class UiMModeButtons(qtw.QWidget):
 
-    def __init__(self, mw_instance):
+    def __init__(self):
 
         super().__init__()
 
@@ -75,3 +74,7 @@ class UiFileSelector(qtw.QWidget):
             "All Files (*);;Text Files (*.txt)",
             options=options
         )
+
+
+class DefaultWidget(qtw.QWidget):
+    def __init__(self): super().__init__()
