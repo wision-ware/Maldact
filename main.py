@@ -1,7 +1,6 @@
 import sys
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
-from widgets import UiFileSelector, UiMModeButtons
 from ui_manager import UIManager as um
 
 
@@ -10,7 +9,10 @@ class MainWindow(qtw.QMainWindow):
     def __init__(self):
 
         super().__init__()
+
         self.setWindowTitle("Maldact")
+        self.resize(960,540)
+
         um.initialize(self)
 
         # # create and set up the UI
@@ -21,9 +23,11 @@ class MainWindow(qtw.QMainWindow):
 def main():
 
     app = qtw.QApplication(sys.argv)
+
+    app.setAttribute(qtc.Qt.AA_EnableHighDpiScaling)
+
     window = MainWindow()
     window.show()
-
     sys.exit(app.exec_())
 
 

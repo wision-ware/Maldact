@@ -3,7 +3,7 @@ import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
 import os
 import sys
-from widgets import DefaultWidget
+from ui.widgets import DefaultWidget
 
 
 class Transitions:
@@ -17,7 +17,9 @@ class Transitions:
         self.central_widget = self.window.centralWidget()
 
     def switch_ui(self, new_ui):
-        self.central_widget.setLayout(new_ui.layout())
+        self.central_widget = self.window.centralWidget()
+        self.window.setCentralWidget(new_ui)
+        self.central_widget.deleteLater()
         self.active_ui = new_ui
 
     @staticmethod  # may only be a temporary solution
