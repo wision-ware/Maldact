@@ -1,7 +1,8 @@
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
 import os, sys
-from ui.widgets import UiMModeButtons, UiFileSelector
+from ui.widgets import *
+
 
 class Menu(qtw.QWidget):
 
@@ -9,7 +10,7 @@ class Menu(qtw.QWidget):
 
         super().__init__()
 
-        main_layout = qtw.QVBoxLayout(self)
+        self.main_layout = qtw.QVBoxLayout(self)
         self.key = 'menu'
         self.subscribe_list = ["switch_modes"]
 
@@ -19,18 +20,21 @@ class Menu(qtw.QWidget):
 
         # main layout assembling
 
-        main_layout.addWidget(UiMModeButtons(
+        self.main_layout.addWidget(CustomHeader("Select mode"))
+
+        self.main_layout.addWidget(LargeButtons(
             button1 = (
-                "Train a classification model",
                 self.subscribe_list[0],
                 {"ui_cls":Training}
             ),
             button2 = (
-                "Classify a dataset",
                 self.subscribe_list[0],
                 {"ui_cls":Sorting}
             ),
-            label = "Select mode"
+            labels = (
+                "Train a classification model",
+                "Classify a dataset"
+            )
         ))
 
 
@@ -40,34 +44,57 @@ class Training(qtw.QWidget):
 
         super().__init__()
 
-        main_layout = qtw.QVBoxLayout(self)
+        self.main_layout = qtw.QVBoxLayout(self)
+        self.sub_layout1 = qtw.QHBoxLayout(self)
         self.key = 'train'
 
         # sublayout assembling
 
-        # ----
+        self.sub_layout1.addWidget(TitledLineEdit(
+            labels = ("Select architecture:","example: [:,50,50,50,5]"),
+            layout = 'v',
+            line_edited = "arch_line_edited"
+        ))
+        self.sub_layout1.addWidget(TitledDropdown(
+            labels = ("Select gradient descent type:", "Mini Batch"),
+            layout = 'v',
+            options = (
+                "Batch",
+                "Mini Batch",
+                "Stochastic"
+            )
+        ))
 
         # main layout assembling
+        # header
+        self.main_layout.addWidget(CustomHeader("Model training mode"))
 
-        self.title = qtw.QLabel("Model training mode")
-        self.title.setStyleSheet("font-size: 16px")
-        main_layout.addWidget(self.title, alignment=qtc.Qt.AlignCenter)
+        # content
+        self.main_layout.addWidget(TitledLineEdit(
+            line_edited = "model_name_entered",
+            labels = ("Select model name:", "model1"),
+        ))
 
-        #TODO model name line edit
-
-        main_layout.addWidget(UiFileSelector(
+        self.main_layout.addWidget(FileSelector(
             file_selected = "tr_samples_selected",
-            label = "Select training data directory",
+            labels = "Select training data directory:",
             directory = True
         ))
 
-        main_layout.addWidget(UiFileSelector(
+        self.main_layout.addWidget(FileSelector(
             file_selected = "parameter_dir_selected",
-            label = "Select a directory for your model",
+            labels = "Select a directory for your model:",
             directory = True
         ))
 
-        main_layout.addStretch(1)
+        self.main_layout.addLayout(self.sub_layout1)
+
+        # footer
+        self.main_layout.addStretch(1)
+        self.main_layout.addWidget(CustomFooter((
+            ("back to menu", "switch_modes", {"ui_cls":Menu}),
+            "start training"
+        )))
 
 
 class Sorting(qtw.QWidget):
@@ -76,7 +103,7 @@ class Sorting(qtw.QWidget):
 
         super().__init__()
 
-        main_layout = qtw.QVBoxLayout(self)
+        self.main_layout = qtw.QVBoxLayout(self)
         self.key = 'sort'
 
         # sublayout assembling
@@ -85,19 +112,22 @@ class Sorting(qtw.QWidget):
 
         # main layout assembling
 
-        self.title = qtw.QLabel("Data classification mode")
-        self.title.setStyleSheet("font-size: 16px")
-        main_layout.addWidget(self.title, alignment=qtc.Qt.AlignCenter)
+        self.main_layout.addWidget(CustomHeader("Data classification mode"))
 
-        main_layout.addWidget(UiFileSelector(
+        self.main_layout.addWidget(FileSelector(
             file_selected = "sample_dir_selected",
-            label = "Select directory with samples for classification",
+            labels = "Select directory with samples for classification:",
             directory = True
         ))
 
-        main_layout.addWidget(UiFileSelector(
-            file_selected="model_selected",
-            label="Select your trained model"
+        self.main_layout.addWidget(FileSelector(
+            file_selected = "model_selected",
+            labels ="Select your trained model:"
         ))
 
-        main_layout.addStretch(1)
+        self.main_layout.addStretch(1)
+
+        self.main_layout.addWidget(CustomFooter((
+            ("back to menu", "switch_modes", {"ui_cls":Menu}),
+            "start classification"
+        )))

@@ -14,7 +14,10 @@ class UIManager:
         cls.active_ui = cls.main_window.centralWidget()
         cls.transitions = Transitions(main_window, cls.active_ui)
         cls.switch_ui(Menu)
+
+        # subscribe for events
         eb.subscribe("switch_modes", cls.switch_ui)
+
 
     # switches from a chosen displayed widget to a different one
     @classmethod

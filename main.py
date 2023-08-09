@@ -11,7 +11,7 @@ class MainWindow(qtw.QMainWindow):
         super().__init__()
 
         self.setWindowTitle("Maldact")
-        self.resize(960,540)
+        self.resize(960, 540)
 
         um.initialize(self)
 
