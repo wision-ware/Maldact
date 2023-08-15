@@ -1,3 +1,4 @@
+import inspect
 
 class EventBus:
 
@@ -26,4 +27,6 @@ class EventBus:
 
         if event in cls._subscriptions:
             for callback in cls._subscriptions[event]:
+                num_args = len(inspect.signature(callback).parameters)
+                args = args[:num_args]
                 callback(*args, **kwargs)

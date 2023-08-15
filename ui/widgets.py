@@ -168,10 +168,11 @@ class TitledLineEdit(qtw.QWidget):
         self.line_edited = line_edited
 
         default_labels = (None, None)
+        default_line_edited = (None, {})
         if isinstance(labels, str):
             self.labels = (labels,) + default_labels[1:]
-        else:
-            self.labels = labels + default_labels[len(labels)-1:]
+            self.line_edited = (line_edited,) + defalt_line_edited[1:]
+        else: self.labels = labels
 
         match layout:
             case "v":
@@ -200,7 +201,7 @@ class TitledLineEdit(qtw.QWidget):
 
 class TitledDropdown(qtw.QWidget):
 
-    def __init__(self, option_changed=(None, {}), labels=(None, None), options=None, layout="h"):
+    def __init__(self, option_changed=(None, {}), labels=None, options=None, layout="h"):
 
         super().__init__()
         self.option_selected = ""  # attribute holding the current selected option
@@ -208,8 +209,10 @@ class TitledDropdown(qtw.QWidget):
         self.options = options  # tuple with the options
 
         default_labels = (None, None)
+        default_option_changed = (None, {})
         if isinstance(labels, str):
             labels = (labels,) + default_labels[1:]
+            self.option_changed = (option_changed,) + default_option_changed[1:]
 
         match layout:
             case "v":
@@ -224,8 +227,8 @@ class TitledDropdown(qtw.QWidget):
         self.dropdown = qtw.QComboBox(self)
         for i, item in enumerate(options):
             self.dropdown.addItem(item)
-
         self.dropdown.currentIndexChanged.connect(self.on_dropdown_selected)
+        self.main_layout.addWidget(self.dropdown)
 
     def on_dropdown_selected(self):
         self.option_selected = self.dropdown.currentText()
@@ -233,4 +236,10 @@ class TitledDropdown(qtw.QWidget):
 
 
 class DefaultWidget(qtw.QWidget):
-    def __init__(self): super().__init__()
+    def __init__(self, layout='h'):
+        super().__init__()
+        match layout:
+            case 'h':
+                self.main_layout = qtw.QHBoxLayout()
+            case 'v':
+                self.main_layout = qtw.QVBoxLayout()

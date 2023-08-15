@@ -17,13 +17,13 @@ class UIManager:
 
         # subscribe for events
         eb.subscribe("switch_modes", cls.switch_ui)
-
+        eb.subscribe("switch_widgets", cls.switch_widget)
 
     # switches from a chosen displayed widget to a different one
     @classmethod
-    def switch_widget(cls, replaced, new):
+    def switch_widget(cls, replaced, new, parent, stored=None):
         cls.disconnect_signals(replaced)
-        cls.transitions.switch_widget(replaced, new)
+        cls.transitions.replace_widget(replaced, new, parent, stored=stored)
         cls.connect_signals(new)
 
     # switches from a chosen ui page to a different one
@@ -46,10 +46,12 @@ class UIManager:
     def disconnect_signals(cls, ui):
         from signal_manager import SignalManager as sm
         # Disconnect any signals that were connected to the previous UI
-        sm.disconnect_signals(ui.key)
+        try: sm.disconnect_signals(ui.key)
+        except: pass
 
     @classmethod
     def connect_signals(cls, ui):
         from signal_manager import SignalManager as sm
         # Disconnect any signals that were connected to the previous UI
-        sm.connect_signals(ui.key)
+        try: sm.connect_signals(ui.key)
+        except: pass

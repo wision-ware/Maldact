@@ -15,6 +15,7 @@ class Transitions:
             self.window.setCentralWidget(DefaultWidget())
         self.active_ui = active_ui
         self.central_widget = self.window.centralWidget()
+        self.stored_instances = {}
 
     def switch_ui(self, new_ui):
         self.central_widget = self.window.centralWidget()
@@ -22,13 +23,33 @@ class Transitions:
         self.central_widget.deleteLater()
         self.active_ui = new_ui
 
-    @staticmethod  # may only be a temporary solution
-    def switch_widget(old_widget, new_widget_self):
-        if isinstance(old_widget, QtWidgets.QLayout):
-            replace_layout(old_widget, old_widget, new_widget_self())
-        elif isinstance(old_widget, QtWidgets.QWidget):
-            layout = old_widget.layout()
-            replace_widget_in_layout(layout, old_widget, new_widget_self())
+    def replace_widget(self, old_widget, new_widget, parent, stored=None):
+        # Get the parent of the old widget
+        parent_layout = parent
+        if old_widget is None:
+            old_widget = self.stored_instances[stored]
+
+        if parent_layout is not None:
+            # Find the index of the old widget in the parent layout
+            index = parent_layout.indexOf(old_widget)
+
+            if index != -1:
+                # Remove the old widget from the parent layout
+                parent_layout.removeWidget(old_widget)
+                old_widget.deleteLater()
+
+                # Insert the new widget at the same index
+                parent_layout.insertWidget(index, new_widget)
+                if stored is not None:
+                    self.stored_instances[stored] = new_widget
+
+    @classmethod  # may only be a temporary solution
+    def switch_widget(cls, old_widget, new_widget_self):
+        if isinstance(old_widget, qtw.QLayout):
+            replace_layout(old_widget, old_widget, new_widget_self)
+        elif isinstance(old_widget, qtw.QWidget):
+            cls.replace_widget_in_layout(old_widget, new_widget_self)
+
 
     @staticmethod
     def replace_layout(old_layout, new_layout):

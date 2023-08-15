@@ -15,10 +15,6 @@ class MainWindow(qtw.QMainWindow):
 
         um.initialize(self)
 
-        # # create and set up the UI
-        # self.ui = UiMModeButtons(self)
-        # self.setCentralWidget(self.ui)
-
 
 def main():
 
