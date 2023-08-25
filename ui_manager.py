@@ -22,8 +22,10 @@ class UIManager:
     # switches from a chosen displayed widget to a different one
     @classmethod
     def switch_widget(cls, replaced, new, parent, stored=None):
+
         cls.disconnect_signals(replaced)
         cls.transitions.replace_widget(replaced, new, parent, stored=stored)
+        cls.subs_cleanup(cls.transitions.central_widget)
         cls.connect_signals(new)
 
     # switches from a chosen ui page to a different one
@@ -36,11 +38,12 @@ class UIManager:
         elif isinstance(ui_class, type(None)):
             return
 
+        cls.new = ui_class()
         if cls.active_ui:
             cls.disconnect_signals(cls.active_ui)
 
-        cls.transitions.switch_ui(ui_class())
-        cls.connect_signals(ui_class())
+        cls.transitions.switch_ui(cls.new)
+        cls.connect_signals(cls.new)
 
     @classmethod
     def disconnect_signals(cls, ui):
@@ -54,4 +57,9 @@ class UIManager:
         from signal_manager import SignalManager as sm
         # Disconnect any signals that were connected to the previous UI
         try: sm.connect_signals(ui.key)
+        except: pass
+
+    @classmethod
+    def subs_cleanup(cls, ui):
+        try: ui.cleanup()
         except: pass

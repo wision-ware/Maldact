@@ -24,15 +24,15 @@ class Menu(qtw.QWidget):
         self.main_layout.addWidget(CustomHeader("Select mode"))
 
         self.main_layout.addWidget(LargeButtons(
-            button1 = (
+            button1=(
                 self.subscribe_list[0],
-                {"ui_cls":Training}
+                {"ui_cls": Training}
             ),
-            button2 = (
+            button2=(
                 self.subscribe_list[0],
-                {"ui_cls":Sorting}
+                {"ui_cls": Sorting}
             ),
-            labels = (
+            labels=(
                 "Train a classification model",
                 "Classify a dataset"
             )
@@ -54,14 +54,15 @@ class Training(qtw.QWidget):
         # sublayout 1
 
         self.sub_layout1.addWidget(TitledLineEdit(
-            labels = ("Select architecture:","example: [:,50,50,50,5]"),
-            layout = 'v',
-            line_edited = "arch_line_edited"
+            labels=("Select architecture:", "example: [:,50,50,50,5]"),
+            layout='v',
+            line_edited="arch_line_edited"
         ))
         self.sub_layout1.addWidget(TitledDropdown(
-            labels = "Select gradient descent type:",
-            layout = 'v',
-            options = (
+            labels="Select gradient descent type:",
+            layout='v',
+            option_changed='_',
+            options=(
                 "Batch",
                 "Mini Batch",
                 "Stochastic"
@@ -77,15 +78,15 @@ class Training(qtw.QWidget):
             "Fixed number of iterations"
         )
         self.sub_layout2.addWidget(TitledDropdown(
-            option_changed = "train_switch_ledit",
-            labels = "Select termination condition:",
-            layout = 'v',
-            options = options
+            option_changed=("switch_channel1", None),
+            labels="Select termination condition:",
+            layout='v',
+            options=options
         ))
 
         self.switched_linedit = TitledLineEdit()
         self.switched_linedit.setEnabled(False)
-        self.sub_layout2.addWidget(self.switched_linedit, alignment=qtc.Qt.AlignBottom)
+        self.sub_layout2.addWidget(self.switched_linedit)
 
         # main layout assembling
         # header
@@ -93,20 +94,20 @@ class Training(qtw.QWidget):
 
         # content
         self.main_layout.addWidget(TitledLineEdit(
-            line_edited = "model_name_entered",
-            labels = ("Select model name:", "model1"),
+            line_edited="model_name_entered",
+            labels=("Select model name:", "model1"),
         ))
 
         self.main_layout.addWidget(FileSelector(
-            file_selected = "tr_samples_selected",
-            labels = "Select training data directory:",
-            directory = True
+            file_selected="tr_samples_selected",
+            labels="Select training data directory:",
+            directory=True
         ))
 
         self.main_layout.addWidget(FileSelector(
-            file_selected = "parameter_dir_selected",
-            labels = "Select a directory for your model:",
-            directory = True
+            file_selected="parameter_dir_selected",
+            labels="Select a directory for your model:",
+            directory=True
         ))
 
         self.main_layout.addLayout(self.sub_layout1)
@@ -116,18 +117,28 @@ class Training(qtw.QWidget):
         # footer
         self.main_layout.addStretch(1)
         self.main_layout.addWidget(CustomFooter((
-            ("back to menu", "switch_modes", {"ui_cls":Menu}),
+            ("back to menu", "switch_modes", {"ui_cls": Menu}),
             "start training"
         )))
 
-        self.switch_widget(options[0], old_widget=self.switched_linedit, parent=self.sub_layout2, stored = 'termination_options')
+        self.switch_widget(
+            options[0],
+            old_widget=self.switched_linedit,
+            parent=self.sub_layout2,
+            stored='termination_options'
+        )
+
         # subscriptions to event bus
-        eb.subscribe("train_switch_ledit",
-                     lambda key, parent=self.sub_layout2 : self.switch_widget(
+        self.switch_func1 = lambda key, old_widget, parent=self.sub_layout2, stored="termination_options": self.switch_widget(
                          key,
-                         parent = self.sub_layout2,
-                         stored = "termination_options"
-                     ))
+                         old_widget,
+                         parent=parent,
+                         stored=stored)
+
+        eb.subscribe(
+            "switch_channel1",
+            self.switch_func1
+        )
 
     def switch_widget(self, key, old_widget=None, parent=None, stored=None):
 
@@ -145,13 +156,15 @@ class Training(qtw.QWidget):
             TitledLineEdit(
                 labels=("Set time limit for training", "time (s)"),
                 layout='v'
-            )
+            ),
+            alignment=qtc.Qt.AlignTop
         )
         self.term_cond_assoc["Time limit with cost treshold"].main_layout.addWidget(
             TitledLineEdit(
                 labels=("Enter the order of cost treshold:", "default: -10"),
                 layout='v'
-            )
+            ),
+            alignment=qtc.Qt.AlignTop
         )
 
         self.term_cond_assoc["Cost treshold"] = TitledLineEdit(
@@ -160,12 +173,18 @@ class Training(qtw.QWidget):
         )
 
         self.term_cond_assoc["Fixed number of iterations"] = TitledLineEdit(
-            labels=("Enter the number of iterations:", "default: -10"),
+            labels=("Enter the number of iterations:", "default: 1000"),
             layout='v'
         )
 
         # request a switch to ui manager
         eb.emit("switch_widgets", old_widget, self.term_cond_assoc[key], parent, stored=stored)
+
+    def cleanup(self):
+        eb.unsubscribe(
+            "switch_channel1",
+            self.switch_func1
+        )
 
 class Sorting(qtw.QWidget):
 
@@ -185,19 +204,19 @@ class Sorting(qtw.QWidget):
         self.main_layout.addWidget(CustomHeader("Data classification mode"))
 
         self.main_layout.addWidget(FileSelector(
-            file_selected = "sample_dir_selected",
-            labels = "Select directory with samples for classification:",
-            directory = True
+            file_selected="sample_dir_selected",
+            labels="Select directory with samples for classification:",
+            directory=True
         ))
 
         self.main_layout.addWidget(FileSelector(
-            file_selected = "model_selected",
-            labels ="Select your trained model:"
+            file_selected="model_selected",
+            labels="Select your trained model:"
         ))
 
         self.main_layout.addStretch(1)
 
         self.main_layout.addWidget(CustomFooter((
-            ("back to menu", "switch_modes", {"ui_cls":Menu}),
+            ("back to menu", "switch_modes", {"ui_cls": Menu}),
             "start classification"
         )))

@@ -137,7 +137,7 @@ class FileSelector(qtw.QWidget):
             self.file_path = file_path
             eb.emit(
                 self.file_selected[0],
-                file_path,
+                self.file_path,
                 self.file_selected[1]
             )
 
@@ -171,7 +171,7 @@ class TitledLineEdit(qtw.QWidget):
         default_line_edited = (None, {})
         if isinstance(labels, str):
             self.labels = (labels,) + default_labels[1:]
-            self.line_edited = (line_edited,) + defalt_line_edited[1:]
+            self.line_edited = (line_edited,) + default_line_edited[1:]
         else: self.labels = labels
 
         match layout:
@@ -189,6 +189,7 @@ class TitledLineEdit(qtw.QWidget):
         self.l_edit.editingFinished.connect(self.on_line_edited)
         self.l_edit.setPlaceholderText(self.labels[1])
         self.main_layout.addWidget(self.l_edit)
+        self.main_layout.addStretch(1)
 
     def on_line_edited(self):
         self.text_edit = self.l_edit.text()
@@ -211,7 +212,8 @@ class TitledDropdown(qtw.QWidget):
         default_labels = (None, None)
         default_option_changed = (None, {})
         if isinstance(labels, str):
-            labels = (labels,) + default_labels[1:]
+            self.labels = (labels,) + default_labels[1:]
+        if isinstance(option_changed, str):
             self.option_changed = (option_changed,) + default_option_changed[1:]
 
         match layout:
@@ -222,13 +224,15 @@ class TitledDropdown(qtw.QWidget):
 
         # main layout assembling
 
-        self.main_layout.addWidget(qtw.QLabel(labels[0]))
+        self.main_layout.addWidget(qtw.QLabel(self.labels[0]))
 
         self.dropdown = qtw.QComboBox(self)
         for i, item in enumerate(options):
             self.dropdown.addItem(item)
         self.dropdown.currentIndexChanged.connect(self.on_dropdown_selected)
         self.main_layout.addWidget(self.dropdown)
+
+        self.main_layout.addStretch(1)
 
     def on_dropdown_selected(self):
         self.option_selected = self.dropdown.currentText()
@@ -240,6 +244,8 @@ class DefaultWidget(qtw.QWidget):
         super().__init__()
         match layout:
             case 'h':
-                self.main_layout = qtw.QHBoxLayout()
+                self.main_layout = qtw.QHBoxLayout(self)
+                self.main_layout.setContentsMargins(0, 0, 0, 0)
             case 'v':
-                self.main_layout = qtw.QVBoxLayout()
+                self.main_layout = qtw.QVBoxLayout(self)
+                self.main_layout.setContentsMargins(0, 0, 0, 0)
