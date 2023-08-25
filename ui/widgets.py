@@ -209,6 +209,10 @@ class TitledDropdown(qtw.QWidget):
         self.option_changed = option_changed  # signal attributes upon changing an option
         self.options = options  # tuple with the options
 
+        # style configuration
+        self.style_sheet = ""
+        self.setStyleSheet(self.style_sheet)
+
         default_labels = (None, None)
         default_option_changed = (None, {})
         if isinstance(labels, str):
@@ -240,7 +244,9 @@ class TitledDropdown(qtw.QWidget):
 
 
 class DefaultWidget(qtw.QWidget):
-    def __init__(self, layout='h'):
+
+    def __init__(self, layout='h', border="grey_round"):
+
         super().__init__()
         match layout:
             case 'h':
@@ -249,3 +255,27 @@ class DefaultWidget(qtw.QWidget):
             case 'v':
                 self.main_layout = qtw.QVBoxLayout(self)
                 self.main_layout.setContentsMargins(0, 0, 0, 0)
+
+        # styling
+        self.style_sheet = {}
+
+        # modifying stylesheet
+        match border:
+            case "grey_round":
+                self.style_sheet["border"] = "2px solid grey"
+                self.style_sheet["border-radius"] = "10px"
+
+        # converting to css
+        self.css_style_sheet = DefaultWidget.dict_to_css(self.style_sheet)
+
+        self.setStyleSheet(self.style_sheet)
+
+    @staticmethod
+    def dict_to_css(dict_styles):
+        css = ""
+        for selector, styles in dict_styles.items():
+            css += f"{selector} {{\n"
+            for prop, value in styles.items():
+                css += f"    {prop}: {value};\n"
+            css += "}\n"
+        return css
