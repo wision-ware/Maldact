@@ -1,6 +1,6 @@
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
-import os, sys
+from ui.ui_tools import dict_to_css
 from event_bus import EventBus as eb
 from functools import partial
 
@@ -189,7 +189,6 @@ class TitledLineEdit(qtw.QWidget):
         self.l_edit.editingFinished.connect(self.on_line_edited)
         self.l_edit.setPlaceholderText(self.labels[1])
         self.main_layout.addWidget(self.l_edit)
-        self.main_layout.addStretch(1)
 
     def on_line_edited(self):
         self.text_edit = self.l_edit.text()
@@ -266,16 +265,6 @@ class DefaultWidget(qtw.QWidget):
                 self.style_sheet["border-radius"] = "10px"
 
         # converting to css
-        self.css_style_sheet = DefaultWidget.dict_to_css(self.style_sheet)
+        self.css_style_sheet = dict_to_css(self.style_sheet)
 
-        self.setStyleSheet(self.style_sheet)
-
-    @staticmethod
-    def dict_to_css(dict_styles):
-        css = ""
-        for selector, styles in dict_styles.items():
-            css += f"{selector} {{\n"
-            for prop, value in styles.items():
-                css += f"    {prop}: {value};\n"
-            css += "}\n"
-        return css
+        self.setStyleSheet(self.css_style_sheet)

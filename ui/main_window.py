@@ -186,6 +186,7 @@ class Training(qtw.QWidget):
             self.switch_func1
         )
 
+
 class Sorting(qtw.QWidget):
 
     def __init__(self):
