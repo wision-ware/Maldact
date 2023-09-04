@@ -73,8 +73,8 @@ class Training(qtw.QWidget):
 
         options = (
             "Time limit",
-            "Time limit with cost treshold",
-            "Cost treshold",
+            "Time limit with cost threshold",
+            "Cost threshold",
             "Fixed number of iterations"
         )
         self.sub_layout2.addWidget(TitledDropdown(
@@ -147,28 +147,28 @@ class Training(qtw.QWidget):
         self.term_cond_assoc = {}
 
         self.term_cond_assoc["Time limit"] = TitledLineEdit(
-            labels=("Set time limit for trining", "time (s)"),
+            labels=("Set time limit for training", "time (s)"),
             layout='v'
         )
 
-        self.term_cond_assoc["Time limit with cost treshold"] = DefaultWidget(layout='h')
-        self.term_cond_assoc["Time limit with cost treshold"].main_layout.addWidget(
+        self.term_cond_assoc["Time limit with cost threshold"] = DefaultWidget(layout='h')
+        self.term_cond_assoc["Time limit with cost threshold"].main_layout.addWidget(
             TitledLineEdit(
                 labels=("Set time limit for training", "time (s)"),
                 layout='v'
             ),
             alignment=qtc.Qt.AlignTop
         )
-        self.term_cond_assoc["Time limit with cost treshold"].main_layout.addWidget(
+        self.term_cond_assoc["Time limit with cost threshold"].main_layout.addWidget(
             TitledLineEdit(
-                labels=("Enter cost treshold:", "default: 10e-10"),
+                labels=("Enter cost threshold:", "default: 10e-10"),
                 layout='v'
             ),
             alignment=qtc.Qt.AlignTop
         )
 
-        self.term_cond_assoc["Cost treshold"] = TitledLineEdit(
-            labels=("Enter cost treshold:", "default: 10e-10"),
+        self.term_cond_assoc["Cost threshold"] = TitledLineEdit(
+            labels=("Enter cost threshold:", "default: 10e-10"),
             layout='v'
         )
 

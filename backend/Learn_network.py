@@ -350,13 +350,13 @@ class Learn_network(object):
 
         return [gradient[:],partial_bias[:]]
 
-    # learning algorithm with optional learning rate, cost treshold and GD methods
+    # learning algorithm with optional learning rate, cost threshold and GD methods
 
     def learn(
             self,
             inp,
             labels,
-            treshold=1e-12,
+            threshold=1e-12,
             time_limit=np.inf,
             GD='mini_b',
             batch_size=50,
@@ -377,87 +377,92 @@ class Learn_network(object):
 
         # verifying  parameters
 
-        Learn_network.typeval_assertion( # training data verification
+        Learn_network.typeval_assertion(  # training data verification
             isinstance(inp, np.ndarray),
             len(inp.shape) == 2,
             f"positional argument \'inp\' must be type: numpy.ndarray, not {type(inp)}!",
-            f"positional argument \'inp\' must be 2 dimensional (samples, data_width), {len(inp.shape)} dimensional was given!"
+            f"positional argument \'inp\' must be 2 dimensional (samples, data_width), "
+            f"{len(inp.shape)} dimensional was given!"
             )
         try:
             assert inp.shape[1] == self.N[0]
         except AssertionError:
-            raise ValueError(f"size of the second dimension of the positional argument \'inp\' must be equal to the number of input nodes of the first layer! ({self.N[0]} required, {inp.shape[1]} given)")
+            raise ValueError(f"size of the second dimension of the positional argument \'inp\' must be equal to the "
+                             f"number of input nodes of the first layer! ({self.N[0]} required, {inp.shape[1]} given)")
 
         Learn_network.typeval_assertion( # data label verification
             isinstance(labels, np.ndarray),
             len(labels.shape) == 2,
             f"positional argument \'labels\' must be type: numpy.ndarray, not {type(inp)}!",
-            f"positional argument \'labels\' must be 2 dimensional (samples, binary_sort_cases), {len(inp.shape)} dimensional was given!"
+            f"positional argument \'labels\' must be 2 dimensional (samples, binary_sort_cases), "
+            f"{len(inp.shape)} dimensional was given!"
             )
         try:
             assert labels.shape[1] == self.N[-1]
         except AssertionError:
-            raise ValueError(f"size of the second dimension of the positional argument \'labels\' must be equal to the number of output nodes of the final layer! ({self.N[-1]} required, {labels.shape[1]} given)")
+            raise ValueError(f"size of the second dimension of the positional argument \'labels\' must be equal to "
+                             f"the number of output nodes of the final layer! ({self.N[-1]} required, "
+                             f"{labels.shape[1]} given)")
 
-        Learn_network.typeval_assertion( # cost treshold verification
-            isinstance(treshold,(float,Decimal,np.floating)),
-            treshold > 0,
-            f"keyword argument \'treshold\' must be a number, not {type(treshold)}!",
-            "keyword argument \'treshold\' must be positive!"
+        Learn_network.typeval_assertion( # cost threshold verification
+            isinstance(threshold, (float, Decimal, np.floating)),
+            threshold > 0,
+            f"keyword argument \'threshold\' must be a number, not {type(threshold)}!",
+            "keyword argument \'threshold\' must be positive!"
             )
-        Learn_network.typeval_assertion( # training time limit verification
-            isinstance(time_limit,(float,int,Decimal,np.floating,np.integer)),
+        Learn_network.typeval_assertion(  # training time limit verification
+            isinstance(time_limit, (float, int, Decimal, np.floating, np.integer)),
             time_limit > 0,
             f"keyword argument \'time_limit\' must be a number, not {type(time_limit)}!",
             "keyword argument \'time_limit\' must be positive!"
             )
-        GD_options = ['mini_b','batch','stochastic'] # gradient descent type switch options
-        Learn_network.typeval_assertion( # gradient descent type switch verification
-            isinstance(GD,str),
+        GD_options = ['mini_b', 'batch', 'stochastic'] # gradient descent type switch options
+        Learn_network.typeval_assertion(  # gradient descent type switch verification
+            isinstance(GD, str),
             GD in GD_options,
             f"keyword argument \'GD\' must be type \'str\', not {type(GD)}!",
             f"keyword argument \'GD\' must be one of the following: {GD_options}"
             )
-        Learn_network.typeval_assertion( # batch size verification
-            isinstance(batch_size,(int,np.integer)),
+        Learn_network.typeval_assertion(  # batch size verification
+            isinstance(batch_size, (int, np.integer)),
             batch_size > 0,
             f"keyword argument \'batch_size\' must be type \'int\', not {type(batch_size)}!",
             "keyword argument \'batch_size\' must be positive!"
             )
-        Learn_network.typeval_assertion( # batch size verification
-            isinstance(eta,(float,Decimal,np.floating)),
+        Learn_network.typeval_assertion(  # batch size verification
+            isinstance(eta, (float, Decimal, np.floating)),
             eta > 0,
             f"keyword argument \'eta\' must be type \'int\', not {type(eta)}!",
             "keyword argument \'eta\' must be positive!"
             )
         try: # live monitor toggle verification
-            assert isinstance(live_monitor,bool)
+            assert isinstance(live_monitor, bool)
         except AssertionError:
             raise TypeError(f"keyword argument \'live_monitor\' must be type \'bool\', not {type(live_monitor)}!")
 
         try: # saving in .txt format toggle verification
-            assert isinstance(as_text,bool)
+            assert isinstance(as_text, bool)
         except AssertionError:
             raise TypeError(f"keyword argument \'as_text\' must be type \'bool\', not {type(as_text)}!")
 
-        Learn_network.typeval_assertion( # verification of the fixed number of iterations
-            isinstance(fixed_iter,(int,np.integer)),
+        Learn_network.typeval_assertion(  # verification of the fixed number of iterations
+            isinstance(fixed_iter, (int, np.integer)),
             fixed_iter >= 0,
             f"keyword argument \'fixed_iter\' must be type \'int\', not {type(fixed_iter)}!",
             "keyword argument \'fixed_iter\' can not be negative!"
             )
         try: # diagnostic data return toggle verification
-            assert isinstance(dia_data,bool)
+            assert isinstance(dia_data, bool)
         except AssertionError:
             raise TypeError(f"keyword argument \'dia_data\' must be type \'bool\', not {type(dia_data)}!")
 
         try: # trained parameter saving to binary (.npy) format verification
-            assert isinstance(save_params,bool)
+            assert isinstance(save_params, bool)
         except AssertionError:
             raise TypeError(f"keyword argument \'save_params\' must be type \'bool\', not {type(save_params)}!")
 
         Learn_network.typeval_assertion(
-            isinstance(overwrite, bool) or isinstance(overwrite, (int,np.integer)),
+            isinstance(overwrite, bool) or isinstance(overwrite, (int, np.integer)),
             isinstance(overwrite, bool) or overwrite >= 0,
             f"keyword argument \'overwrite\' must be type \'int\' or \'bool\', not {type(overwrite)}!",
             "keyword argument \'overwrite\' can not be negative!"
@@ -466,8 +471,8 @@ class Learn_network(object):
         # PU variable setup
 
         if self.GPU:
-            labels = cp.asarray(labels,dtype='f')
-            inp = cp.asarray(inp,dtype='f')
+            labels = cp.asarray(labels, dtype='f')
+            inp = cp.asarray(inp, dtype='f')
 
         # --
 
@@ -490,11 +495,11 @@ class Learn_network(object):
 
         # parameter init
 
-        for l in range(1,len(self.N)):
+        for l in range(1, len(self.N)):
             self.weights[l] = xp.random.normal(
-            0,2/xp.sqrt(self.N[l] + self.N[l-1]),(self.N[l-1],self.N[l]))\
+            0, 2/xp.sqrt(self.N[l] + self.N[l-1]), (self.N[l-1],self.N[l]))\
             if l < (self.N[-1]) else xp.random.normal(
-            0,xp.sqrt(2/(self.N[l] + self.N[l-1])),(self.N[l-1],self.N[l])
+            0, xp.sqrt(2/(self.N[l] + self.N[l-1])), (self.N[l-1],self.N[l])
             )
 
         t_0 = time.perf_counter()
@@ -503,9 +508,9 @@ class Learn_network(object):
         # main training loop
 
         while (d_index < fixed_iter) if fixed_iter != 0\
-            else ((avg_cost > treshold) & (elapsed_learning_time < time_limit)):
+            else ((avg_cost > threshold) & (elapsed_learning_time < time_limit)):
 
-            # computing gradients and avarage cost
+            # computing gradients and average cost
 
             if GD == 'stochastic':
                 d_indices = xp.arange(len(inp))
@@ -520,10 +525,10 @@ class Learn_network(object):
 
                 for i in range(len(inp)):
 
-                    backprop_out = self.backpropagate(inp[i,:],labels[i,:],skip_check=True)
+                    backprop_out = self.backpropagate(inp[i, :], labels[i, :], skip_check=True)
                     iter_cost_sum += self.cost/self.N[-1]
 
-                    for l in range(1,len(self.N)):
+                    for l in range(1, len(self.N)):
                         s_partials[0][l] = s_partials[0][l] + backprop_out[0][l]
                         s_partials[1][l] = s_partials[1][l] + backprop_out[1][l]
 
@@ -535,17 +540,17 @@ class Learn_network(object):
 
             if GD == 'mini_b':
 
-                s_partials = [self.weight_like[:],self.bias_like[:]]
+                s_partials = [self.weight_like[:], self.bias_like[:]]
                 d_indices = xp.arange(len(inp))
                 iter_cost_sum = 0
 
                 for i in range(batch_size):
 
-                    ind = int(xp.random.choice(d_indices,size=1))
-                    backprop_out = self.backpropagate(inp[ind,:],labels[ind,:],skip_check=True)
+                    ind = int(xp.random.choice(d_indices, size=1))
+                    backprop_out = self.backpropagate(inp[ind, :], labels[ind, :], skip_check=True)
                     iter_cost_sum += self.cost/self.N[-1]
 
-                    for l in range(1,len(self.N)):
+                    for l in range(1, len(self.N)):
                         s_partials[0][l] = s_partials[0][l] + backprop_out[0][l]
                         s_partials[1][l] = s_partials[1][l] + backprop_out[1][l]
 
@@ -557,7 +562,7 @@ class Learn_network(object):
 
             if dia_data: avg_eta_tracking_ = []
 
-            for l in range(1,len(self.N)):
+            for l in range(1, len(self.N)):
 
                 if GD == 'mini_b':
                     R_w[l] = (1-gamma)*(partials[0][l])**2\
@@ -585,15 +590,14 @@ class Learn_network(object):
                     avg_eta = xp.average(avg_eta)
                     avg_eta_tracking_.append(avg_eta)
 
-
             d_index += 1
             elapsed_learning_time = time.perf_counter() - t_0
 
             if live_monitor or dia_data: avg_cost_tracking.append(avg_cost)
             if live_monitor:
-                print(empty_chars,end='\r')
+                print(empty_chars, end='\r')
                 message = 'Current cost minimum: ' + str(min(avg_cost_tracking))
-                print(message,end='\r')
+                print(message, end='\r')
                 empty_chars = "\b"*(len(message))
 
             if dia_data:
@@ -603,56 +607,56 @@ class Learn_network(object):
         path_ = Learn_network.path_
         if live_monitor:
             empty_chars = "\b"*(len(message))
-            print(empty_chars,end='\r')
+            print(empty_chars, end='\r')
 
         if type(overwrite) == bool:
 
-            dir_content = glob(os.path.join(path_,'p*.npy'))
+            dir_content = glob(os.path.join(path_, 'p*.npy'))
 
-            if dir_content != []:
+            if dir_content:
                 current_ind = Learn_network.current_index()
             else:
                 current_ind = 0
 
             if overwrite:
-                deletions = glob(os.path.join(path_,f'p{current_ind}*.npy'))
+                deletions = glob(os.path.join(path_, f'p{current_ind}*.npy'))
                 for file in deletions:
                     os.remove(file)
-                saving_filename = os.path.join(path_,f'p{current_ind}')
+                saving_filename = os.path.join(path_, f'p{current_ind}')
             else:
-                saving_filename = os.path.join(path_,f'p{current_ind}')
+                saving_filename = os.path.join(path_, f'p{current_ind}')
 
         else:
-            saving_filename = os.path.join(path_,f'p{overwrite}')
-            deletions = glob(os.path.join(path_,f'p{overwrite}*.npy'))
+            saving_filename = os.path.join(path_, f'p{overwrite}')
+            deletions = glob(os.path.join(path_, f'p{overwrite}*.npy'))
             for file in deletions:
                 os.remove(file)
 
         if save_params:
             for l in range(1,len(self.N)):
-                np.save(saving_filename + '_w' + str(l-1), self.weights[l],allow_pickle=True)
-                np.save(saving_filename + '_b' + str(l-1), self.bias[l],allow_pickle=True)
+                np.save(saving_filename + '_w' + str(l-1), self.weights[l], allow_pickle=True)
+                np.save(saving_filename + '_b' + str(l-1), self.bias[l], allow_pickle=True)
 
         if as_text:
-            np.savetxt(saving_filename + '_w', self.weights,allow_pickle=True)
-            np.savetxt(saving_filename + '_b', self.bias,allow_pickle=True)
+            np.savetxt(saving_filename + '_w', self.weights)
+            np.savetxt(saving_filename + '_b', self.bias)
 
-        print(f'Training successful after {elapsed_learning_time}s.',end='\n')
+        print(f'Training successful after {elapsed_learning_time}s.', end='\n')
 
         r_weights = self.weight_like
         r_bias = self.bias_like
 
         if self.GPU:
-            for l in range(1,len(self.N)):
+            for l in range(1, len(self.N)):
                 r_weights[l] = cp.asnumpy(self.weights[l])
                 r_bias[l] = cp.asnumpy(self.bias[l])
 
-        return_dict = {'weights':r_weights,
-                       'bias':r_bias}
+        return_dict = {'weights': r_weights,
+                       'bias': r_bias}
 
         if dia_data and self.GPU:
-            return_dict['cost'] = np.array([np.float32(cp.asnumpy(x)) for x in avg_cost_tracking])
-            return_dict['l_rate'] = np.array([np.float32(cp.asnumpy(x)) for x in avg_eta_tracking])
+            return_dict['cost'] = np.array([np.float32(cp.asnumpy(x)) for x in avg_cost_tracking], dtype=object)
+            return_dict['l_rate'] = np.array([np.float32(cp.asnumpy(x)) for x in avg_eta_tracking], dtype=object)
         elif dia_data:
             return_dict['cost'] = avg_cost_tracking
             return_dict['l_rate'] = avg_eta_tracking

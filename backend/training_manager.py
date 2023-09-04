@@ -5,6 +5,7 @@ import numpy as np
 import cupy as cp
 import multiprocessing as mp
 import inspect
+from event_bus import EventBus as eb
 
 
 class TrainingManager:
@@ -32,13 +33,14 @@ class TrainingManager:
                 raise AttributeError(f"TrainingManager object has no attribute {key}")
 
     def update_params(self, update_dict):
+
         for key, value in update_dict.items():
             if key in self.__dict__.keys():
                 setattr(self, key, value)
 
     def start_training(self):
 
-        self.network.__init__(self.N, GPU=self.GPU)
+        self.network.__init__(self.N, GPU=self.GPU)  # reinitialize network object
         training_data = np.load(self.data_dir)
         inp = training_data["input"]
         labels = training_data["labels"]
@@ -65,4 +67,4 @@ class TrainingManager:
         np.save(meta, self.model_dir)
 
     def exit_training(self):
-        pass
+        pass  #TODO
