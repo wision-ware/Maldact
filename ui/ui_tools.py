@@ -1,27 +1,15 @@
-from io import StringIO
 
+def dict_to_css(data, indent=0):
+    css = ""
 
-def write_css(selector, data, output):
-    children = []
-    attributes = []
-
+    # Iterate over key-value pairs in the dictionary
     for key, value in data.items():
-        if hasattr(value, 'items'):
-            children.append((key, value))
+        if isinstance(value, dict):
+            # If the value is a dictionary, recursively process it
+            nested_css = dict_to_css(value, indent + 1)
+            css += f"{key} {{\n{nested_css}\n{' ' * (indent * 4)}}}\n"
         else:
-            attributes.append((key, value))
+            # If the value is not a dictionary, assume it's a CSS property and value
+            css += f"{' ' * (indent * 4)}{key}: {value};\n"
 
-    if attributes:
-        print(' '.join(selector), "{", file=output)
-        for key, value in attributes:
-            print("\t", key + ":", value, file=output)
-        print("}", file=output)
-
-    for key, value in children:
-        write_css(selector + (key,), value, output)
-
-
-def dict_to_css(data):
-    output = StringIO()
-    write_css((), data, output)
-    return output.getvalue()
+    return css

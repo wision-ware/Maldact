@@ -366,7 +366,8 @@ class Learn_network(object):
             fixed_iter=0,
             dia_data=False,
             save_params=True,
-            overwrite=True
+            overwrite=True,
+            **_
             ):
 
         # PU prefix setup
@@ -473,7 +474,7 @@ class Learn_network(object):
         d_index = 0
         gamma = 0.9
         eta_r = 0.001
-        self.get_output(inp[0,:],False,label=labels[0,:])
+        self.get_output(inp[0, :], False, label=labels[0, :])
         avg_cost = 999
 
         if dia_data or live_monitor: avg_cost_tracking = []
