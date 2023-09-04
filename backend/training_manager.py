@@ -10,3 +10,9 @@ class TrainingManager:
 
     def update_params(self):
         pass
+
+    def start_training(self):
+        pass
+
+    def exit_training(self):
+        pass

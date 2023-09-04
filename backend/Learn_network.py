@@ -16,15 +16,16 @@ import inspect
 
 class Learn_network(object):
 
-    path_ = os.path.join('..','..','training_params')
+    path_ = os.path.join('..', '..', 'training_params')
 
+    @staticmethod
     def ReLU(x, d=False, GPU=False):
 
         if GPU: xp = cp
         else: xp = np
         return xp.where(x<0,0.,(x if d==False else 1))
 
-
+    @staticmethod
     def Sigmoid(x, d=False, GPU=False):
 
         if GPU: xp = cp
@@ -32,7 +33,7 @@ class Learn_network(object):
         return (1/(1+xp.exp(-x))) if d == False\
         else ((1/(1+xp.exp(-x)))*(1-(1/(1+xp.exp(-x)))))
 
-
+    @staticmethod
     def typeval_assertion(t_condition,v_condition,t_message,v_message):
 
         try:
@@ -45,7 +46,7 @@ class Learn_network(object):
         except AssertionError:
             raise ValueError(v_message)
 
-
+    @staticmethod
     def extract_int(string, cut=None):
 
         if cut is None:
@@ -75,7 +76,7 @@ class Learn_network(object):
                         break
         return int(n_str)
 
-
+    @staticmethod
     def clear_dir(indices=None):
 
         try:
@@ -100,7 +101,7 @@ class Learn_network(object):
         except (ValueError, IndexError):
             print('Warning: Input indices must correspond with existing parameter files!')
 
-
+    @staticmethod
     def current_index():
 
         path_ = Learn_network.path_
@@ -156,8 +157,7 @@ class Learn_network(object):
 
         path_ = Learn_network.path_
         dir_ind = Learn_network.current_index()
-        self.par_filename = os.path.join(path_,f'p{dir_ind}')
-
+        self.par_filename = os.path.join(path_, f'p{dir_ind}')
 
     def call_origin(self):
 
@@ -168,7 +168,6 @@ class Learn_network(object):
         else: inside = False
 
         return inside
-
 
     def get_output(self, inp, layer=False, label=None):
 
@@ -280,7 +279,9 @@ class Learn_network(object):
             try:
                 assert inp.shape[1] == self.N[0]
             except AssertionError:
-                raise ValueError(f"size of the second dimension of the positional argument \'inp\' must be equal to the number of input nodes of the first layer! ({self.N[0]} required, {inp.shape[1]} given)")
+                raise ValueError(f"size of the second dimension of the positional argument \'inp\' must be equal to "
+                                 f"the number of input nodes of the first layer! ({self.N[0]} required, "
+                                 f"{inp.shape[1]} given)")
 
             Learn_network.typeval_assertion( # data label verification
                 isinstance(labels, np.ndarray),
@@ -291,7 +292,9 @@ class Learn_network(object):
             try:
                 assert labels.shape[1] == self.N[-1]
             except AssertionError:
-                raise ValueError(f"size of the second dimension of the positional argument \'labels\' must be equal to the number of output nodes of the final layer! ({self.N[-1]} required, {labels.shape[1]} given)")
+                raise ValueError(f"size of the second dimension of the positional argument \'labels\' must be equal "
+                                 f"to the number of output nodes of the final layer! ({self.N[-1]} required, "
+                                 f"{labels.shape[1]} given)")
 
         # checking call origin
 
