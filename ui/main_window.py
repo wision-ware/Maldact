@@ -161,14 +161,14 @@ class Training(qtw.QWidget):
         )
         self.term_cond_assoc["Time limit with cost treshold"].main_layout.addWidget(
             TitledLineEdit(
-                labels=("Enter the order of cost treshold:", "default: -10"),
+                labels=("Enter cost treshold:", "default: 10e-10"),
                 layout='v'
             ),
             alignment=qtc.Qt.AlignTop
         )
 
         self.term_cond_assoc["Cost treshold"] = TitledLineEdit(
-            labels=("Enter the order of cost treshold:", "default: -10"),
+            labels=("Enter cost treshold:", "default: 10e-10"),
             layout='v'
         )
 
