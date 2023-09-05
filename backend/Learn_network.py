@@ -14,7 +14,8 @@ from decimal import Decimal
 import warnings
 import inspect
 
-class Learn_network(object):
+
+class LearnNetwork(object):
 
     path_ = os.path.join('..', '..', 'training_params')
 
@@ -23,7 +24,7 @@ class Learn_network(object):
 
         if GPU: xp = cp
         else: xp = np
-        return xp.where(x<0,0.,(x if d==False else 1))
+        return xp.where(x < 0, 0., (x if d == False else 1))
 
     @staticmethod
     def Sigmoid(x, d=False, GPU=False):
@@ -80,7 +81,7 @@ class Learn_network(object):
     def clear_dir(indices=None):
 
         try:
-            path_ = Learn_network.path_
+            path_ = LearnNetwork.path_
             if indices is not None:
 
                 files = []
@@ -104,11 +105,11 @@ class Learn_network(object):
     @staticmethod
     def current_index():
 
-        path_ = Learn_network.path_
+        path_ = LearnNetwork.path_
         all_files = glob(os.path.join(path_,'p*.npy'))
         if all_files != []:
             end_basename = os.path.basename(all_files[-1])
-            extracted = Learn_network.extract_int(end_basename,cut='first')
+            extracted = LearnNetwork.extract_int(end_basename,cut='first')
             return extracted
         else: return 0
 
@@ -117,7 +118,7 @@ class Learn_network(object):
         # verifying parameters
 
         confirmation = [isinstance(i,(int, np.integer)) for i in N]
-        Learn_network.typeval_assertion(
+        LearnNetwork.typeval_assertion(
             isinstance(N, (np.ndarray, list)),
             all(confirmation),
             f"positional argument \'N\' must be type: \'list\' or \'numpy.ndarray\', not {type(N)}!",
@@ -155,8 +156,8 @@ class Learn_network(object):
         self.weights = self.weight_like[:]
         self.bias = self.bias_like[:]
 
-        path_ = Learn_network.path_
-        dir_ind = Learn_network.current_index()
+        path_ = LearnNetwork.path_
+        dir_ind = LearnNetwork.current_index()
         self.par_filename = os.path.join(path_, f'p{dir_ind}')
 
     def call_origin(self):
@@ -184,7 +185,7 @@ class Learn_network(object):
 
         if not inside:
 
-            Learn_network.typeval_assertion( # training data verification
+            LearnNetwork.typeval_assertion( # training data verification
                 isinstance(inp, np.ndarray),
                 len(inp.shape) == 1,
                 f"positional argument \'inp\' must be type: \'numpy.ndarray\', not {type(inp)}!",
@@ -195,7 +196,7 @@ class Learn_network(object):
             except AssertionError:
                 raise ValueError(f"size of the second dimension of the positional argument \'inp\' must be equal to the number of input nodes of the first layer! ({self.N[0]} required, {inp.shape[1]} given)")
 
-            Learn_network.typeval_assertion(
+            LearnNetwork.typeval_assertion(
                 isinstance(layer, bool) or isinstance(layer, (int,np.integer)),
                 isinstance(layer, bool) or layer >= 0,
                 f"keyword argument \'layer\' must be type \'int\' or \'bool\', not {type(layer)}!",
@@ -232,8 +233,8 @@ class Learn_network(object):
 
                 activation = xp.matmul(p_output,self.weights[l]) + self.bias[l]
 
-                if l < (len(self.N)-1): p_output = Learn_network.ReLU(activation, GPU=self.GPU)
-                else: p_output = Learn_network.Sigmoid(activation,GPU=self.GPU)
+                if l < (len(self.N)-1): p_output = LearnNetwork.ReLU(activation, GPU=self.GPU)
+                else: p_output = LearnNetwork.Sigmoid(activation,GPU=self.GPU)
 
                 if layer == True and not inside:
                     all_out_act.append(np.copy(activation[:]))
@@ -270,7 +271,7 @@ class Learn_network(object):
 
         if not skip_check:
 
-            Learn_network.typeval_assertion( # training data verification
+            LearnNetwork.typeval_assertion( # training data verification
                 isinstance(inp, np.ndarray),
                 len(inp.shape) == 1,
                 f"positional argument \'inp\' must be type: numpy.ndarray, not {type(inp)}!",
@@ -283,7 +284,7 @@ class Learn_network(object):
                                  f"the number of input nodes of the first layer! ({self.N[0]} required, "
                                  f"{inp.shape[1]} given)")
 
-            Learn_network.typeval_assertion( # data label verification
+            LearnNetwork.typeval_assertion( # data label verification
                 isinstance(labels, np.ndarray),
                 len(labels.shape) == 1,
                 f"positional argument \'labels\' must be type: numpy.ndarray, not {type(inp)}!",
@@ -314,7 +315,7 @@ class Learn_network(object):
 
         # output layer
 
-        dsigmoid = Learn_network.Sigmoid(output[0][-1],d=True,GPU=self.GPU)
+        dsigmoid = LearnNetwork.Sigmoid(output[0][-1],d=True,GPU=self.GPU)
         dif = output[1][-1]-labels[:]
         deltas = dsigmoid*dif
         partial_bias_0 = deltas[:]
@@ -329,15 +330,15 @@ class Learn_network(object):
 
         # hidden layers
 
-        for l in range(2,len(self.N)):
+        for l in range(2, len(self.N)):
 
-            drelu = Learn_network.ReLU(output[0][-l][:],d=True,GPU=self.GPU)
+            drelu = LearnNetwork.ReLU(output[0][-l][:], d=True, GPU=self.GPU)
 
-            deltas_new = xp.matmul(self.weights[-(l-1)],deltas_old)
+            deltas_new = xp.matmul(self.weights[-(l-1)], deltas_old)
             deltas_new = deltas_new*drelu
 
-            m_deltas_new = xp.tile(deltas_new,(self.N[-(l+1)],1))
-            m_output = xp.tile(output[1][-(l+1)],(self.N[-l],1))
+            m_deltas_new = xp.tile(deltas_new, (self.N[-(l+1)], 1))
+            m_output = xp.tile(output[1][-(l+1)], (self.N[-l], 1))
 
             gradient[-l] = m_deltas_new*xp.transpose(m_output)
             partial_bias[-l] = deltas_new[:]
@@ -377,7 +378,7 @@ class Learn_network(object):
 
         # verifying  parameters
 
-        Learn_network.typeval_assertion(  # training data verification
+        LearnNetwork.typeval_assertion(  # training data verification
             isinstance(inp, np.ndarray),
             len(inp.shape) == 2,
             f"positional argument \'inp\' must be type: numpy.ndarray, not {type(inp)}!",
@@ -390,7 +391,7 @@ class Learn_network(object):
             raise ValueError(f"size of the second dimension of the positional argument \'inp\' must be equal to the "
                              f"number of input nodes of the first layer! ({self.N[0]} required, {inp.shape[1]} given)")
 
-        Learn_network.typeval_assertion( # data label verification
+        LearnNetwork.typeval_assertion( # data label verification
             isinstance(labels, np.ndarray),
             len(labels.shape) == 2,
             f"positional argument \'labels\' must be type: numpy.ndarray, not {type(inp)}!",
@@ -404,32 +405,32 @@ class Learn_network(object):
                              f"the number of output nodes of the final layer! ({self.N[-1]} required, "
                              f"{labels.shape[1]} given)")
 
-        Learn_network.typeval_assertion( # cost threshold verification
+        LearnNetwork.typeval_assertion( # cost threshold verification
             isinstance(threshold, (float, Decimal, np.floating)),
             threshold > 0,
             f"keyword argument \'threshold\' must be a number, not {type(threshold)}!",
             "keyword argument \'threshold\' must be positive!"
             )
-        Learn_network.typeval_assertion(  # training time limit verification
+        LearnNetwork.typeval_assertion(  # training time limit verification
             isinstance(time_limit, (float, int, Decimal, np.floating, np.integer)),
             time_limit > 0,
             f"keyword argument \'time_limit\' must be a number, not {type(time_limit)}!",
             "keyword argument \'time_limit\' must be positive!"
             )
         GD_options = ['mini_b', 'batch', 'stochastic'] # gradient descent type switch options
-        Learn_network.typeval_assertion(  # gradient descent type switch verification
+        LearnNetwork.typeval_assertion(  # gradient descent type switch verification
             isinstance(GD, str),
             GD in GD_options,
             f"keyword argument \'GD\' must be type \'str\', not {type(GD)}!",
             f"keyword argument \'GD\' must be one of the following: {GD_options}"
             )
-        Learn_network.typeval_assertion(  # batch size verification
+        LearnNetwork.typeval_assertion(  # batch size verification
             isinstance(batch_size, (int, np.integer)),
             batch_size > 0,
             f"keyword argument \'batch_size\' must be type \'int\', not {type(batch_size)}!",
             "keyword argument \'batch_size\' must be positive!"
             )
-        Learn_network.typeval_assertion(  # batch size verification
+        LearnNetwork.typeval_assertion(  # batch size verification
             isinstance(eta, (float, Decimal, np.floating)),
             eta > 0,
             f"keyword argument \'eta\' must be type \'int\', not {type(eta)}!",
@@ -445,7 +446,7 @@ class Learn_network(object):
         except AssertionError:
             raise TypeError(f"keyword argument \'as_text\' must be type \'bool\', not {type(as_text)}!")
 
-        Learn_network.typeval_assertion(  # verification of the fixed number of iterations
+        LearnNetwork.typeval_assertion(  # verification of the fixed number of iterations
             isinstance(fixed_iter, (int, np.integer)),
             fixed_iter >= 0,
             f"keyword argument \'fixed_iter\' must be type \'int\', not {type(fixed_iter)}!",
@@ -461,7 +462,7 @@ class Learn_network(object):
         except AssertionError:
             raise TypeError(f"keyword argument \'save_params\' must be type \'bool\', not {type(save_params)}!")
 
-        Learn_network.typeval_assertion(
+        LearnNetwork.typeval_assertion(
             isinstance(overwrite, bool) or isinstance(overwrite, (int, np.integer)),
             isinstance(overwrite, bool) or overwrite >= 0,
             f"keyword argument \'overwrite\' must be type \'int\' or \'bool\', not {type(overwrite)}!",
@@ -604,7 +605,7 @@ class Learn_network(object):
                 avg_eta_tracking_ = xp.average(xp.array(avg_eta_tracking_))
                 avg_eta_tracking.append(avg_eta_tracking_)
 
-        path_ = Learn_network.path_
+        path_ = LearnNetwork.path_
         if live_monitor:
             empty_chars = "\b"*(len(message))
             print(empty_chars, end='\r')
@@ -614,7 +615,7 @@ class Learn_network(object):
             dir_content = glob(os.path.join(path_, 'p*.npy'))
 
             if dir_content:
-                current_ind = Learn_network.current_index()
+                current_ind = LearnNetwork.current_index()
             else:
                 current_ind = 0
 
@@ -633,7 +634,7 @@ class Learn_network(object):
                 os.remove(file)
 
         if save_params:
-            for l in range(1,len(self.N)):
+            for l in range(1, len(self.N)):
                 np.save(saving_filename + '_w' + str(l-1), self.weights[l], allow_pickle=True)
                 np.save(saving_filename + '_b' + str(l-1), self.bias[l], allow_pickle=True)
 
@@ -655,8 +656,8 @@ class Learn_network(object):
                        'bias': r_bias}
 
         if dia_data and self.GPU:
-            return_dict['cost'] = np.array([np.float32(cp.asnumpy(x)) for x in avg_cost_tracking], dtype=object)
-            return_dict['l_rate'] = np.array([np.float32(cp.asnumpy(x)) for x in avg_eta_tracking], dtype=object)
+            return_dict['cost'] = [np.float32(cp.asnumpy(x)) for x in avg_cost_tracking]
+            return_dict['l_rate'] = [np.float32(cp.asnumpy(x)) for x in avg_eta_tracking]
         elif dia_data:
             return_dict['cost'] = avg_cost_tracking
             return_dict['l_rate'] = avg_eta_tracking

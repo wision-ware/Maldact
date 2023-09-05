@@ -3,7 +3,7 @@ import PyQt5.QtCore as qtc
 import os, sys
 from ui.widgets import *
 from event_bus import EventBus as eb
-from backend.ml_managers import TrainingManager
+from backend.ml_managers import TrainingManager, SortingManager
 
 
 class Menu(qtw.QWidget):
@@ -46,12 +46,12 @@ class Training(qtw.QWidget):
 
         super().__init__()
 
-        # training manager instantiation
         self.training_manager = TrainingManager()
 
         # user input storage
         self.input_dict = {}
 
+        # layout specification
         self.main_layout = qtw.QVBoxLayout(self)
         self.sub_layout1 = qtw.QHBoxLayout(self)
         self.sub_layout2 = qtw.QHBoxLayout(self)
@@ -77,7 +77,7 @@ class Training(qtw.QWidget):
             )
         ))
 
-        # sublayout 2
+        # sub layout 2
 
         options = (
             "Time limit",
@@ -232,6 +232,8 @@ class Sorting(qtw.QWidget):
 
         super().__init__()
 
+        self.sorting_manager = SortingManager()
+
         self.main_layout = qtw.QVBoxLayout(self)
         self.key = 'sort'
 
@@ -245,12 +247,12 @@ class Sorting(qtw.QWidget):
 
         self.main_layout.addWidget(FileSelector(
             file_selected="sample_dir_selected",
-            labels="Select directory with samples for classification:",
+            labels="Select directory for the sorting folders:",
             directory=True
         ))
 
         self.main_layout.addWidget(FileSelector(
-            file_selected="model_selected",
+            file_selected=("store_st", {"attr": "model_selected"}),
             labels="Select your trained model:"
         ))
 
@@ -260,3 +262,6 @@ class Sorting(qtw.QWidget):
             ("back to menu", "switch_modes", {"ui_cls": Menu}),
             "start classification"
         )))
+
+    def start_sorting(self):
+        pass

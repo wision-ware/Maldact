@@ -1,6 +1,7 @@
 import multiprocessing
 
-from backend.Learn_network import Learn_network
+from backend.learn_network import LearnNetwork
+from backend.network import Network
 import numpy as np
 import cupy as cp
 import multiprocessing as mp
@@ -14,7 +15,7 @@ class TrainingManager:
     def __init__(self, event=None, **kwargs):
 
         # make Learn_network.learn() default arguments into attributes of TrainingManager
-        self.network = Learn_network([1, 1])
+        self.network = LearnNetwork([1, 1])
         learn_signature = inspect.signature(self.network.learn)
         default_args = {param.name: param.default for param in learn_signature.parameters.values() if
                         param.default != inspect.Parameter.empty}
@@ -62,7 +63,7 @@ class TrainingManager:
 
     def executor(self, network, inp, labels):
 
-        arg_filter = lambda x: not callable(x) and not isinstance(x, Learn_network)
+        arg_filter = lambda x: not callable(x) and not isinstance(x, LearnNetwork)
         kwargs = {key: value for key, value in self.__dict__.items() if arg_filter(value)}
         meta = network.learn(
             inp,
@@ -72,8 +73,17 @@ class TrainingManager:
         np.save(meta, os.path.join(self.model_dir, self.model_name))
 
     def exit_training(self):
-        pass  #TODO
+        pass  # TODO
 
 
 class SortingManager:
-    pass
+
+    def __init__(self, ):
+
+        self.network = Network('')
+        self.model_dir = None
+        self.sort_dir = None
+
+    def start_sorting(self):
+        self.network.load_params(self.model_dir)
+
