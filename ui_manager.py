@@ -61,5 +61,5 @@ class UIManager:
 
     @classmethod
     def subs_cleanup(cls, ui):
-        try: ui.cleanup()
+        try: type(ui).cleanup()
         except: pass

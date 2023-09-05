@@ -3,6 +3,7 @@ import PyQt5.QtCore as qtc
 import os, sys
 from ui.widgets import *
 from event_bus import EventBus as eb
+from backend.ml_managers import TrainingManager
 
 
 class Menu(qtw.QWidget):
@@ -45,23 +46,30 @@ class Training(qtw.QWidget):
 
         super().__init__()
 
+        # training manager instantiation
+        self.training_manager = TrainingManager()
+
+        # user input storage
+        self.input_dict = {}
+
         self.main_layout = qtw.QVBoxLayout(self)
         self.sub_layout1 = qtw.QHBoxLayout(self)
         self.sub_layout2 = qtw.QHBoxLayout(self)
         self.key = 'train'
+        self.exclusion = ["threshold", "time_limit", "fixed_iter"]
 
-        # sublayout assembling
-        # sublayout 1
+        # sub layout assembling
+        # sub layout 1
 
         self.sub_layout1.addWidget(TitledLineEdit(
             labels=("Select architecture:", "example: [:,50,50,50,5]"),
             layout='v',
-            line_edited="arch_line_edited"
+            line_edited=("store_tr", {"attr": "N"})
         ))
         self.sub_layout1.addWidget(TitledDropdown(
             labels="Select gradient descent type:",
             layout='v',
-            option_changed='_',
+            option_changed=('store_tr', {"attr": "GD"}),
             options=(
                 "Batch",
                 "Mini Batch",
@@ -94,18 +102,18 @@ class Training(qtw.QWidget):
 
         # content
         self.main_layout.addWidget(TitledLineEdit(
-            line_edited="model_name_entered",
+            line_edited=("store_tr", {"attr": "model_name"}),
             labels=("Select model name:", "model1"),
         ))
 
         self.main_layout.addWidget(FileSelector(
-            file_selected="tr_samples_selected",
+            file_selected=("store_tr", {"attr": "data_dir"}),
             labels="Select training data directory:",
             directory=True
         ))
 
         self.main_layout.addWidget(FileSelector(
-            file_selected="parameter_dir_selected",
+            file_selected=("store_tr", {"attr": "model_dir"}),
             labels="Select a directory for your model:",
             directory=True
         ))
@@ -118,7 +126,7 @@ class Training(qtw.QWidget):
         self.main_layout.addStretch(1)
         self.main_layout.addWidget(CustomFooter((
             ("back to menu", "switch_modes", {"ui_cls": Menu}),
-            "start training"
+            ("start training", "start_training")
         )))
 
         self.switch_widget(
@@ -133,11 +141,20 @@ class Training(qtw.QWidget):
                          key,
                          old_widget,
                          parent=parent,
-                         stored=stored)
+                         stored=stored
+        )
 
         eb.subscribe(
             "switch_channel1",
             self.switch_func1
+        )
+        eb.subscribe(
+            "store_tr",
+            self.store_user_input
+        )
+        eb.subscribe(
+            "start_training",
+            self.start_training
         )
 
     def switch_widget(self, key, old_widget=None, parent=None, stored=None):
@@ -148,6 +165,7 @@ class Training(qtw.QWidget):
 
         self.term_cond_assoc["Time limit"] = TitledLineEdit(
             labels=("Set time limit for training", "time (s)"),
+            line_edited=("store_tr", {"attr": "time_limit"}),
             layout='v'
         )
 
@@ -155,6 +173,7 @@ class Training(qtw.QWidget):
         self.term_cond_assoc["Time limit with cost threshold"].main_layout.addWidget(
             TitledLineEdit(
                 labels=("Set time limit for training", "time (s)"),
+                line_edited=("store_tr", {"attr": "time_limit"}),
                 layout='v'
             ),
             alignment=qtc.Qt.AlignTop
@@ -162,6 +181,7 @@ class Training(qtw.QWidget):
         self.term_cond_assoc["Time limit with cost threshold"].main_layout.addWidget(
             TitledLineEdit(
                 labels=("Enter cost threshold:", "default: 10e-10"),
+                line_edited=("store_tr", {"attr": "threshold"}),
                 layout='v'
             ),
             alignment=qtc.Qt.AlignTop
@@ -169,22 +189,41 @@ class Training(qtw.QWidget):
 
         self.term_cond_assoc["Cost threshold"] = TitledLineEdit(
             labels=("Enter cost threshold:", "default: 10e-10"),
+            line_edited=("store_tr", {"attr": "threshold"}),
             layout='v'
         )
 
         self.term_cond_assoc["Fixed number of iterations"] = TitledLineEdit(
             labels=("Enter the number of iterations:", "default: 1000"),
+            line_edited=("store_tr", {"attr": "fixed_iter"}),
             layout='v'
         )
 
         # request a switch to ui manager
         eb.emit("switch_widgets", old_widget, self.term_cond_assoc[key], parent, stored=stored)
 
+    @staticmethod
     def cleanup(self):
         eb.unsubscribe(
             "switch_channel1",
-            self.switch_func1
+            True
         )
+        eb.unsubscribe(
+            "store_tr",
+            True
+        )
+        eb.unsubscribe(
+            "start_training",
+            True
+        )
+
+    def store_user_input(self, value, meta):
+
+        self.input_dict[meta["attr"]] = value
+
+    def start_training(self):
+        self.training_manager.update_params(self.input_dict)
+        self.training_manager.start_training()
 
 
 class Sorting(qtw.QWidget):

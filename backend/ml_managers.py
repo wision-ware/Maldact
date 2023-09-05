@@ -6,24 +6,26 @@ import cupy as cp
 import multiprocessing as mp
 import inspect
 from event_bus import EventBus as eb
+import os
 
 
 class TrainingManager:
 
-    def __init__(self, **kwargs):
+    def __init__(self, event=None, **kwargs):
 
         # make Learn_network.learn() default arguments into attributes of TrainingManager
         self.network = Learn_network([1, 1])
         learn_signature = inspect.signature(self.network.learn)
-        default_args = {param.name: param.default for param in learn_signature.parameters.values() if\
+        default_args = {param.name: param.default for param in learn_signature.parameters.values() if
                         param.default != inspect.Parameter.empty}
-        for key, value in default_args:
+        for key, value in default_args.items():
             setattr(self, key, value)
 
         # additional attributes
         self.save_params = False
         self.data_dir = None
         self.model_dir = None
+        self.model_name = None
 
         # overwrite the default values
         for key, value in kwargs.items():
@@ -31,6 +33,9 @@ class TrainingManager:
                 setattr(self, key, value)
             else:
                 raise AttributeError(f"TrainingManager object has no attribute {key}")
+
+        if event:
+            eb.subscribe(event, self.start_training)
 
     def update_params(self, update_dict):
 
@@ -64,7 +69,11 @@ class TrainingManager:
             labels,
             **kwargs
         )
-        np.save(meta, self.model_dir)
+        np.save(meta, os.path.join(self.model_dir, self.model_name))
 
     def exit_training(self):
         pass  #TODO
+
+
+class SortingManager:
+    pass

@@ -239,7 +239,11 @@ class TitledDropdown(qtw.QWidget):
 
     def on_dropdown_selected(self):
         self.option_selected = self.dropdown.currentText()
-        eb.emit(self.option_changed[0], self.option_selected, self.option_changed[1])
+        if isinstance(self.option_changed, tuple):
+            eb.emit(self.option_changed[0], self.option_selected, self.option_changed[1])
+        else:
+            for tup in self.option_changed:
+                eb.emit(self.tup[0], self.option_selected, self.tup[1])
 
 
 class DefaultWidget(qtw.QWidget):

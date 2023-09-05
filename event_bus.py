@@ -19,7 +19,7 @@ class EventBus:
         if event in cls._subscriptions:
             cls._subscriptions[event].remove(callback)
 
-        if len(cls._subscriptions[event]) == 0:
+        if (len(cls._subscriptions[event]) == 0) or callback is True:
             cls._subscriptions.pop(event)
 
     @classmethod
