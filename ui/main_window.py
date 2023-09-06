@@ -9,7 +9,6 @@ from backend.ml_managers import TrainingManager, SortingManager
 class Menu(qtw.QWidget):
 
     def __init__(self):
-
         super().__init__()
 
         self.main_layout = qtw.QVBoxLayout(self)
@@ -47,7 +46,6 @@ class Menu(qtw.QWidget):
 class Training(qtw.QWidget):
 
     def __init__(self):
-
         super().__init__()
 
         self.training_manager = TrainingManager()
@@ -142,10 +140,10 @@ class Training(qtw.QWidget):
 
         # subscriptions to event bus
         self.switch_func1 = lambda key, old_widget, parent=self.sub_layout2, stored="termination_options": self.switch_widget(
-                         key,
-                         old_widget,
-                         parent=parent,
-                         stored=stored
+            key,
+            old_widget,
+            parent=parent,
+            stored=stored
         )
 
         eb.subscribe(
@@ -162,7 +160,6 @@ class Training(qtw.QWidget):
         )
 
     def switch_widget(self, key, old_widget=None, parent=None, stored=None):
-
         # define widget switching mechanism
 
         self.term_cond_assoc = {}
@@ -222,7 +219,6 @@ class Training(qtw.QWidget):
         )
 
     def store_user_input(self, value, meta):
-
         self.input_dict[meta["attr"]] = value
 
     def start_training(self):
@@ -233,7 +229,6 @@ class Training(qtw.QWidget):
 class Sorting(qtw.QWidget):
 
     def __init__(self):
-
         super().__init__()
 
         self.sorting_manager = SortingManager()
@@ -250,13 +245,13 @@ class Sorting(qtw.QWidget):
         self.main_layout.addWidget(CustomHeader("Data classification mode"))
 
         self.main_layout.addWidget(FileSelector(
-            file_selected="sample_dir_selected",
+            file_selected=("store_st", {"attr": "sort_dir"}),
             labels="Select directory for the sorting folders:",
             directory=True
         ))
 
         self.main_layout.addWidget(FileSelector(
-            file_selected=("store_st", {"attr": "model_selected"}),
+            file_selected=("store_st", {"attr": "model_file"}),
             labels="Select your trained model:"
         ))
 
@@ -264,12 +259,32 @@ class Sorting(qtw.QWidget):
 
         self.main_layout.addWidget(CustomFooter((
             ("back to menu", "switch_modes", {"ui_cls": Menu}),
-            "start classification"
+            ("start sorting", "start_sorting")
         )))
 
+        eb.subscribe(
+            "store_tr",
+            self.store_user_input
+        )
+        eb.subscribe(
+            "start_sorting",
+            self.start_sorting()
+        )
+
+    def store_user_input(self, value, meta):
+        self.input_dict[meta["attr"]] = value
+
     def start_sorting(self):
-        pass
+        self.sorting_manager.update_params(self.input_dict)
+        self.training_manager.start_sorting()
 
     @staticmethod
     def cleanup():
-        pass
+        eb.unsubscribe(
+            "store_tr",
+            True
+        )
+        eb.unsubscribe(
+            "start_sorting",
+            True
+        )

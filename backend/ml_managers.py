@@ -51,7 +51,6 @@ class TrainingManager:
         inp = training_data["input"]
         labels = training_data["labels"]
         exec_args = (
-            self.network,
             inp,
             labels
         )
@@ -61,11 +60,11 @@ class TrainingManager:
         )
         compute_process.start()
 
-    def executor(self, network, inp, labels):
+    def executor(self, inp, labels):
 
         arg_filter = lambda x: not callable(x) and not isinstance(x, LearnNetwork)
         kwargs = {key: value for key, value in self.__dict__.items() if arg_filter(value)}
-        meta = network.learn(
+        meta = self.network.learn(
             inp,
             labels,
             **kwargs
@@ -78,12 +77,38 @@ class TrainingManager:
 
 class SortingManager:
 
-    def __init__(self, ):
+    def __init__(self, **kwargs):
 
         self.network = Network('')
-        self.model_dir = None
+        self.model_file = None
         self.sort_dir = None
+        self.dir_path = None
+
+        # overwrite the default values
+        for key, value in kwargs.items():
+            if key in self.__dict__.keys():
+                setattr(self, key, value)
+            else:
+                raise AttributeError(f"SortingManager object has no attribute {key}")
+
+    def update_params(self, update_dict):
+
+        for key, value in update_dict.items():
+            if key in self.__dict__.keys():
+                setattr(self, key, value)
 
     def start_sorting(self):
-        self.network.load_params(self.model_dir)
 
+        self.network.load_params(self.model_file)
+        data = np.load(self.sort_dir)
+        self.dir_path = f"sorted_by_{self.model_file.os.path.basename(self.model_file)}"
+        os.mkdir(os.path.join(self.sort_dir, self.dir_path))
+        for i in range(self.network.N[-1]):
+            os.mkdir(os.path.join(self.dir_path, str(i)))
+
+    def executor(self, data):
+
+        out = self.network.get_output(data)
+        dim = out.shape[0]
+        for i in range(dim):
+            np.save(os.path.join(self.dir_path, str(np.argmax(out[i, :]))), out[i, :])
