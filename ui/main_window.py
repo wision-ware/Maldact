@@ -39,6 +39,10 @@ class Menu(qtw.QWidget):
             )
         ))
 
+    @staticmethod
+    def cleanup():
+        pass
+
 
 class Training(qtw.QWidget):
 
@@ -203,7 +207,7 @@ class Training(qtw.QWidget):
         eb.emit("switch_widgets", old_widget, self.term_cond_assoc[key], parent, stored=stored)
 
     @staticmethod
-    def cleanup(self):
+    def cleanup():
         eb.unsubscribe(
             "switch_channel1",
             True
@@ -264,4 +268,8 @@ class Sorting(qtw.QWidget):
         )))
 
     def start_sorting(self):
+        pass
+
+    @staticmethod
+    def cleanup():
         pass

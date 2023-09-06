@@ -16,7 +16,7 @@ class EventBus:
     @classmethod
     def unsubscribe(cls, event, callback):
 
-        if event in cls._subscriptions:
+        if event in cls._subscriptions and callback in cls._subscriptions[event]:
             cls._subscriptions[event].remove(callback)
 
         if (len(cls._subscriptions[event]) == 0) or callback is True:

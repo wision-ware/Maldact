@@ -15,6 +15,7 @@ class Transitions:
             self.active_ui = active_ui
         self.central_widget = self.window.centralWidget()
         self.stored_instances = {}
+        self.old_widget = None
 
     def switch_ui(self, new_ui):
         self.central_widget = self.window.centralWidget()
@@ -25,17 +26,18 @@ class Transitions:
     def replace_widget(self, old_widget, new_widget, parent, stored=None):
         # Get the parent of the old widget
         parent_layout = parent
+        self.old_widget = old_widget
         if old_widget is None:
-            old_widget = self.stored_instances[stored]
+            self.old_widget = self.stored_instances[stored]
 
         if parent_layout is not None:
             # Find the index of the old widget in the parent layout
-            index = parent_layout.indexOf(old_widget)
+            index = parent_layout.indexOf(self.old_widget)
 
             if index != -1:
                 # Remove the old widget from the parent layout
-                parent_layout.removeWidget(old_widget)
-                old_widget.deleteLater()
+                parent_layout.removeWidget(self.old_widget)
+                self.old_widget.deleteLater()
 
                 # Insert the new widget at the same index
                 parent_layout.insertWidget(index, new_widget)

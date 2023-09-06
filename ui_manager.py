@@ -25,14 +25,14 @@ class UIManager:
 
         cls.disconnect_signals(replaced)
         cls.transitions.replace_widget(replaced, new, parent, stored=stored)
-        cls.subs_cleanup(cls.transitions.central_widget)
+        cls.subs_cleanup(cls.transitions.old_widget)
         cls.connect_signals(new)
 
     # switches from a chosen ui page to a different one
     @classmethod
     def switch_ui(cls, ui_class=None):
 
-        if isinstance(ui_class,dict):
+        if isinstance(ui_class, dict):
             ui_class = ui_class['ui_cls']
 
         elif isinstance(ui_class, type(None)):
@@ -43,6 +43,7 @@ class UIManager:
             cls.disconnect_signals(cls.active_ui)
 
         cls.transitions.switch_ui(cls.new)
+        cls.subs_cleanup(cls.transitions.central_widget)
         cls.connect_signals(cls.new)
 
     @classmethod
@@ -61,5 +62,4 @@ class UIManager:
 
     @classmethod
     def subs_cleanup(cls, ui):
-        try: type(ui).cleanup()
-        except: pass
+        ui.__class__.cleanup()

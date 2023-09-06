@@ -19,6 +19,10 @@ class CustomHeader(qtw.QWidget):
         self.title.setStyleSheet(f"font-size: {font_size}px")
         self.main_layout.addWidget(self.title, alignment=qtc.Qt.AlignCenter)
 
+    @staticmethod
+    def cleanup():
+        pass
+
 
 class CustomFooter(qtw.QWidget):
     
@@ -55,6 +59,10 @@ class CustomFooter(qtw.QWidget):
         if additional == (): eb.emit(event)
         else: eb.emit(event, *additional)
 
+    @staticmethod
+    def cleanup():
+        pass
+
 
 
 class LargeButtons(qtw.QWidget):
@@ -82,6 +90,10 @@ class LargeButtons(qtw.QWidget):
         # main layout assembling
 
         self.main_layout.addLayout(self.sub_layout_1)
+
+    @staticmethod
+    def cleanup():
+        pass
 
 
 class FileSelector(qtw.QWidget):
@@ -158,6 +170,10 @@ class FileSelector(qtw.QWidget):
                 self.file_selected[1]
             )
 
+    @staticmethod
+    def cleanup():
+        pass
+
 
 class TitledLineEdit(qtw.QWidget):
 
@@ -197,6 +213,10 @@ class TitledLineEdit(qtw.QWidget):
             self.l_edit.text(),
             self.line_edited[1]
         )
+
+    @staticmethod
+    def cleanup():
+        pass
 
 
 class TitledDropdown(qtw.QWidget):
@@ -245,6 +265,10 @@ class TitledDropdown(qtw.QWidget):
             for tup in self.option_changed:
                 eb.emit(self.tup[0], self.option_selected, self.tup[1])
 
+    @staticmethod
+    def cleanup():
+        pass
+
 
 class DefaultWidget(qtw.QWidget):
 
@@ -272,3 +296,7 @@ class DefaultWidget(qtw.QWidget):
         self.css_style_sheet = dict_to_css(self.style_sheet)
 
         self.setStyleSheet(self.css_style_sheet)
+
+    @staticmethod
+    def cleanup():
+        pass
