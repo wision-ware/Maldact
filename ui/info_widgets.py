@@ -7,11 +7,16 @@ from functools import partial
 
 class WarningText(qtw.QWidget):
 
-    def __init__(self):
+    def __init__(self, initial_message):
 
         super().__init__()
+        self.main_layout = qtw.QVBoxLayout(self)
 
+        # main layout assembling
 
+        message = qtw.QLabel(initial_message)
+        message.setStyleSheet(f"color: red; font: Fira Code")
+        self.main_layout.addWidget(message)
 
     def cleanup(self):
         pass
