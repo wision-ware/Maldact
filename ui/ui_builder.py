@@ -1,7 +1,7 @@
 
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
-from ui.widgets import DefaultWidget
+from ui.input_widgets import DefaultWidget
 
 
 class Transitions:

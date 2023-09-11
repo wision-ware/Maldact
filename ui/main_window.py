@@ -1,7 +1,8 @@
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
 import os, sys
-from ui.widgets import *
+from ui.input_widgets import *
+from ui.info_widgets import *
 from event_bus import EventBus as eb
 from backend.ml_managers import TrainingManager, SortingManager
 
@@ -235,6 +236,7 @@ class Sorting(qtw.QWidget):
 
         self.main_layout = qtw.QVBoxLayout(self)
         self.key = 'sort'
+        self.input_dict = {}
 
         # sublayout assembling
 
@@ -268,7 +270,7 @@ class Sorting(qtw.QWidget):
         )
         eb.subscribe(
             "start_sorting",
-            self.start_sorting()
+            self.start_sorting
         )
 
     def store_user_input(self, value, meta):
@@ -276,7 +278,7 @@ class Sorting(qtw.QWidget):
 
     def start_sorting(self):
         self.sorting_manager.update_params(self.input_dict)
-        self.training_manager.start_sorting()
+        self.sorting_manager.start_sorting()
 
     @staticmethod
     def cleanup():
