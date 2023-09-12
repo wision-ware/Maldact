@@ -12,11 +12,20 @@ class WarningText(qtw.QWidget):
         super().__init__()
         self.main_layout = qtw.QVBoxLayout(self)
 
+        stylesheet = """
+            QLabel {
+                color: red;
+                font-family: "Fira Code", monospace;
+                font-size: 8pt;
+            }
+        """
+
         # main layout assembling
 
         message = qtw.QLabel(initial_message)
-        message.setStyleSheet(f"color: red; font: Fira Code")
+        message.setStyleSheet(stylesheet)
         self.main_layout.addWidget(message)
+        self.main_layout.setContentsMargins(0, 0, 10, 0)
 
     def cleanup(self):
         pass

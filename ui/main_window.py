@@ -237,6 +237,8 @@ class Sorting(qtw.QWidget):
         self.main_layout = qtw.QVBoxLayout(self)
         self.key = 'sort'
         self.input_dict = {}
+        self.warning_state = False
+        self.input_warning_text = None
 
         # sublayout assembling
 
@@ -277,8 +279,22 @@ class Sorting(qtw.QWidget):
         self.input_dict[meta["attr"]] = value
 
     def start_sorting(self):
-        self.sorting_manager.update_params(self.input_dict)
-        self.sorting_manager.start_sorting()
+
+        if len(self.input_dict) > 2:
+            if self.warning_state is True:
+                self.main_layout.removeWidget(self.input_warning_text)
+                self.input_warning_text.deleteLater()
+                self.warning_state = False
+            self.sorting_manager.update_params(self.input_dict)
+            self.sorting_manager.start_sorting()
+
+        elif self.warning_state is False:
+            self.input_warning_text = WarningText("Mandatory input missing!")
+            last_index = self.main_layout.count()
+            self.main_layout.insertWidget(last_index - 1, self.input_warning_text, alignment=qtc.Qt.AlignRight)
+            self.warning_state = True
+        else:
+            return None
 
     @staticmethod
     def cleanup():

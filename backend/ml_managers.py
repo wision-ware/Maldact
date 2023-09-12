@@ -27,6 +27,7 @@ class TrainingManager:
         self.data_dir = None
         self.model_dir = None
         self.model_name = None
+        self.training_process = None
 
         # overwrite the default values
         for key, value in kwargs.items():
@@ -54,11 +55,11 @@ class TrainingManager:
             inp,
             labels
         )
-        compute_process = mp.Process(
+        self.training_process = mp.Process(
             target=self.executor,
             args=exec_args
         )
-        compute_process.start()
+        self.training_process.start()
 
     def executor(self, inp, labels):
 
@@ -83,6 +84,7 @@ class SortingManager:
         self.model_file = None
         self.sort_dir = None
         self.dir_path = None
+        self.sorting_process = None
 
         # overwrite the default values
         for key, value in kwargs.items():
@@ -105,6 +107,12 @@ class SortingManager:
         os.mkdir(os.path.join(self.sort_dir, self.dir_path))
         for i in range(self.network.N[-1]):
             os.mkdir(os.path.join(self.dir_path, str(i)))
+        exec_args = (data,)
+        self.sorting_process = mp.Process(
+            target=self.executor,
+            args=exec_args
+        )
+        self.sorting_process.start()
 
     def executor(self, data):
 
@@ -112,3 +120,4 @@ class SortingManager:
         dim = out.shape[0]
         for i in range(dim):
             np.save(os.path.join(self.dir_path, str(np.argmax(out[i, :]))), out[i, :])
+        eb.emit("training_finished", out)
