@@ -3,6 +3,7 @@ import PyQt5.QtCore as qtc
 import os, sys
 from ui.input_widgets import *
 from ui.info_widgets import *
+from ui.popups import *
 from event_bus import EventBus as eb
 from backend.ml_managers import TrainingManager, SortingManager
 
@@ -50,6 +51,10 @@ class Training(qtw.QWidget):
         super().__init__()
 
         self.training_manager = TrainingManager()
+        self.training_popup = None
+        self.term_cond_assoc = {}
+        self.warning_state = False
+        self.input_warning_text = None
 
         # user input storage
         self.input_dict = {}
@@ -147,23 +152,17 @@ class Training(qtw.QWidget):
             stored=stored
         )
 
-        eb.subscribe(
-            "switch_channel1",
-            self.switch_func1
+        self.subs = (
+            ("switch_channel1", self.switch_func1),
+            ("store_tr", self.store_user_input),
+            ("start_training", self.start_training)
         )
-        eb.subscribe(
-            "store_tr",
-            self.store_user_input
-        )
-        eb.subscribe(
-            "start_training",
-            self.start_training
-        )
+
+        for sub in self.subs:
+            eb.subscribe(*sub)
 
     def switch_widget(self, key, old_widget=None, parent=None, stored=None):
         # define widget switching mechanism
-
-        self.term_cond_assoc = {}
 
         self.term_cond_assoc["Time limit"] = TitledLineEdit(
             labels=("Set time limit for training", "time (s)"),
@@ -204,27 +203,42 @@ class Training(qtw.QWidget):
         # request a switch to ui manager
         eb.emit("switch_widgets", old_widget, self.term_cond_assoc[key], parent, stored=stored)
 
-    @staticmethod
-    def cleanup():
-        eb.unsubscribe(
-            "switch_channel1",
-            True
-        )
-        eb.unsubscribe(
-            "store_tr",
-            True
-        )
-        eb.unsubscribe(
-            "start_training",
-            True
-        )
+    def cleanup(self):
+        for sub in self.subs:
+            eb.unsubscribe(sub[0], True)
 
     def store_user_input(self, value, meta):
         self.input_dict[meta["attr"]] = value
 
     def start_training(self):
-        self.training_manager.update_params(self.input_dict)
-        self.training_manager.start_training()
+
+        if all(("model_dir", "data_dir")) in self.input_dict.keys():
+
+            if self.warning_state is True:
+                self.main_layout.removeWidget(self.input_warning_text)
+                self.input_warning_text.deleteLater()
+                self.warning_state = False
+
+            self.training_manager.update_params(self.input_dict)
+            self.training_manager.start_training()
+
+            self.training_popup = LoadingWindow(
+                f'''Training of the "{self.model_name}" model in progress''',
+                f"training_done_{self.training_manager.id}",
+                f"training_canceled_{self.training_manager.id}"
+            )
+
+            self.training_manager = TrainingManager()
+
+        elif self.warning_state is False:
+
+            self.input_warning_text = WarningText("Mandatory input missing!")
+            last_index = self.main_layout.count()
+            self.main_layout.insertWidget(last_index - 1, self.input_warning_text, alignment=qtc.Qt.AlignRight)
+            self.warning_state = True
+
+        else:
+            return None
 
 
 class Sorting(qtw.QWidget):
@@ -239,8 +253,9 @@ class Sorting(qtw.QWidget):
         self.input_dict = {}
         self.warning_state = False
         self.input_warning_text = None
+        self.sorting_popup = None
 
-        # sublayout assembling
+        # sub layout assembling
 
         # ----
 
@@ -281,18 +296,30 @@ class Sorting(qtw.QWidget):
     def start_sorting(self):
 
         if len(self.input_dict) > 2:
+
             if self.warning_state is True:
                 self.main_layout.removeWidget(self.input_warning_text)
                 self.input_warning_text.deleteLater()
                 self.warning_state = False
+
             self.sorting_manager.update_params(self.input_dict)
             self.sorting_manager.start_sorting()
 
+            self.sorting_popup = LoadingWindow(
+                f'''Sorting by the "{os.path.basename(self.model_dir)}" model in progress''',
+                f"sorting_done_{self.sorting_manager.id}",
+                f"sorting_canceled_{self.sorting_manager.id}"
+            )
+
+            self.sorting_manager = SortingManager()
+
         elif self.warning_state is False:
+
             self.input_warning_text = WarningText("Mandatory input missing!")
             last_index = self.main_layout.count()
             self.main_layout.insertWidget(last_index - 1, self.input_warning_text, alignment=qtc.Qt.AlignRight)
             self.warning_state = True
+
         else:
             return None
 

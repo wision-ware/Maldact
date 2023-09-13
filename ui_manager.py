@@ -62,4 +62,7 @@ class UIManager:
 
     @classmethod
     def subs_cleanup(cls, ui):
-        ui.__class__.cleanup()
+        try:
+            ui.__class__.cleanup()
+        except TypeError:
+            ui.cleanup()

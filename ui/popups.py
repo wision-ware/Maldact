@@ -11,7 +11,7 @@ from backend.ml_managers import TrainingManager, SortingManager
 
 class LoadingWindow(qtw.QDialog):
 
-    def __init__(self, info, close_event):
+    def __init__(self, info, close_receiver, cancel_sender):
         
         super().__init__()
 
@@ -19,7 +19,7 @@ class LoadingWindow(qtw.QDialog):
         self.sub_layout_1 = qtw.QHBoxLayout(self)
         self.sub_layout_2 = qtw.QHBoxLayout(self)
         self.loading_gif_path = "../resources/loading.gif"
-        self.close_event = close_event
+        self.close_receiver = close_receiver
 
         # sub layout assembly
         # 1
@@ -50,9 +50,10 @@ class LoadingWindow(qtw.QDialog):
 
         # event based termination
 
-        eb.subscribe(self.close_event, self.terminate)
+        eb.subscribe(self.close_receiver, self.terminate)
 
     def terminate(self):
 
-        eb.unsubscribe(self.close_event, self.terminate)
+        eb.unsubscribe(self.close_receiver, self.terminate)
+        eb.emit(self.cancel_sender)
         self.accept()
