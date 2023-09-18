@@ -6,6 +6,8 @@ from ui.info_widgets import *
 from ui.popups import *
 from event_bus import EventBus as eb
 from backend.ml_managers import TrainingManager, SortingManager
+import numpy as np
+import pickle
 
 
 class Menu(qtw.QWidget):
@@ -115,9 +117,9 @@ class Training(qtw.QWidget):
         ))
 
         self.main_layout.addWidget(FileSelector(
-            file_selected=("store_tr", {"attr": "data_dir"}),
-            labels="Select training data directory:",
-            directory=True
+            file_selected=("store_tr", {"attr": "data_file"}),
+            labels="Select training data file:",
+            directory=False
         ))
 
         self.main_layout.addWidget(FileSelector(
@@ -212,12 +214,22 @@ class Training(qtw.QWidget):
 
     def start_training(self):
 
-        if all(("model_dir", "data_dir")) in self.input_dict.keys():
+        if all(key in self.input_dict for key in ("model_dir", "data_file")):
 
             if self.warning_state is True:
                 self.main_layout.removeWidget(self.input_warning_text)
                 self.input_warning_text.deleteLater()
                 self.warning_state = False
+
+            try:
+                _ = np.load(self.input_dict["data_file"], allow_pickle=True)
+
+            except (AssertionError, AttributeError, FileNotFoundError, OSError, IOError, pickle.UnpicklingError):
+                self.input_warning_text = WarningText("Files failed to load!")
+                last_index = self.main_layout.count()
+                self.main_layout.insertWidget(last_index - 1, self.input_warning_text, alignment=qtc.Qt.AlignRight)
+                self.warning_state = True
+                return None
 
             self.training_manager.update_params(self.input_dict)
             self.training_manager.start_training()
@@ -274,6 +286,11 @@ class Sorting(qtw.QWidget):
             labels="Select your trained model:"
         ))
 
+        self.main_layout.addWidget(FileSelector(
+            file_selected=("store_st", {"attr": "data_file"}),
+            labels="Select data for classification:"
+        ))
+
         self.main_layout.addStretch(1)
 
         self.main_layout.addWidget(CustomFooter((
@@ -281,26 +298,40 @@ class Sorting(qtw.QWidget):
             ("start sorting", "start_sorting")
         )))
 
-        eb.subscribe(
-            "store_tr",
-            self.store_user_input
+        self.subs = (
+            ("store_st", self.store_user_input),
+            ("start_sorting", self.start_sorting)
         )
-        eb.subscribe(
-            "start_sorting",
-            self.start_sorting
-        )
+
+        for sub in self.subs:
+            eb.subscribe(*sub)
 
     def store_user_input(self, value, meta):
         self.input_dict[meta["attr"]] = value
 
     def start_sorting(self):
 
+        if self.sorting_manager.sorting_process.is_alive():
+            self.sorting_manager = SortingManager()
         if len(self.input_dict) > 2:
 
             if self.warning_state is True:
                 self.main_layout.removeWidget(self.input_warning_text)
                 self.input_warning_text.deleteLater()
                 self.warning_state = False
+
+            try:
+                test_load = np.load(self.input_dict["model_file"], allow_pickle=True)
+                _ = test_load["weights"]
+                dim = test_load["bias"][0].shape()[0]
+                test_load = np.load(self.input_dict["data_file"], allow_pickle=True)
+                assert dim == test_load.shape()[0]
+            except (AssertionError, AttributeError, FileNotFoundError, OSError, IOError, pickle.UnpicklingError):
+                self.input_warning_text = WarningText("Files failed to load!")
+                last_index = self.main_layout.count()
+                self.main_layout.insertWidget(last_index - 1, self.input_warning_text, alignment=qtc.Qt.AlignRight)
+                self.warning_state = True
+                return None
 
             self.sorting_manager.update_params(self.input_dict)
             self.sorting_manager.start_sorting()
@@ -323,13 +354,6 @@ class Sorting(qtw.QWidget):
         else:
             return None
 
-    @staticmethod
-    def cleanup():
-        eb.unsubscribe(
-            "store_tr",
-            True
-        )
-        eb.unsubscribe(
-            "start_sorting",
-            True
-        )
+    def cleanup(self):
+        for sub in self.subs:
+            eb.unsubscribe(sub[0], True)

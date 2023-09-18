@@ -16,7 +16,7 @@ class CustomHeader(qtw.QWidget):
         # main layout assembling
 
         self.title = qtw.QLabel(label, self)
-        self.title.setStyleSheet(f"font-size: {font_size}px")
+        self.title.setStyleSheet(f"font-size: {font_size}pt")
         self.main_layout.addWidget(self.title, alignment=qtc.Qt.AlignCenter)
 
     @staticmethod
@@ -289,8 +289,8 @@ class DefaultWidget(qtw.QWidget):
         # modifying stylesheet
         match border:
             case "grey_round":
-                self.style_sheet["border"] = "2px solid grey"
-                self.style_sheet["border-radius"] = "10px"
+                self.style_sheet["border"] = "1pt solid grey"
+                self.style_sheet["border-radius"] = "10pt"
 
         # converting to css
         self.css_style_sheet = dict_to_css(self.style_sheet)

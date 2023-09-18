@@ -1,6 +1,7 @@
 import sys
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
+import PyQt5.QtGui as qtg
 from ui_manager import UIManager as um
 
 
@@ -19,8 +20,10 @@ class MainWindow(qtw.QMainWindow):
 def main():
 
     app = qtw.QApplication(sys.argv)
+    default_font = qtg.QFont("Arial", 10)
 
     app.setAttribute(qtc.Qt.AA_EnableHighDpiScaling)
+    app.setFont(default_font)
 
     window = MainWindow()
     window.show()

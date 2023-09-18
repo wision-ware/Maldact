@@ -118,10 +118,11 @@ class SortingManager:
         TrainingManager.instance_id += 1
 
         # other attribute declarations
-        self.network = Network('')
+        self.network = Network(skip_init=True)
         self.model_file = None
+        self.data_file = None
         self.sort_dir = None
-        self.dir_path = None
+        self.dir_name = None
         self.sorting_process = None
         self.term_queue = mp.Queue()
         self.check_timer = qtc.QTimer()
@@ -148,12 +149,12 @@ class SortingManager:
             pass
 
         self.network.load_params(self.model_file)
-        data = np.load(self.sort_dir)
-        self.dir_path = f"sorted_by_{self.model_file.os.path.basename(self.model_file)}"
-        os.mkdir(os.path.join(self.sort_dir, self.dir_path))
+        self.dir_name = f"sorted_by_{self.model_file.os.path.basename(self.model_file)}"
+        os.mkdir(os.path.join(self.sort_dir, self.dir_name))
+        data = np.load(self.data_file)
         term_queue = mp.Queue()
         for i in range(self.network.N[-1]):
-            os.mkdir(os.path.join(self.dir_path, str(i)))
+            os.mkdir(os.path.join(self.dir_name, str(i)))
         exec_args = (
             data,
             term_queue
@@ -169,7 +170,7 @@ class SortingManager:
         out = self.network.get_output(data)
         dim = out.shape[0]
         for i in range(dim):
-            np.save(os.path.join(self.dir_path, str(np.argmax(out[i, :]))), out[i, :])
+            np.save(os.path.join(self.dir_name, str(np.argmax(out[i, :]))), out[i, :])
         queue.put("done")
 
     def check_queue(self):
