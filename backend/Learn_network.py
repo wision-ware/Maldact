@@ -117,7 +117,7 @@ class LearnNetwork(object):
 
         # verifying parameters
 
-        confirmation = [isinstance(i,(int, np.integer)) for i in N]
+        confirmation = [isinstance(i, (int, np.integer)) for i in N]
         LearnNetwork.typeval_assertion(
             isinstance(N, (np.ndarray, list)),
             all(confirmation),

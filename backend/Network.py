@@ -95,80 +95,75 @@ class Network(object):
         except (ValueError, IndexError):
             print('Warning: Input indices must correspond with existing parameter files!')
 
-    def __init__(self, index=None):  # if index is left None, then the latest existing is used
+    def __init__(self, index=None, skip_init=False):  # if index is left None, then the latest existing is used
 
-        pass
+        if skip_init: return
 
-#        bias_load = []
-#        weight_load = []
-#        path_ = str(np.copy(Network.path_))
-#        all_files = glob(os.path.join(path_,'*.npy'))
-#
-#        try:
-#            assert len(all_files) != 0, "No parameter files available!"
-#        except AssertionError:
-#            raise  # TODO proper error handling
-#
-#        last_file = os.path.basename(all_files[-1])
-#        last_index = Network.extract_int(last_file, cut='first')
-#
-#        if index is not None:
-#            par_indices = []
-#            for file in all_files:
-#                bfile = os.path.basename(file)
-#                par_index = Network.extract_int(bfile, cut='first')
-#                par_indices.append(par_index)
-#
-#            try:
-#                assert index in par_indices, "Listed parameters dont exist!"
-#            except AssertionError:
-#                raise  # TODO proper error handling
-#
-#            p_ind = index
-#
-#        else: p_ind = last_index
-#
-#        w_par_files = glob(os.path.join(path_, f'p{p_ind}_w*.npy'))
-#        b_par_files = glob(os.path.join(path_, f'p{p_ind}_b*.npy'))
-#
-#        for file in w_par_files:
-#            weight_load.append(np.load(file))
-#
-#        for file in b_par_files:
-#            bias_load.append(np.load(file))
-#
-#        params = [weight_load,bias_load]
-#
-#        N = [len(weight_load[0][:,0])]
-#        for matrix in weight_load:
-#            N.append(len(matrix[0,:]))
-#
-#        self.N = N
-#
-#        weight_like = [0]*len(self.N)
-#        bias_like = [0]*len(self.N)
-#
-#        for l in range(1, len(self.N)):
-#            weight_like[l] = np.zeros((self.N[l-1], self.N[l]))
-#            bias_like[l] = np.zeros((self.N[l]))
-#
-#        self.weight_like = weight_like
-#        self.bias_like = bias_like
-#        self.weights = self.weight_like[:]
-#        self.bias = self.bias_like[:]
-#
-#        for l in range(len(self.N)):
-#            self.weights[l] = params[0][l-1]
-#            self.bias[l] = params[1][l-1]
+        bias_load = []
+        weight_load = []
+        path_ = str(np.copy(Network.path_))
+        all_files = glob(os.path.join(path_,'*.npy'))
+
+        try:
+            assert len(all_files) != 0, "No parameter files available!"
+        except AssertionError:
+            raise  # TODO proper error handling
+
+        last_file = os.path.basename(all_files[-1])
+        last_index = Network.extract_int(last_file, cut='first')
+
+        if index is not None:
+            par_indices = []
+            for file in all_files:
+                bfile = os.path.basename(file)
+                par_index = Network.extract_int(bfile, cut='first')
+                par_indices.append(par_index)
+
+            try:
+                assert index in par_indices, "Listed parameters dont exist!"
+            except AssertionError:
+                raise  # TODO proper error handling
+
+            p_ind = index
+
+        else: p_ind = last_index
+
+        w_par_files = glob(os.path.join(path_, f'p{p_ind}_w*.npy'))
+        b_par_files = glob(os.path.join(path_, f'p{p_ind}_b*.npy'))
+
+        for file in w_par_files:
+            weight_load.append(np.load(file))
+
+        for file in b_par_files:
+            bias_load.append(np.load(file))
+
+        params = [weight_load,bias_load]
+
+        N = [len(weight_load[0][:,0])]
+        for matrix in weight_load:
+            N.append(len(matrix[0,:]))
+
+        self.N = N
+
+        weight_like = [0]*len(self.N)
+        bias_like = [0]*len(self.N)
+
+        for l in range(1, len(self.N)):
+            weight_like[l] = np.zeros((self.N[l-1], self.N[l]))
+            bias_like[l] = np.zeros((self.N[l]))
+
+        self.weight_like = weight_like
+        self.bias_like = bias_like
+        self.weights = self.weight_like[:]
+        self.bias = self.bias_like[:]
+
+        for l in range(len(self.N)):
+            self.weights[l] = params[0][l-1]
+            self.bias[l] = params[1][l-1]
 
     # output method
 
     def get_output(self, inp_, layer=False, label=None):
-
-        if layer is True:
-
-            all_out_act = []
-            all_out = []
 
         # first layer output
 
@@ -176,6 +171,8 @@ class Network(object):
 
         if layer is True:
 
+            all_out_act = []
+            all_out = []
             all_out_act.append(p_output[:])
             all_out.append(p_output[:])
 

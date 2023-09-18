@@ -19,7 +19,7 @@ class Menu(qtw.QWidget):
         self.key = 'menu'
         self.subscribe_list = ["switch_modes"]
 
-        # sublayout assembling
+        # sub layout assembling
 
         # ----
 
@@ -172,7 +172,7 @@ class Training(qtw.QWidget):
             layout='v'
         )
 
-        self.term_cond_assoc["Time limit with cost threshold"] = DefaultWidget(layout='h')
+        self.term_cond_assoc["Time limit with cost threshold"] = DefaultWidget(layout='h', border=None)
         self.term_cond_assoc["Time limit with cost threshold"].main_layout.addWidget(
             TitledLineEdit(
                 labels=("Set time limit for training", "time (s)"),
@@ -321,12 +321,15 @@ class Sorting(qtw.QWidget):
                 self.warning_state = False
 
             try:
+
                 test_load = np.load(self.input_dict["model_file"], allow_pickle=True)
                 _ = test_load["weights"]
                 dim = test_load["bias"][0].shape()[0]
                 test_load = np.load(self.input_dict["data_file"], allow_pickle=True)
                 assert dim == test_load.shape()[0]
+
             except (AssertionError, AttributeError, FileNotFoundError, OSError, IOError, pickle.UnpicklingError):
+
                 self.input_warning_text = WarningText("Files failed to load!")
                 last_index = self.main_layout.count()
                 self.main_layout.insertWidget(last_index - 1, self.input_warning_text, alignment=qtc.Qt.AlignRight)
