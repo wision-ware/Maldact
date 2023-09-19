@@ -13,3 +13,14 @@ def dict_to_css(data, indent=0):
             css += f"{' ' * (indent * 4)}{key}: {value};\n"
 
     return css
+
+
+def add_target(sheet, target):
+
+    # indent inputted style-sheet
+    tabbed_sheet = ["\t" + line for line in sheet.splitlines()]
+    tabbed_sheet = "\n".join(tabbed_sheet)
+
+    # assemble it into sheet with a selector
+    final = f"{target} {{\n{tabbed_sheet}\n}}"
+    return final

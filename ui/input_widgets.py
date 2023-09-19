@@ -1,11 +1,11 @@
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
-from ui.ui_tools import dict_to_css
+from ui.ui_tools import dict_to_css, add_target
 from event_bus import EventBus as eb
 from functools import partial
 
 
-class CustomHeader(qtw.QWidget):
+class CustomHeader(qtw.QFrame):
 
     def __init__(self, label, font_size=16):
 
@@ -24,7 +24,7 @@ class CustomHeader(qtw.QWidget):
         pass
 
 
-class CustomFooter(qtw.QWidget):
+class CustomFooter(qtw.QFrame):
     
     def __init__(self, labels):
         
@@ -64,8 +64,7 @@ class CustomFooter(qtw.QWidget):
         pass
 
 
-
-class LargeButtons(qtw.QWidget):
+class LargeButtons(qtw.QFrame):
 
     def __init__(self, button1=(None, {}), button2=(None, {}), labels=(None, None)):
 
@@ -96,7 +95,7 @@ class LargeButtons(qtw.QWidget):
         pass
 
 
-class FileSelector(qtw.QWidget):
+class FileSelector(qtw.QFrame):
 
     def __init__(self, file_selected=(None, {}), labels=(None, None), directory=False):
 
@@ -175,7 +174,7 @@ class FileSelector(qtw.QWidget):
         pass
 
 
-class TitledLineEdit(qtw.QWidget):
+class TitledLineEdit(qtw.QFrame):
 
     def __init__(self, line_edited=(None, {}), labels=(None, None), layout="h"):
 
@@ -219,7 +218,7 @@ class TitledLineEdit(qtw.QWidget):
         pass
 
 
-class TitledDropdown(qtw.QWidget):
+class TitledDropdown(qtw.QFrame):
 
     def __init__(self, option_changed=(None, {}), labels=None, options=None, layout="h"):
 
@@ -270,7 +269,7 @@ class TitledDropdown(qtw.QWidget):
         pass
 
 
-class DefaultWidget(qtw.QWidget):
+class DefaultWidget(qtw.QFrame):
 
     def __init__(self, layout='h', border="grey_round"):
 
@@ -283,18 +282,25 @@ class DefaultWidget(qtw.QWidget):
                 self.main_layout = qtw.QVBoxLayout(self)
                 self.main_layout.setContentsMargins(0, 0, 0, 0)
 
+        self.setContentsMargins(0, 0, 0, 0)
+
         # styling
-        self.style_sheet = {}
+        self.style_sheet = {
+            "margin": "0",
+            "padding": "0"
+        }
 
         # modifying stylesheet
         match border:
             case "grey_round":
-                self.style_sheet["border"] = "1pt solid grey"
-                self.style_sheet["border-radius"] = "10pt"
+                self.style_sheet["border"] = "0.1em solid grey"
+                self.style_sheet["border-radius"] = "0.75em"
+                self.style_sheet["padding"] = "-0.1em"
+            case _:
+                pass
 
-        # converting to css
         self.css_style_sheet = dict_to_css(self.style_sheet)
-
+        self.css_style_sheet = add_target(self.css_style_sheet, "DefaultWidget")
         self.setStyleSheet(self.css_style_sheet)
 
     @staticmethod

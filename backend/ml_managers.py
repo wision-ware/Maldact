@@ -10,6 +10,7 @@ from event_bus import EventBus as eb
 import os
 import queue
 import PyQt5.QtCore as qtc
+import traceback
 
 
 class TrainingManager:
@@ -84,25 +85,52 @@ class TrainingManager:
 
         arg_filter = lambda x: not callable(x) and not isinstance(x, LearnNetwork)
         kwargs = {key: value for key, value in self.__dict__.items() if arg_filter(value)}
-        meta = self.network.learn(
-            inp,
-            labels,
-            **kwargs
-        )
+        try:
+
+            meta = self.network.learn(
+                inp,
+                labels,
+                **kwargs
+            )
+
+        except Exception as e:
+
+            exc_type = type(e).__name__
+            exc_message = str(e)
+            exc_traceback = traceback.format_exc()
+
+            exception_info = {
+                'type': exc_type,
+                'message': exc_message,
+                'traceback': exc_traceback
+            }
+
+            self.term_queue.put(("crashed", exception_info))
+            return None
+
         np.save(meta, os.path.join(self.model_dir, self.model_name))
-        self.term_queue.put("done")
+        self.term_queue.put(("done",))
 
     def exit_training(self):
         pass  # TODO
 
     def check_queue(self):
         try:
-            match self.term_queue.get():
+            message = self.term_queue.get()
+            match message[0]:
+
                 case "done":
                     eb.emit(f"training_done_{self.id}")
                     self.check_timer.stop()
                     if self.training_process.is_alive():
                         self.training_process.terminate()
+
+                case "crashed":
+                    eb.emit(f"training_crashed_{self.id}", message[1])
+                    self.check_timer.stop()
+                    if self.training_process.is_alive():
+                        self.training_process.terminate()
+
         except queue.Empty:
             pass
 
@@ -167,7 +195,25 @@ class SortingManager:
 
     def executor(self, data, queue):
 
-        out = self.network.get_output(data)
+        try:
+
+            out = self.network.get_output(data)
+
+        except Exception as e:
+
+            exc_type = type(e).__name__
+            exc_message = str(e)
+            exc_traceback = traceback.format_exc()
+
+            exception_info = {
+                'type': exc_type,
+                'message': exc_message,
+                'traceback': exc_traceback
+            }
+
+            self.term_queue.put(("crashed", exception_info))
+            return None
+
         dim = out.shape[0]
         for i in range(dim):
             np.save(os.path.join(self.dir_name, str(np.argmax(out[i, :]))), out[i, :])
@@ -175,12 +221,23 @@ class SortingManager:
 
     def check_queue(self):
         try:
-            match self.term_queue.get():
+            message = self.term_queue.get()
+            match message[0]:
+
                 case "done":
+
                     eb.emit(f"sorting_done_{self.id}")
                     self.check_timer.stop()
                     if self.sorting_process.is_alive():
                         self.sorting_process.terminate()
+
+                case "crashed":
+
+                    eb.emit(f"sorting_crashed_{self.id}", message[1])
+                    self.check_timer.stop()
+                    if self.sorting_process.is_alive():
+                        self.sorting_process.terminate()
+
         except queue.Empty:
             pass
 

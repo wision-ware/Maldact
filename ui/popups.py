@@ -21,6 +21,8 @@ class LoadingWindow(qtw.QDialog):
         self.loading_gif_path = "../resources/loading.gif"
         self.close_receiver = close_receiver
 
+        self.setWindowTitle("Loading...")
+
         # sub layout assembly
         # 1
 
