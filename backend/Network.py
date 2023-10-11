@@ -32,8 +32,8 @@ class Network(object):
     @staticmethod
     def extract_int(string, cut=None):
 
+        n_str = ''
         if cut is None:
-            n_str = ''
             for i, char in enumerate(string):
                 n_str += char if char.isdigit() is True else ''
             n_str = int(n_str)
@@ -45,14 +45,13 @@ class Network(object):
                 raise
 
             if cut == "first":
-                n_str = ''
                 for i, char in enumerate(string):
                     n_str += char if char.isdigit() is True else ''
-                    if char == '_': break
+                    if char == '_':
+                        break
 
             if cut == "last":
-                n_str = ''
-                for i,char1 in enumerate(string):
+                for i, char1 in enumerate(string):
                     if char1 == '_':
                         for char2 in string[i:]:
                             n_str += char2 if char2.isdigit() is True else ''
@@ -163,11 +162,12 @@ class Network(object):
 
     # output method
 
-    def get_output(self, inp_, layer=False, label=None):
+    def get_output(self, inp_, layer=False, labels=None):
 
         # first layer output
 
         p_output = np.copy(inp_)
+        skipper = len(self.N) - 1
 
         if layer is True:
 
@@ -178,34 +178,28 @@ class Network(object):
 
         # rest of the layers propagating
 
-        if (layer > 1) or (len(self.N) > 1):
+        if (layer > 1) or (skipper >= 1):
 
-            for l in range(1,(len(self.N) if type(layer) == bool else layer)):
+            for l in range(1, skipper+1):
 
-                act_matrix = np.full((self.N[l],self.N[l-1]),p_output)
-                act_matrix = np.transpose(act_matrix)*self.weights[l]
-                activation = np.sum(act_matrix,axis=0) + self.bias[l]
+                activation = np.matmul(p_output, self.weights[l]) + self.bias[l]
 
-                if l < (len(self.N)-1): p_output = Network.ReLU(activation)
-                else: p_output = Network.Sigmoid(activation)
+                match l < skipper:
+                    case True:
+                        p_output = np.where(activation < 0, 0., activation)
+                    case False:
+                        p_output = 1 / (1 + np.exp(-activation))
 
                 if layer is True:
-
-                    all_out_act.append(activation[:])
-                    all_out.append(p_output[:])
+                    all_out_act.append(np.copy(activation[:]))
+                    all_out.append(np.copy(p_output[:]))
 
         # computing cost
 
-        if label is not None:
-
-            if layer is False or isinstance(layer, int):
-                output = np.copy(p_output)
-            else:
-                output = np.copy(all_out[-1])
-
-            dif = label - output
-            cost = np.sum(dif**2)
-            self.cost = cost
+        if labels:
+            output = [all_out_act, all_out]
+            dif = labels - output
+            self.cost = np.average(dif ** 2)
 
         if layer is True:
             return [np.copy(all_out_act),np.copy(all_out)]
