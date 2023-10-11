@@ -3,15 +3,14 @@ import PyQt5.QtCore as qtc
 from ui.ui_tools import dict_to_css, add_target
 from event_bus import EventBus as eb
 from functools import partial
+from ui.default_widget import DefaultWidget
 
 
-class CustomHeader(qtw.QFrame):
+class CustomHeader(DefaultWidget):
 
-    def __init__(self, label, font_size=16):
+    def __init__(self, label, font_size=16, border=None):
 
-        super().__init__()
-
-        self.main_layout = qtw.QHBoxLayout(self)
+        super().__init__(layout="h", border=border)
 
         # main layout assembling
 
@@ -19,18 +18,12 @@ class CustomHeader(qtw.QFrame):
         self.title.setStyleSheet(f"font-size: {font_size}pt")
         self.main_layout.addWidget(self.title, alignment=qtc.Qt.AlignCenter)
 
-    @staticmethod
-    def cleanup():
-        pass
 
-
-class CustomFooter(qtw.QFrame):
+class CustomFooter(DefaultWidget):
     
-    def __init__(self, labels):
+    def __init__(self, labels, border=None):
         
-        super().__init__()
-        
-        self.main_layout = qtw.QHBoxLayout(self)
+        super().__init__(layout="h", border=border)
         
         # main layout assembling
 
@@ -59,18 +52,13 @@ class CustomFooter(qtw.QFrame):
         if additional == (): eb.emit(event)
         else: eb.emit(event, *additional)
 
-    @staticmethod
-    def cleanup():
-        pass
 
+class LargeButtons(DefaultWidget):
 
-class LargeButtons(qtw.QFrame):
+    def __init__(self, button1=(None, {}), button2=(None, {}), labels=(None, None), layout="v", border=None):
 
-    def __init__(self, button1=(None, {}), button2=(None, {}), labels=(None, None)):
+        super().__init__(layout=layout, border=border)
 
-        super().__init__()
-
-        self.main_layout = qtw.QVBoxLayout(self)
         self.sub_layout_1 = qtw.QHBoxLayout(self)
 
         # sub layout assembling
@@ -90,16 +78,12 @@ class LargeButtons(qtw.QFrame):
 
         self.main_layout.addLayout(self.sub_layout_1)
 
-    @staticmethod
-    def cleanup():
-        pass
 
+class FileSelector(DefaultWidget):
 
-class FileSelector(qtw.QFrame):
+    def __init__(self, file_selected=(None, {}), labels=(None, None), directory=False, border=None):
 
-    def __init__(self, file_selected=(None, {}), labels=(None, None), directory=False):
-
-        super().__init__()
+        super().__init__(layout="h", border=border)
 
         default_labels = (None, None)
         if isinstance(labels, str):
@@ -109,8 +93,6 @@ class FileSelector(qtw.QFrame):
 
         self.file_path = ""
         self.file_selected = file_selected
-
-        self.main_layout = qtw.QVBoxLayout(self)
 
         self.sub_layout_1 = qtw.QHBoxLayout(self)
 
@@ -169,16 +151,12 @@ class FileSelector(qtw.QFrame):
                 self.file_selected[1]
             )
 
-    @staticmethod
-    def cleanup():
-        pass
 
+class TitledLineEdit(DefaultWidget):
 
-class TitledLineEdit(qtw.QFrame):
+    def __init__(self, line_edited=(None, {}), labels=(None, None), layout="h", border=None):
 
-    def __init__(self, line_edited=(None, {}), labels=(None, None), layout="h"):
-
-        super().__init__()
+        super().__init__(layout=layout, border=border)
         self.text_edit = ""
         self.line_edited = line_edited
 
@@ -188,12 +166,6 @@ class TitledLineEdit(qtw.QFrame):
             self.labels = (labels,) + default_labels[1:]
             self.line_edited = (line_edited,) + default_line_edited[1:]
         else: self.labels = labels
-
-        match layout:
-            case "v":
-                self.main_layout = qtw.QVBoxLayout(self)
-            case "h":
-                self.main_layout = qtw.QHBoxLayout(self)
 
         # main layout assembling
 
@@ -213,23 +185,15 @@ class TitledLineEdit(qtw.QFrame):
             self.line_edited[1]
         )
 
-    @staticmethod
-    def cleanup():
-        pass
 
+class TitledDropdown(DefaultWidget):
 
-class TitledDropdown(qtw.QFrame):
+    def __init__(self, option_changed=(None, {}), labels=None, options=None, layout="h", border=None):
 
-    def __init__(self, option_changed=(None, {}), labels=None, options=None, layout="h"):
-
-        super().__init__()
+        super().__init__(layout=layout, border=border)
         self.option_selected = ""  # attribute holding the current selected option
         self.option_changed = option_changed  # signal attributes upon changing an option
         self.options = options  # tuple with the options
-
-        # style configuration
-        self.style_sheet = ""
-        self.setStyleSheet(self.style_sheet)
 
         default_labels = (None, None)
         default_option_changed = (None, {})
@@ -237,12 +201,6 @@ class TitledDropdown(qtw.QFrame):
             self.labels = (labels,) + default_labels[1:]
         if isinstance(option_changed, str):
             self.option_changed = (option_changed,) + default_option_changed[1:]
-
-        match layout:
-            case "v":
-                self.main_layout = qtw.QVBoxLayout(self)
-            case "h":
-                self.main_layout = qtw.QHBoxLayout(self)
 
         # main layout assembling
 
@@ -263,46 +221,3 @@ class TitledDropdown(qtw.QFrame):
         else:
             for tup in self.option_changed:
                 eb.emit(self.tup[0], self.option_selected, self.tup[1])
-
-    @staticmethod
-    def cleanup():
-        pass
-
-
-class DefaultWidget(qtw.QFrame):
-
-    def __init__(self, layout='h', border="grey_round"):
-
-        super().__init__()
-        match layout:
-            case 'h':
-                self.main_layout = qtw.QHBoxLayout(self)
-                self.main_layout.setContentsMargins(0, 0, 0, 0)
-            case 'v':
-                self.main_layout = qtw.QVBoxLayout(self)
-                self.main_layout.setContentsMargins(0, 0, 0, 0)
-
-        self.setContentsMargins(0, 0, 0, 0)
-
-        # styling
-        self.style_sheet = {
-            "margin": "0",
-            "padding": "0"
-        }
-
-        # modifying stylesheet
-        match border:
-            case "grey_round":
-                self.style_sheet["border"] = "0.1em solid grey"
-                self.style_sheet["border-radius"] = "0.75em"
-                self.style_sheet["padding"] = "-0.1em"
-            case _:
-                pass
-
-        self.css_style_sheet = dict_to_css(self.style_sheet)
-        self.css_style_sheet = add_target(self.css_style_sheet, "DefaultWidget")
-        self.setStyleSheet(self.css_style_sheet)
-
-    @staticmethod
-    def cleanup():
-        pass

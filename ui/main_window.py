@@ -172,7 +172,7 @@ class Training(qtw.QWidget):
             layout='v'
         )
 
-        self.term_cond_assoc["Time limit with cost threshold"] = DefaultWidget(layout='h')
+        self.term_cond_assoc["Time limit with cost threshold"] = DefaultWidget(layout='h', padding=0)
         self.term_cond_assoc["Time limit with cost threshold"].main_layout.addWidget(
             TitledLineEdit(
                 labels=("Set time limit for training", "time (s)"),
