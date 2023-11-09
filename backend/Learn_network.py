@@ -147,7 +147,7 @@ class LearnNetwork(object):
 
         weight_like = [0]*len(self.N)
         bias_like = [0]*len(self.N)
-        for l in range(1,len(self.N)):
+        for l in range(1, len(self.N)):
             weight_like[l] = xp.zeros((self.N[l-1],self.N[l]))
             bias_like[l] = xp.zeros((self.N[l]))
         self.weight_like = weight_like
@@ -185,7 +185,7 @@ class LearnNetwork(object):
 
         if not inside:
 
-            LearnNetwork.typeval_assertion( # training data verification
+            LearnNetwork.typeval_assertion(  # training data verification
                 isinstance(inp, np.ndarray),
                 len(inp.shape) == 1,
                 f"positional argument \'inp\' must be type: \'numpy.ndarray\', not {type(inp)}!",

@@ -16,7 +16,7 @@ class Network(object):
 
     path_ = os.path.join('..', '..', 'training_params')
 
-    #activation functions
+    # activation functions
 
     @staticmethod
     def ReLU(x, d=False):
