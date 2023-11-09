@@ -71,11 +71,6 @@ class Training(qtw.QWidget):
         # sub layout assembling
         # sub layout 1
 
-        self.sub_layout1.addWidget(TitledLineEdit(
-            labels=("Select architecture:", "example: [:,50,50,50,5]"),
-            layout='v',
-            line_edited=("store_tr", {"attr": "N"})
-        ))
         self.sub_layout1.addWidget(TitledDropdown(
             labels="Select gradient descent type:",
             layout='v',
@@ -85,6 +80,13 @@ class Training(qtw.QWidget):
                 "Mini Batch",
                 "Stochastic"
             )
+        ))
+
+        self.sub_layout1.addWidget(TitledLineEdit(
+            labels=("Set architecture:", "example: [:,50,50,50,5]"),
+            layout='v',
+            line_edited=("store_tr", {"attr": "N"}),
+            border="grey_round"
         ))
 
         # sub layout 2
@@ -116,17 +118,24 @@ class Training(qtw.QWidget):
             labels=("Select model name:", "model1"),
         ))
 
-        self.main_layout.addWidget(FileSelector(
+        self.file_selection_container = DefaultWidget(
+            border="grey_round",
+            padding=0,
+            layout="v"
+        )
+
+        self.file_selection_container.main_layout.addWidget(FileSelector(
             file_selected=("store_tr", {"attr": "data_file"}),
             labels="Select training data file:",
             directory=False
         ))
 
-        self.main_layout.addWidget(FileSelector(
+        self.file_selection_container.main_layout.addWidget(FileSelector(
             file_selected=("store_tr", {"attr": "model_dir"}),
             labels="Select a directory for your model:",
             directory=True
         ))
+        self.main_layout.addWidget(self.file_selection_container)
 
         self.main_layout.addLayout(self.sub_layout1)
 
@@ -169,7 +178,8 @@ class Training(qtw.QWidget):
         self.term_cond_assoc["Time limit"] = TitledLineEdit(
             labels=("Set time limit for training", "time (s)"),
             line_edited=("store_tr", {"attr": "time_limit"}),
-            layout='v'
+            layout="v",
+            border="grey_round"
         )
 
         self.term_cond_assoc["Time limit with cost threshold"] = DefaultWidget(layout='h', padding=0)
@@ -183,7 +193,7 @@ class Training(qtw.QWidget):
         )
         self.term_cond_assoc["Time limit with cost threshold"].main_layout.addWidget(
             TitledLineEdit(
-                labels=("Enter cost threshold:", "default: 10e-10"),
+                labels=("Enter cost threshold:", "int or float < 1"),
                 line_edited=("store_tr", {"attr": "threshold"}),
                 layout='v'
             ),
@@ -191,15 +201,17 @@ class Training(qtw.QWidget):
         )
 
         self.term_cond_assoc["Cost threshold"] = TitledLineEdit(
-            labels=("Enter cost threshold:", "default: 10e-10"),
+            labels=("Enter cost threshold:", "int or float < 1"),
             line_edited=("store_tr", {"attr": "threshold"}),
-            layout='v'
+            layout="v",
+            border="grey_round"
         )
 
         self.term_cond_assoc["Fixed number of iterations"] = TitledLineEdit(
-            labels=("Enter the number of iterations:", "default: 1000"),
+            labels=("Enter the number of iterations:", "integer"),
             line_edited=("store_tr", {"attr": "fixed_iter"}),
-            layout='v'
+            layout="v",
+            border="grey_round"
         )
 
         # request a switch to ui manager

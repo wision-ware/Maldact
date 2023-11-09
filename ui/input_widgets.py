@@ -83,7 +83,7 @@ class FileSelector(DefaultWidget):
 
     def __init__(self, file_selected=(None, {}), labels=(None, None), directory=False, border=None):
 
-        super().__init__(layout="h", border=border)
+        super().__init__(layout="v", border=border)
 
         default_labels = (None, None)
         if isinstance(labels, str):
@@ -139,7 +139,7 @@ class FileSelector(DefaultWidget):
         options = qtw.QFileDialog.Options()
         selected_dir = qtw.QFileDialog.getExistingDirectory(
             self,
-            "Open Directory",
+            " Open Directory ",
             options=options
         )
         if self.file_path != selected_dir:
@@ -159,7 +159,6 @@ class TitledLineEdit(DefaultWidget):
         super().__init__(layout=layout, border=border)
         self.text_edit = ""
         self.line_edited = line_edited
-
         default_labels = (None, None)
         default_line_edited = (None, {})
         if isinstance(labels, str):
