@@ -32,8 +32,10 @@ class TrainingManager:
             setattr(self, key, value)
 
         # additional attributes
+        self.N = None
+        self.GPU = False
         self.save_params = False
-        self.data_dir = None
+        self.data_file = None
         self.model_dir = None
         self.model_name = None
         self.training_process = None
@@ -64,8 +66,9 @@ class TrainingManager:
         except AttributeError:
             pass
 
+        self.N = [int(num) for num in self.N.replace("]", " ").replace("[", " ").replace(",", " ").split()]
         self.network.__init__(self.N, GPU=self.GPU)  # reinitialize network object
-        training_data = np.load(self.data_dir)
+        training_data = np.load(self.data_file, allow_pickle=True)
         inp = training_data["input"]
         labels = training_data["labels"]
         exec_args = (
