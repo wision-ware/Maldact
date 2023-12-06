@@ -15,7 +15,7 @@ import warnings
 import inspect
 
 
-class LearnNetwork(object):
+class LearnNetwork:
 
     path_ = os.path.join('..', '..', 'training_params')
 
@@ -58,14 +58,14 @@ class LearnNetwork(object):
 
         else:
             try:
-                assert cut in ['first','last'], "Split needs to be either \"first\" or \"last\""
+                assert cut in ['first', 'last'], "Split needs to be either \"first\" or \"last\""
             except AssertionError:
                 raise
 
             if cut == "first":
                 n_str = ''
                 for i, char in enumerate(string):
-                    n_str += char if char.isdigit() == True else ''
+                    n_str += char if char.isdigit() is True else ''
                     if char == '_': break
 
             if cut == "last":
@@ -194,7 +194,8 @@ class LearnNetwork(object):
             try:
                 assert inp.shape[0] == self.N[0]
             except AssertionError:
-                raise ValueError(f"size of the second dimension of the positional argument \'inp\' must be equal to the number of input nodes of the first layer! ({self.N[0]} required, {inp.shape[1]} given)")
+                raise ValueError(f"size of the second dimension of the positional argument \'inp\' must be equal to the "
+                                 f"number of input nodes of the first layer! ({self.N[0]} required, {inp.shape[1]} given)")
 
             LearnNetwork.typeval_assertion(
                 isinstance(layer, bool) or isinstance(layer, (int,np.integer)),
