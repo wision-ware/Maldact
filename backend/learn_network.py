@@ -20,14 +20,14 @@ class LearnNetwork:
     path_ = os.path.join('..', '..', 'training_params')
 
     @staticmethod
-    def ReLU(x, d=False, GPU=False):
+    def ReLU(x, d=False, GPU=False) -> np.ndarray:
 
         if GPU: xp = cp
         else: xp = np
         return xp.where(x < 0, 0., (x if d == False else 1))
 
     @staticmethod
-    def Sigmoid(x, d=False, GPU=False):
+    def Sigmoid(x, d=False, GPU=False) -> np.ndarray:
 
         if GPU: xp = cp
         else: xp = np
@@ -35,7 +35,7 @@ class LearnNetwork:
         else ((1/(1+xp.exp(-x)))*(1-(1/(1+xp.exp(-x)))))
 
     @staticmethod
-    def typeval_assertion(t_condition,v_condition,t_message,v_message):
+    def typeval_assertion(t_condition, v_condition, t_message, v_message) -> None:
 
         try:
             assert t_condition
@@ -48,7 +48,7 @@ class LearnNetwork:
             raise ValueError(v_message)
 
     @staticmethod
-    def extract_int(string, cut=None):
+    def extract_int(string, cut=None) -> int:
 
         if cut is None:
             n_str = ''
@@ -78,7 +78,7 @@ class LearnNetwork:
         return int(n_str)
 
     @staticmethod
-    def clear_dir(indices=None):
+    def clear_dir(indices=None) -> None:
 
         try:
             path_ = LearnNetwork.path_
@@ -103,17 +103,17 @@ class LearnNetwork:
             print('Warning: Input indices must correspond with existing parameter files!')
 
     @staticmethod
-    def current_index():
+    def current_index() -> int:
 
         path_ = LearnNetwork.path_
         all_files = glob(os.path.join(path_,'p*.npy'))
-        if all_files != []:
+        if all_files:
             end_basename = os.path.basename(all_files[-1])
             extracted = LearnNetwork.extract_int(end_basename,cut='first')
             return extracted
         else: return 0
 
-    def __init__(self, N, GPU=True):
+    def __init__(self, N, GPU=True) -> None:
 
         # verifying parameters
 
@@ -160,7 +160,7 @@ class LearnNetwork:
         dir_ind = LearnNetwork.current_index()
         self.par_filename = os.path.join(path_, f'p{dir_ind}')
 
-    def call_origin(self):
+    def call_origin(self) -> None:
 
         caller_frame = inspect.currentframe().f_back
         caller_name = caller_frame.f_globals['__name__']
@@ -170,7 +170,7 @@ class LearnNetwork:
 
         return inside
 
-    def get_output(self, inp, layer=False, label=None):
+    def get_output(self, inp, layer=False, label=None) -> np.ndarray:
 
         # checking call origin
 
@@ -261,7 +261,7 @@ class LearnNetwork:
 
     # backpropagation
 
-    def backpropagate(self, inp, labels, skip_check=False):
+    def backpropagate(self, inp, labels, skip_check=False) -> tuple:
 
         # PU prefix setup
 
@@ -370,7 +370,7 @@ class LearnNetwork:
             save_params=True,
             overwrite=True,
             **_
-            ):
+            ) -> dict:
 
         # PU prefix setup
 

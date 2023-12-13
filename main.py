@@ -7,7 +7,7 @@ from ui_manager import UIManager as um
 
 class MainWindow(qtw.QMainWindow):
 
-    def __init__(self):
+    def __init__(self) -> None:
 
         super().__init__()
 
@@ -17,7 +17,7 @@ class MainWindow(qtw.QMainWindow):
         um.initialize(self)
 
 
-def main():
+def main() -> None:
 
     app = qtw.QApplication(sys.argv)
     default_font = qtg.QFont("Arial", 10)

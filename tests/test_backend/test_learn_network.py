@@ -17,8 +17,8 @@ class TestLearnNetwork:
     for file in os.listdir(data_dir):
         test_data[str(file[:-4])] = np.load(file, allow_pickle=True)
 
-    @pytest.mark.parametrize("data", test_data.values())
-    @pytest.mark.parametrize("hidden_layers", [])
+    @pt.mark.parametrize("data", test_data.values())
+    @pt.mark.parametrize("hidden_layers", [])
     def test_training_execution(self, data, hidden_layers):
 
         N = [data["input"].shape[1]]

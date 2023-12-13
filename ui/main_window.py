@@ -12,7 +12,7 @@ import pickle
 
 class Menu(qtw.QWidget):
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.main_layout = qtw.QVBoxLayout(self)
@@ -43,13 +43,13 @@ class Menu(qtw.QWidget):
         ))
 
     @staticmethod
-    def cleanup():
+    def cleanup() -> None:
         pass
 
 
 class Training(qtw.QWidget):
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.training_manager = TrainingManager()
@@ -172,7 +172,7 @@ class Training(qtw.QWidget):
         for sub in self.subs:
             eb.subscribe(*sub)
 
-    def switch_widget(self, key, old_widget=None, parent=None, stored=None):
+    def switch_widget(self, key, old_widget=None, parent=None, stored=None) -> None:
         # define widget switching mechanism
 
         self.term_cond_assoc["Time limit"] = TitledLineEdit(
@@ -217,14 +217,14 @@ class Training(qtw.QWidget):
         # request a switch to ui manager
         eb.emit("switch_widgets", old_widget, self.term_cond_assoc[key], parent, stored=stored)
 
-    def cleanup(self):
+    def cleanup(self) -> None:
         for sub in self.subs:
             eb.unsubscribe(sub[0], True)
 
-    def store_user_input(self, value, meta):
+    def store_user_input(self, value, meta) -> None:
         self.input_dict[meta["attr"]] = value
 
-    def start_training(self):
+    def start_training(self) -> None:
 
         if all(key in self.input_dict for key in ("model_dir", "data_file")):
 
@@ -267,7 +267,7 @@ class Training(qtw.QWidget):
 
 class Sorting(qtw.QWidget):
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.sorting_manager = SortingManager()
@@ -318,10 +318,10 @@ class Sorting(qtw.QWidget):
         for sub in self.subs:
             eb.subscribe(*sub)
 
-    def store_user_input(self, value, meta):
+    def store_user_input(self, value, meta) -> None:
         self.input_dict[meta["attr"]] = value
 
-    def start_sorting(self):
+    def start_sorting(self) -> None:
 
         if self.sorting_manager.sorting_process.is_alive():
             self.sorting_manager = SortingManager()
@@ -369,6 +369,6 @@ class Sorting(qtw.QWidget):
         else:
             return None
 
-    def cleanup(self):
+    def cleanup(self) -> None:
         for sub in self.subs:
             eb.unsubscribe(sub[0], True)

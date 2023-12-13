@@ -17,7 +17,7 @@ class TrainingManager:
 
     instance_id = 1
 
-    def __init__(self, event=None, **kwargs):
+    def __init__(self, event=None, **kwargs) -> None:
 
         # ID assignment
         self.id = TrainingManager.instance_id
@@ -52,13 +52,13 @@ class TrainingManager:
         if event:
             eb.subscribe(event, self.start_training)
 
-    def update_params(self, update_dict):
+    def update_params(self, update_dict) -> None:
 
         for key, value in update_dict.items():
             if key in self.__dict__.keys():
                 setattr(self, key, value)
 
-    def start_training(self):
+    def start_training(self) -> None:
 
         try:
             if self.training_process.is_alive():
@@ -84,7 +84,7 @@ class TrainingManager:
         self.check_timer.timeout.connect(self.check_queue)
         self.check_timer.start(100)
 
-    def executor(self, inp, labels):
+    def executor(self, inp, labels) -> None:
 
         arg_filter = lambda x: not callable(x) and not isinstance(x, LearnNetwork)
         kwargs = {key: value for key, value in self.__dict__.items() if arg_filter(value)}
@@ -114,10 +114,10 @@ class TrainingManager:
         np.save(meta, os.path.join(self.model_dir, self.model_name))
         self.term_queue.put(("done",))
 
-    def exit_training(self):
+    def exit_training(self) -> None:
         pass  # TODO
 
-    def check_queue(self):
+    def check_queue(self) -> None:
         try:
             message = self.term_queue.get()
             match message[0]:
@@ -142,7 +142,7 @@ class SortingManager:
 
     instance_id = 1
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
 
         # ID assignment
         self.id = TrainingManager.instance_id
@@ -165,13 +165,13 @@ class SortingManager:
             else:
                 raise AttributeError(f"SortingManager object has no attribute {key}")
 
-    def update_params(self, update_dict):
+    def update_params(self, update_dict) -> None:
 
         for key, value in update_dict.items():
             if key in self.__dict__.keys():
                 setattr(self, key, value)
 
-    def start_sorting(self):
+    def start_sorting(self) -> None:
 
         try:
             if self.sorting_process.is_alive() is True:
@@ -196,7 +196,7 @@ class SortingManager:
         )
         self.sorting_process.start()
 
-    def executor(self, data, queue):
+    def executor(self, data, queue) -> None:
 
         try:
 
@@ -222,7 +222,7 @@ class SortingManager:
             np.save(os.path.join(self.dir_name, str(np.argmax(out[i, :]))), out[i, :])
         queue.put("done")
 
-    def check_queue(self):
+    def check_queue(self) -> None:
         try:
             message = self.term_queue.get()
             match message[0]:
