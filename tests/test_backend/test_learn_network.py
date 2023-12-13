@@ -1,6 +1,6 @@
 import pytest
 
-from backend.learn_network import LearnNetwork
+from ...backend.learn_network import LearnNetwork
 import pytest as pt
 import numpy as np
 import os
@@ -15,7 +15,7 @@ class TestLearnNetwork:
         "training"
     )
     for file in os.listdir(data_dir):
-        test_data[str(file[:-4])] = np.load(file, allow_pickle=True)
+        test_data[str(file[:-4])] = np.load(os.path.join(data_dir, file), allow_pickle=True)
 
     @pt.mark.parametrize("data", test_data.values())
     @pt.mark.parametrize("hidden_layers", [])
