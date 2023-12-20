@@ -3,6 +3,5 @@ ui/__pycache__/
 backend/__pycache__/
 tests/__pycache__/
 tests/test_backend/__pycache__/
-tests/test_backend/.pytest_cache/
 .idea/
-.pytest_cache/
+tests/.pytest_cache/
