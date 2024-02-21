@@ -52,7 +52,7 @@ class Training(qtw.QWidget):
     def __init__(self) -> None:
         super().__init__()
 
-        self.training_manager = TrainingManager()
+        self.training_managers = {}
         self.training_popup = None
         self.term_cond_assoc = {}
         self.warning_state = False
@@ -148,33 +148,25 @@ class Training(qtw.QWidget):
             ("start training", "start_training")
         )))
 
-        self.switch_widget(
-            options[0],
-            old_widget=self.switched_linedit,
-            parent=self.sub_layout2,
-            stored='termination_options'
-        )
+        self.switch_termination_input(options[0], old_widget=self.switched_linedit, parent=self.sub_layout2,
+                                      stored='termination_options')
 
         # subscriptions to event bus
-        self.switch_func1 = lambda key, old_widget, parent=self.sub_layout2, stored="termination_options": self.switch_widget(
-            key,
-            old_widget,
-            parent=parent,
-            stored=stored
-        )
+        self.switch_func1 = lambda key, old_widget, parent=self.sub_layout2, stored="termination_options": \
+            self.switch_termination_input(key, old_widget, parent=parent, stored=stored)
 
-        self.subs = (
+        self.subs: list = [
             ("switch_channel1", self.switch_func1),
             ("store_tr", self.store_user_input),
             ("start_training", self.start_training)
-        )
+        ]
 
         for sub in self.subs:
             eb.subscribe(*sub)
 
-    def switch_widget(self, key, old_widget=None, parent=None, stored=None) -> None:
-        # define widget switching mechanism
+    def switch_termination_input(self, key: str, old_widget=None, parent=None, stored=None) -> None:
 
+        # replacement widgets
         self.term_cond_assoc["Time limit"] = TitledLineEdit(
             labels=("Set time limit for training", "time (s)"),
             line_edited=("store_tr", {"attr": "time_limit"}),
@@ -243,16 +235,20 @@ class Training(qtw.QWidget):
                 self.warning_state = True
                 return None
 
-            self.training_manager.update_params(self.input_dict)
-            self.training_manager.start_training()
+            new_manager = TrainingManager()
+            new_manager.update_params(self.input_dict)
+
+            subscription = (f"training_crashed_{new_manager.id}", self.on_training_crash)
+            self.subs[new_manager.id] = subscription
+            eb.subscribe(*subscription)
+
+            new_manager.start_training()
 
             self.training_popup = LoadingWindow(
                 f'''Training of the "{self.model_name}" model in progress''',
-                f"training_done_{self.training_manager.id}",
-                f"training_canceled_{self.training_manager.id}"
+                f"training_done_{new_manager.id}",
+                f"training_canceled_{new_manager.id}"
             )
-
-            self.training_manager = TrainingManager()
 
         elif self.warning_state is False:
 
@@ -263,6 +259,12 @@ class Training(qtw.QWidget):
 
         else:
             return None
+
+    def on_training_crash(self, exception_info, id):
+        eb.emit(f"training_canceled_{id}")
+        self.training_managers.pop(id)
+        error_class = getattr(__builtins__, exception_info["type"])
+        raise error_class(f"{exception_info['traceback']} \n {exception_info['message']}")
 
 
 class Sorting(qtw.QWidget):

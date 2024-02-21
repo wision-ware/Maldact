@@ -109,7 +109,7 @@ class LearnNetwork:
         all_files = glob(os.path.join(path_,'p*.npy'))
         if all_files:
             end_basename = os.path.basename(all_files[-1])
-            extracted = LearnNetwork.extract_int(end_basename,cut='first')
+            extracted = LearnNetwork.extract_int(end_basename, cut='first')
             return extracted
         else: return 0
 
@@ -261,7 +261,7 @@ class LearnNetwork:
 
     # backpropagation
 
-    def backpropagate(self, inp, labels, skip_check=False) -> tuple:
+    def backpropagate(self, inp, labels, skip_check=False) -> list:
 
         # PU prefix setup
 
@@ -346,11 +346,11 @@ class LearnNetwork:
 
             if not inside and self.GPU:
                 gradient[-l] = cp.asnumpy(gradient[-l])
-                partial_bias[-l] = np.asnumpy(partial_bias[-l])
+                partial_bias[-l] = cp.asnumpy(partial_bias[-l])
 
             deltas_old = deltas_new[:]
 
-        return [gradient[:],partial_bias[:]]
+        return [gradient[:], partial_bias[:]]
 
     # learning algorithm with optional learning rate, cost threshold and GD methods
 

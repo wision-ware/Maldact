@@ -29,7 +29,7 @@ class TestLearnNetwork:
 
     @pt.mark.parametrize("data", test_data.values())
     @pt.mark.parametrize("hidden_layers", [(1, 2), (2, 1), (5, 3), (6, 6)])
-    def test_network_init(self, data: dict, hidden_layers: tuple):
+    def test_network_init(self, data: dict, hidden_layers: tuple) -> None:
         _ = TestLearnNetwork.initialize_network(data, hidden_layers)
 
     @pt.mark.parametrize("data", test_data.values())
@@ -49,4 +49,3 @@ class TestLearnNetwork:
 
     def test_training_results(self):
         pass
-

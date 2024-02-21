@@ -24,7 +24,7 @@ class TrainingManager:
         TrainingManager.instance_id += 1
 
         # make LearnNetwork.learn() default arguments into attributes of TrainingManager
-        self.network = LearnNetwork([1, 1])
+        self.network = LearnNetwork([1, 1], GPU=False)
         learn_signature = inspect.signature(self.network.learn)
         default_args = {param.name: param.default for param in learn_signature.parameters.values() if
                         param.default != inspect.Parameter.empty}
@@ -68,7 +68,7 @@ class TrainingManager:
 
         self.N = [int(num) for num in self.N.replace("]", " ").replace("[", " ").replace(",", " ").split()]
         self.network.__init__(self.N, GPU=self.GPU)  # reinitialize network object
-        training_data = np.load(self.data_file, allow_pickle=True)
+        training_data = np.load(self.data_file, allow_pickle=True).item()
         inp = training_data["input"]
         labels = training_data["labels"]
         exec_args = (
@@ -108,10 +108,10 @@ class TrainingManager:
                 'traceback': exc_traceback
             }
 
-            self.term_queue.put(("crashed", exception_info))
+            self.term_queue.put(("crashed", exception_info, self.id))
             return None
 
-        np.save(meta, os.path.join(self.model_dir, self.model_name))
+        np.save(os.path.join(self.model_dir, self.model_name), meta, allow_pickle=True)
         self.term_queue.put(("done",))
 
     def exit_training(self) -> None:
@@ -215,7 +215,7 @@ class SortingManager:
             }
 
             self.term_queue.put(("crashed", exception_info))
-            return None
+            return
 
         dim = out.shape[0]
         for i in range(dim):
