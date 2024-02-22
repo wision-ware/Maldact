@@ -41,5 +41,16 @@ class DefaultWidget(qtw.QFrame):
         self.setStyleSheet(self.css_style_sheet)
 
     @staticmethod
-    def cleanup():
+    def cleanup() -> None:
         pass
+
+
+class DefaultInputWidget(DefaultWidget):
+
+    def __init__(self, layout='h', border="grey_round", padding=0.7) -> None:
+        super().__init__(layout=layout, border=border, padding=padding)
+
+    def get_input(self) -> None:
+        pass
+
+

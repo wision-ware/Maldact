@@ -20,14 +20,14 @@ class LearnNetwork:
     path_ = os.path.join('..', '..', 'training_params')
 
     @staticmethod
-    def ReLU(x, d=False, GPU=False) -> np.ndarray:
+    def _ReLU(x, d=False, GPU=False) -> np.ndarray:
 
         if GPU: xp = cp
         else: xp = np
         return xp.where(x < 0, 0., (x if d == False else 1))
 
     @staticmethod
-    def Sigmoid(x, d=False, GPU=False) -> np.ndarray:
+    def _Sigmoid(x, d=False, GPU=False) -> np.ndarray:
 
         if GPU: xp = cp
         else: xp = np
@@ -35,7 +35,7 @@ class LearnNetwork:
         else ((1/(1+xp.exp(-x)))*(1-(1/(1+xp.exp(-x)))))
 
     @staticmethod
-    def typeval_assertion(t_condition, v_condition, t_message, v_message) -> None:
+    def __typeval_assertion(t_condition, v_condition, t_message, v_message) -> None:
 
         try:
             assert t_condition
@@ -48,7 +48,7 @@ class LearnNetwork:
             raise ValueError(v_message)
 
     @staticmethod
-    def extract_int(string, cut=None) -> int:
+    def __extract_int(string, cut=None) -> int:
 
         if cut is None:
             n_str = ''
@@ -109,7 +109,7 @@ class LearnNetwork:
         all_files = glob(os.path.join(path_,'p*.npy'))
         if all_files:
             end_basename = os.path.basename(all_files[-1])
-            extracted = LearnNetwork.extract_int(end_basename, cut='first')
+            extracted = LearnNetwork.__extract_int(end_basename, cut='first')
             return extracted
         else: return 0
 
@@ -118,12 +118,9 @@ class LearnNetwork:
         # verifying parameters
 
         confirmation = [isinstance(i, (int, np.integer)) for i in N]
-        LearnNetwork.typeval_assertion(
-            isinstance(N, (np.ndarray, list)),
-            all(confirmation),
-            f"positional argument \'N\' must be type: \'list\' or \'numpy.ndarray\', not {type(N)}!",
-            "all of the elements of positional argument \'N\' must be type: \'int\'!"
-            )
+        LearnNetwork.__typeval_assertion(isinstance(N, (np.ndarray, list)), all(confirmation),
+                                         f"positional argument \'N\' must be type: \'list\' or \'numpy.ndarray\', not {type(N)}!",
+                                         "all of the elements of positional argument \'N\' must be type: \'int\'!")
         try:
             assert isinstance(GPU, bool)
         except AssertionError:
@@ -160,7 +157,7 @@ class LearnNetwork:
         dir_ind = LearnNetwork.current_index()
         self.par_filename = os.path.join(path_, f'p{dir_ind}')
 
-    def call_origin(self) -> None:
+    def __call_origin(self) -> None:
 
         caller_frame = inspect.currentframe().f_back
         caller_name = caller_frame.f_globals['__name__']
@@ -174,7 +171,7 @@ class LearnNetwork:
 
         # checking call origin
 
-        inside = self.call_origin()
+        inside = self.__call_origin()
 
         # PU prefix setup
 
@@ -185,24 +182,19 @@ class LearnNetwork:
 
         if not inside:
 
-            LearnNetwork.typeval_assertion(  # training data verification
-                isinstance(inp, np.ndarray),
-                len(inp.shape) == 1,
-                f"positional argument \'inp\' must be type: \'numpy.ndarray\', not {type(inp)}!",
-                f"positional argument \'inp\' must be 1 dimensional (samples, data_width), {len(inp.shape)} dimensional was given!"
-                )
+            LearnNetwork.__typeval_assertion(isinstance(inp, np.ndarray), len(inp.shape) == 1,
+                                             f"positional argument \'inp\' must be type: \'numpy.ndarray\', not {type(inp)}!",
+                                             f"positional argument \'inp\' must be 1 dimensional (samples, data_width), {len(inp.shape)} dimensional was given!")
             try:
                 assert inp.shape[0] == self.N[0]
             except AssertionError:
                 raise ValueError(f"size of the second dimension of the positional argument \'inp\' must be equal to the "
                                  f"number of input nodes of the first layer! ({self.N[0]} required, {inp.shape[1]} given)")
 
-            LearnNetwork.typeval_assertion(
-                isinstance(layer, bool) or isinstance(layer, (int,np.integer)),
-                isinstance(layer, bool) or layer >= 0,
-                f"keyword argument \'layer\' must be type \'int\' or \'bool\', not {type(layer)}!",
-                "keyword argument \'layer\' can not be negative!"
-                )
+            LearnNetwork.__typeval_assertion(isinstance(layer, bool) or isinstance(layer, (int, np.integer)),
+                                             isinstance(layer, bool) or layer >= 0,
+                                             f"keyword argument \'layer\' must be type \'int\' or \'bool\', not {type(layer)}!",
+                                             "keyword argument \'layer\' can not be negative!")
 
         # PU variable setup
 
@@ -234,8 +226,8 @@ class LearnNetwork:
 
                 activation = xp.matmul(p_output,self.weights[l]) + self.bias[l]
 
-                if l < (len(self.N)-1): p_output = LearnNetwork.ReLU(activation, GPU=self.GPU)
-                else: p_output = LearnNetwork.Sigmoid(activation,GPU=self.GPU)
+                if l < (len(self.N)-1): p_output = LearnNetwork._ReLU(activation, GPU=self.GPU)
+                else: p_output = LearnNetwork._Sigmoid(activation, GPU=self.GPU)
 
                 if layer == True and not inside:
                     all_out_act.append(np.copy(activation[:]))
@@ -272,12 +264,9 @@ class LearnNetwork:
 
         if not skip_check:
 
-            LearnNetwork.typeval_assertion( # training data verification
-                isinstance(inp, np.ndarray),
-                len(inp.shape) == 1,
-                f"positional argument \'inp\' must be type: numpy.ndarray, not {type(inp)}!",
-                f"positional argument \'inp\' must be 2 dimensional (samples, data_width), {len(inp.shape)} dimensional was given!"
-                )
+            LearnNetwork.__typeval_assertion(isinstance(inp, np.ndarray), len(inp.shape) == 1,
+                                             f"positional argument \'inp\' must be type: numpy.ndarray, not {type(inp)}!",
+                                             f"positional argument \'inp\' must be 2 dimensional (samples, data_width), {len(inp.shape)} dimensional was given!")
             try:
                 assert inp.shape[1] == self.N[0]
             except AssertionError:
@@ -285,12 +274,9 @@ class LearnNetwork:
                                  f"the number of input nodes of the first layer! ({self.N[0]} required, "
                                  f"{inp.shape[1]} given)")
 
-            LearnNetwork.typeval_assertion( # data label verification
-                isinstance(labels, np.ndarray),
-                len(labels.shape) == 1,
-                f"positional argument \'labels\' must be type: numpy.ndarray, not {type(inp)}!",
-                f"positional argument \'labels\' must be 2 dimensional (samples, binary_sort_cases), {len(inp.shape)} dimensional was given!"
-                )
+            LearnNetwork.__typeval_assertion(isinstance(labels, np.ndarray), len(labels.shape) == 1,
+                                             f"positional argument \'labels\' must be type: numpy.ndarray, not {type(inp)}!",
+                                             f"positional argument \'labels\' must be 2 dimensional (samples, binary_sort_cases), {len(inp.shape)} dimensional was given!")
             try:
                 assert labels.shape[1] == self.N[-1]
             except AssertionError:
@@ -300,7 +286,7 @@ class LearnNetwork:
 
         # checking call origin
 
-        inside = self.call_origin()
+        inside = self.__call_origin()
 
         # PU variable setup
 
@@ -316,7 +302,7 @@ class LearnNetwork:
 
         # output layer
 
-        dsigmoid = LearnNetwork.Sigmoid(output[0][-1],d=True,GPU=self.GPU)
+        dsigmoid = LearnNetwork._Sigmoid(output[0][-1], d=True, GPU=self.GPU)
         dif = output[1][-1]-labels[:]
         deltas = dsigmoid*dif
         partial_bias_0 = deltas[:]
@@ -333,7 +319,7 @@ class LearnNetwork:
 
         for l in range(2, len(self.N)):
 
-            drelu = LearnNetwork.ReLU(output[0][-l][:], d=True, GPU=self.GPU)
+            drelu = LearnNetwork._ReLU(output[0][-l][:], d=True, GPU=self.GPU)
 
             deltas_new = xp.matmul(self.weights[-(l-1)], deltas_old)
             deltas_new = deltas_new*drelu
@@ -379,26 +365,20 @@ class LearnNetwork:
 
         # verifying  parameters
 
-        LearnNetwork.typeval_assertion(  # training data verification
-            isinstance(inp, np.ndarray),
-            len(inp.shape) == 2,
-            f"positional argument \'inp\' must be type: numpy.ndarray, not {type(inp)}!",
-            f"positional argument \'inp\' must be 2 dimensional (samples, data_width), "
-            f"{len(inp.shape)} dimensional was given!"
-            )
+        LearnNetwork.__typeval_assertion(isinstance(inp, np.ndarray), len(inp.shape) == 2,
+                                         f"positional argument \'inp\' must be type: numpy.ndarray, not {type(inp)}!",
+                                         f"positional argument \'inp\' must be 2 dimensional (samples, data_width), "
+                                         f"{len(inp.shape)} dimensional was given!")
         try:
             assert inp.shape[1] == self.N[0]
         except AssertionError:
             raise ValueError(f"size of the second dimension of the positional argument \'inp\' must be equal to the "
                              f"number of input nodes of the first layer! ({self.N[0]} required, {inp.shape[1]} given)")
 
-        LearnNetwork.typeval_assertion( # data label verification
-            isinstance(labels, np.ndarray),
-            len(labels.shape) == 2,
-            f"positional argument \'labels\' must be type: numpy.ndarray, not {type(inp)}!",
-            f"positional argument \'labels\' must be 2 dimensional (samples, binary_sort_cases), "
-            f"{len(inp.shape)} dimensional was given!"
-            )
+        LearnNetwork.__typeval_assertion(isinstance(labels, np.ndarray), len(labels.shape) == 2,
+                                         f"positional argument \'labels\' must be type: numpy.ndarray, not {type(inp)}!",
+                                         f"positional argument \'labels\' must be 2 dimensional (samples, binary_sort_cases), "
+                                         f"{len(inp.shape)} dimensional was given!")
         try:
             assert labels.shape[1] == self.N[-1]
         except AssertionError:
@@ -406,37 +386,23 @@ class LearnNetwork:
                              f"the number of output nodes of the final layer! ({self.N[-1]} required, "
                              f"{labels.shape[1]} given)")
 
-        LearnNetwork.typeval_assertion( # cost threshold verification
-            isinstance(threshold, (float, Decimal, np.floating)),
-            threshold > 0,
-            f"keyword argument \'threshold\' must be a number, not {type(threshold)}!",
-            "keyword argument \'threshold\' must be positive!"
-            )
-        LearnNetwork.typeval_assertion(  # training time limit verification
-            isinstance(time_limit, (float, int, Decimal, np.floating, np.integer)),
-            time_limit > 0,
-            f"keyword argument \'time_limit\' must be a number, not {type(time_limit)}!",
-            "keyword argument \'time_limit\' must be positive!"
-            )
+        LearnNetwork.__typeval_assertion(isinstance(threshold, (float, Decimal, np.floating)), threshold > 0,
+                                         f"keyword argument \'threshold\' must be a number, not {type(threshold)}!",
+                                         "keyword argument \'threshold\' must be positive!")
+        LearnNetwork.__typeval_assertion(isinstance(time_limit, (float, int, Decimal, np.floating, np.integer)),
+                                         time_limit > 0,
+                                         f"keyword argument \'time_limit\' must be a number, not {type(time_limit)}!",
+                                         "keyword argument \'time_limit\' must be positive!")
         GD_options = ['mini_b', 'batch', 'stochastic'] # gradient descent type switch options
-        LearnNetwork.typeval_assertion(  # gradient descent type switch verification
-            isinstance(GD, str),
-            GD in GD_options,
-            f"keyword argument \'GD\' must be type \'str\', not {type(GD)}!",
-            f"keyword argument \'GD\' must be one of the following: {GD_options}"
-            )
-        LearnNetwork.typeval_assertion(  # batch size verification
-            isinstance(batch_size, (int, np.integer)),
-            batch_size > 0,
-            f"keyword argument \'batch_size\' must be type \'int\', not {type(batch_size)}!",
-            "keyword argument \'batch_size\' must be positive!"
-            )
-        LearnNetwork.typeval_assertion(  # batch size verification
-            isinstance(eta, (float, Decimal, np.floating)),
-            eta > 0,
-            f"keyword argument \'eta\' must be type \'int\', not {type(eta)}!",
-            "keyword argument \'eta\' must be positive!"
-            )
+        LearnNetwork.__typeval_assertion(isinstance(GD, str), GD in GD_options,
+                                         f"keyword argument \'GD\' must be type \'str\', not {type(GD)}!",
+                                         f"keyword argument \'GD\' must be one of the following: {GD_options}")
+        LearnNetwork.__typeval_assertion(isinstance(batch_size, (int, np.integer)), batch_size > 0,
+                                         f"keyword argument \'batch_size\' must be type \'int\', not {type(batch_size)}!",
+                                         "keyword argument \'batch_size\' must be positive!")
+        LearnNetwork.__typeval_assertion(isinstance(eta, (float, Decimal, np.floating)), eta > 0,
+                                         f"keyword argument \'eta\' must be type \'int\', not {type(eta)}!",
+                                         "keyword argument \'eta\' must be positive!")
         try: # live monitor toggle verification
             assert isinstance(live_monitor, bool)
         except AssertionError:
@@ -447,12 +413,9 @@ class LearnNetwork:
         except AssertionError:
             raise TypeError(f"keyword argument \'as_text\' must be type \'bool\', not {type(as_text)}!")
 
-        LearnNetwork.typeval_assertion(  # verification of the fixed number of iterations
-            isinstance(fixed_iter, (int, np.integer)),
-            fixed_iter >= 0,
-            f"keyword argument \'fixed_iter\' must be type \'int\', not {type(fixed_iter)}!",
-            "keyword argument \'fixed_iter\' can not be negative!"
-            )
+        LearnNetwork.__typeval_assertion(isinstance(fixed_iter, (int, np.integer)), fixed_iter >= 0,
+                                         f"keyword argument \'fixed_iter\' must be type \'int\', not {type(fixed_iter)}!",
+                                         "keyword argument \'fixed_iter\' can not be negative!")
         try: # diagnostic data return toggle verification
             assert isinstance(dia_data, bool)
         except AssertionError:
@@ -463,12 +426,10 @@ class LearnNetwork:
         except AssertionError:
             raise TypeError(f"keyword argument \'save_params\' must be type \'bool\', not {type(save_params)}!")
 
-        LearnNetwork.typeval_assertion(
-            isinstance(overwrite, bool) or isinstance(overwrite, (int, np.integer)),
-            isinstance(overwrite, bool) or overwrite >= 0,
-            f"keyword argument \'overwrite\' must be type \'int\' or \'bool\', not {type(overwrite)}!",
-            "keyword argument \'overwrite\' can not be negative!"
-            )
+        LearnNetwork.__typeval_assertion(isinstance(overwrite, bool) or isinstance(overwrite, (int, np.integer)),
+                                         isinstance(overwrite, bool) or overwrite >= 0,
+                                         f"keyword argument \'overwrite\' must be type \'int\' or \'bool\', not {type(overwrite)}!",
+                                         "keyword argument \'overwrite\' can not be negative!")
 
         # PU variable setup
 

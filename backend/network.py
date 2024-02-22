@@ -87,7 +87,7 @@ class Network(object):
                     os.remove(file)
 
             else:
-                files = glob(os.path.join(path_,'p*.npy'))
+                files = glob(os.path.join(path_, 'p*.npy'))
                 for file in files:
                     os.remove(file)
 
@@ -101,7 +101,7 @@ class Network(object):
         bias_load = []
         weight_load = []
         path_ = str(np.copy(Network.path_))
-        all_files = glob(os.path.join(path_,'*.npy'))
+        all_files = glob(os.path.join(path_, '*.npy'))
 
         try:
             assert len(all_files) != 0, "No parameter files available!"
@@ -162,11 +162,11 @@ class Network(object):
 
     # output method
 
-    def get_output(self, inp_, layer=False, labels=None):
+    def get_output(self, inp, layer=False, labels=None):
 
         # first layer output
 
-        p_output = np.copy(inp_)
+        p_output = np.copy(inp)
         skipper = len(self.N) - 1
 
         if layer is True:

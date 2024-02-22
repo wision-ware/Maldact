@@ -3,10 +3,10 @@ import PyQt5.QtCore as qtc
 from ui.ui_tools import dict_to_css, add_target
 from event_bus import EventBus as eb
 from functools import partial
-from ui.default_widget import DefaultWidget
+from ui.default_widget import DefaultWidget, DefaultInputWidget
 
 
-class CustomHeader(DefaultWidget):
+class CustomHeader(DefaultInputWidget):
 
     def __init__(self, label, font_size=16, border=None):
 
@@ -19,7 +19,7 @@ class CustomHeader(DefaultWidget):
         self.main_layout.addWidget(self.title, alignment=qtc.Qt.AlignCenter)
 
 
-class CustomFooter(DefaultWidget):
+class CustomFooter(DefaultInputWidget):
     
     def __init__(self, labels, border=None):
         
@@ -53,46 +53,56 @@ class CustomFooter(DefaultWidget):
         else: eb.emit(event, *additional)
 
 
-class LargeButtons(DefaultWidget):
+class LargeButtons(DefaultInputWidget):
 
-    def __init__(self, button1=(None, {}), button2=(None, {}), labels=(None, None), layout="v", border=None):
+    def __init__(self, button1=None, button2=None, labels=None, layout="v", border=None):
 
         super().__init__(layout=layout, border=border)
+
+        self.button1_output = button1
+        self.button2_output = button2
+        self.labels = labels
+
+        if not isinstance(button1, tuple):
+            self.button1 = button1, {}
+        if not isinstance(button2, tuple):
+            self.button2 = button2, {}
+        if not isinstance(labels, tuple):
+            self.labels = labels, None
 
         self.sub_layout_1 = qtw.QHBoxLayout(self)
 
         # sub layout assembling
-        ## sublayout for mode buttons
+        # sub layout for mode buttons
 
-        self.t_mode_button = qtw.QPushButton(labels[0], self)
-        self.t_mode_button.setSizePolicy(qtw.QSizePolicy.Expanding, qtw.QSizePolicy.Expanding)
-        self.t_mode_button.clicked.connect(lambda: eb.emit(*button1))
-        self.sub_layout_1.addWidget(self.t_mode_button)
+        self.button1 = qtw.QPushButton(self.labels[0], self)
+        self.button1.setSizePolicy(qtw.QSizePolicy.Expanding, qtw.QSizePolicy.Expanding)
+        self.button1.clicked.connect(lambda: eb.emit(*self.button1_output))
+        self.sub_layout_1.addWidget(self.button1)
 
-        self.c_mode_button = qtw.QPushButton(labels[1], self)
-        self.c_mode_button.setSizePolicy(qtw.QSizePolicy.Expanding, qtw.QSizePolicy.Expanding)
-        self.c_mode_button.clicked.connect(lambda: eb.emit(*button2))
-        self.sub_layout_1.addWidget(self.c_mode_button)
+        self.button2 = qtw.QPushButton(self.labels[1], self)
+        self.button2.setSizePolicy(qtw.QSizePolicy.Expanding, qtw.QSizePolicy.Expanding)
+        self.button2.clicked.connect(lambda: eb.emit(*self.button2_output))
+        self.sub_layout_1.addWidget(self.button2)
 
         # main layout assembling
 
         self.main_layout.addLayout(self.sub_layout_1)
 
 
-class FileSelector(DefaultWidget):
+class FileSelector(DefaultInputWidget):
 
-    def __init__(self, file_selected=(None, {}), labels=(None, None), directory=False, border=None):
+    def __init__(self, file_selected=None, labels=None, directory=False, border=None) -> None:
 
         super().__init__(layout="v", border=border)
 
-        default_labels = (None, None)
-        if isinstance(labels, str):
-            labels = (labels,) + default_labels[1:]
-        else:
-            self.labels = labels + default_labels[len(labels)-1:]
-
         self.file_path = ""
         self.file_selected = file_selected
+
+        if not isinstance(labels, tuple):
+            self.labels = labels, None
+        if not isinstance(file_selected, tuple):
+            self.file_selected = file_selected, {}
 
         self.sub_layout_1 = qtw.QHBoxLayout(self)
 
@@ -100,7 +110,7 @@ class FileSelector(DefaultWidget):
 
         self.sub_layout_1.addStretch(1)
 
-        self.label_fselect = qtw.QLabel(labels[0], self)
+        self.label_fselect = qtw.QLabel(self.labels[0], self)
         self.sub_layout_1.addWidget(self.label_fselect)  # 1
 
         self.open_file_button = qtw.QPushButton("Open Directory" if directory else "Open File", self)
@@ -110,12 +120,12 @@ class FileSelector(DefaultWidget):
         # main layout assembling
 
         self.file_path_line_edit = qtw.QLineEdit(self)
-        self.file_path_line_edit.setPlaceholderText(labels[1])
+        self.file_path_line_edit.setPlaceholderText(self.labels[1])
         self.main_layout.addWidget(self.file_path_line_edit)  # 1
 
         self.main_layout.addLayout(self.sub_layout_1)  # 2
 
-    def open_file(self):
+    def open_file(self) -> None:
 
         options = qtw.QFileDialog.Options()
         file_path, _ = qtw.QFileDialog.getOpenFileName(
@@ -128,11 +138,16 @@ class FileSelector(DefaultWidget):
         if self.file_path != file_path:
             self.file_path_line_edit.setText(file_path)
             self.file_path = file_path
-            eb.emit(
-                self.file_selected[0],
-                self.file_path,
-                self.file_selected[1]
-            )
+            if isinstance(self.file_selected[0], str):
+                eb.emit(
+                    self.file_selected[0],
+                    self.file_path,
+                    self.file_selected[1]
+                )
+
+    def get_input(self) -> str:
+
+        return self.file_path
 
     def open_directory(self):
 
@@ -152,19 +167,18 @@ class FileSelector(DefaultWidget):
             )
 
 
-class TitledLineEdit(DefaultWidget):
+class TitledLineEdit(DefaultInputWidget):
 
-    def __init__(self, line_edited=(None, {}), labels=(None, None), layout="h", border=None):
+    def __init__(self, line_edited=None, labels=None, layout="h", border=None):
 
         super().__init__(layout=layout, border=border)
         self.text_edit = ""
         self.line_edited = line_edited
-        default_labels = (None, None)
-        default_line_edited = (None, {})
-        if isinstance(labels, str):
-            self.labels = (labels,) + default_labels[1:]
-            self.line_edited = (line_edited,) + default_line_edited[1:]
-        else: self.labels = labels
+        self.labels = labels
+        if not isinstance(labels, tuple):
+            self.labels = labels, None
+        if not isinstance(line_edited, tuple):
+            self.line_edited = line_edited, {}
 
         # main layout assembling
 
@@ -178,28 +192,31 @@ class TitledLineEdit(DefaultWidget):
 
     def on_line_edited(self):
         self.text_edit = self.l_edit.text()
-        eb.emit(
-            self.line_edited[0],
-            self.l_edit.text(),
-            self.line_edited[1]
-        )
+        if isinstance(self.line_edited[0], str):
+            eb.emit(
+                self.line_edited[0],
+                self.l_edit.text(),
+                self.line_edited[1]
+            )
+
+    def get_input(self) -> str:
+
+        return self.text_edit
 
 
-class TitledDropdown(DefaultWidget):
+class TitledDropdown(DefaultInputWidget):
 
-    def __init__(self, option_changed=(None, {}), labels=None, options=None, layout="h", border=None):
+    def __init__(self, option_changed=None, labels=None, options=None, layout="h", border=None):
 
         super().__init__(layout=layout, border=border)
         self.option_selected = ""  # attribute holding the current selected option
         self.option_changed = option_changed  # signal attributes upon changing an option
         self.options = options  # tuple with the options
 
-        default_labels = (None, None)
-        default_option_changed = (None, {})
-        if isinstance(labels, str):
-            self.labels = (labels,) + default_labels[1:]
-        if isinstance(option_changed, str):
-            self.option_changed = (option_changed,) + default_option_changed[1:]
+        if not isinstance(labels, tuple):
+            self.labels = labels, None
+        if not isinstance(option_changed, tuple):
+            self.option_changed = option_changed, {}
 
         # main layout assembling
 
@@ -215,8 +232,9 @@ class TitledDropdown(DefaultWidget):
 
     def on_dropdown_selected(self):
         self.option_selected = self.dropdown.currentText()
-        if isinstance(self.option_changed, tuple):
+        if isinstance(self.option_changed[0], str):
             eb.emit(self.option_changed[0], self.option_selected, self.option_changed[1])
-        else:
-            for tup in self.option_changed:
-                eb.emit(self.tup[0], self.option_selected, self.tup[1])
+
+    def get_input(self) -> str:
+
+        return self.option_selected
