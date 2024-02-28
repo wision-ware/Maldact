@@ -2,11 +2,14 @@ import multiprocessing
 
 from backend.learn_network import LearnNetwork
 from backend.network import Network
+from event_bus import EventBus as eb
+from state_enums import ProcessTerminationState as Term
+from async_workers import training_executor
+
 import numpy as np
-import cupy as cp
+# import cupy as cp
 import multiprocessing as mp
 import inspect
-from event_bus import EventBus as eb
 import os
 import queue
 import PyQt5.QtCore as qtc
@@ -71,12 +74,19 @@ class TrainingManager:
         training_data = np.load(self.data_file, allow_pickle=True).item()
         inp = training_data["input"]
         labels = training_data["labels"]
+
         exec_args = (
             inp,
-            labels
+            labels,
+            self.__dict__,
+            self.network,
+            self.id,
+            self.term_queue,
+            os.path.join(self.model_dir, self.model_name)
         )
+
         self.training_process = mp.Process(
-            target=self.executor,
+            target=training_executor,
             args=exec_args
         )
 
@@ -122,13 +132,13 @@ class TrainingManager:
             message = self.term_queue.get()
             match message[0]:
 
-                case "done":
+                case Term.DONE:
                     eb.emit(f"training_done_{self.id}")
                     self.check_timer.stop()
                     if self.training_process.is_alive():
                         self.training_process.terminate()
 
-                case "crashed":
+                case Term.CRASHED:
                     eb.emit(f"training_crashed_{self.id}", message[1])
                     self.check_timer.stop()
                     if self.training_process.is_alive():
@@ -227,14 +237,14 @@ class SortingManager:
             message = self.term_queue.get()
             match message[0]:
 
-                case "done":
+                case Term.DONE:
 
                     eb.emit(f"sorting_done_{self.id}")
                     self.check_timer.stop()
                     if self.sorting_process.is_alive():
                         self.sorting_process.terminate()
 
-                case "crashed":
+                case Term.CRASHED:
 
                     eb.emit(f"sorting_crashed_{self.id}", message[1])
                     self.check_timer.stop()
