@@ -172,13 +172,14 @@ class TitledLineEdit(DefaultInputWidget):
     def __init__(self, line_edited=None, labels=None, layout="h", border=None):
 
         super().__init__(layout=layout, border=border)
-        self.text_edit = ""
+
         self.line_edited = line_edited
         self.labels = labels
         if not isinstance(labels, tuple):
             self.labels = labels, None
         if not isinstance(line_edited, tuple):
             self.line_edited = line_edited, {}
+        self.text_edit = self.labels[1]
 
         # main layout assembling
 
@@ -199,8 +200,15 @@ class TitledLineEdit(DefaultInputWidget):
                 self.line_edited[1]
             )
 
-    def get_input(self) -> str:
+    def trigger(self):
+        if isinstance(self.line_edited[0], str):
+            eb.emit(
+                self.line_edited[0],
+                self.text_edit,
+                self.line_edited[1]
+            )
 
+    def get_input(self) -> str:
         return self.text_edit
 
 
@@ -217,6 +225,7 @@ class TitledDropdown(DefaultInputWidget):
             self.labels = labels, None
         if not isinstance(option_changed, tuple):
             self.option_changed = option_changed, {}
+        self.option_selected = self.options[0]
 
         # main layout assembling
 
@@ -233,8 +242,19 @@ class TitledDropdown(DefaultInputWidget):
     def on_dropdown_selected(self):
         self.option_selected = self.dropdown.currentText()
         if isinstance(self.option_changed[0], str):
-            eb.emit(self.option_changed[0], self.option_selected, self.option_changed[1])
+            eb.emit(
+                self.option_changed[0],
+                self.option_selected,
+                self.option_changed[1]
+            )
+
+    def trigger(self):
+        if isinstance(self.option_changed[0], str):
+            eb.emit(
+                self.option_changed[0],
+                self.option_selected,
+                self.option_changed[1]
+            )
 
     def get_input(self) -> str:
-
         return self.option_selected

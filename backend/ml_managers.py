@@ -1,10 +1,8 @@
-import multiprocessing
-
 from backend.learn_network import LearnNetwork
 from backend.network import Network
+from backend.async_workers import training_executor
 from event_bus import EventBus as eb
 from state_enums import ProcessTerminationState as Term
-from async_workers import training_executor
 
 import numpy as np
 # import cupy as cp
@@ -37,6 +35,8 @@ class TrainingManager:
         # additional attributes
         self.N = None
         self.GPU = False
+        self.GD = None
+        self.time_limit = None
         self.save_params = False
         self.data_file = None
         self.model_dir = None
@@ -55,7 +55,7 @@ class TrainingManager:
         if event:
             eb.subscribe(event, self.start_training)
 
-    def update_params(self, update_dict) -> None:
+    def update_params(self, update_dict: dict) -> None:
 
         for key, value in update_dict.items():
             if key in self.__dict__.keys():
@@ -69,12 +69,24 @@ class TrainingManager:
         except AttributeError:
             pass
 
+        # adjusting attributes to fit `LearnNetworks` interface --------------------------------------------------------
         self.N = [int(num) for num in self.N.replace("]", " ").replace("[", " ").replace(",", " ").split()]
+        self.time_limit = int(self.time_limit)
+
+        gd_mapping = {
+            "Mini batch": "mini_b",
+            "Batch": "batch",
+            "Stochastic": "stochastic"
+        }
+        self.GD = gd_mapping[self.GD]
+
         self.network.__init__(self.N, GPU=self.GPU)  # reinitialize network object
         training_data = np.load(self.data_file, allow_pickle=True).item()
         inp = training_data["input"]
         labels = training_data["labels"]
+        # --------------------------------------------------------------------------------------------------------------
 
+        # packing the arguments for the subprocess
         exec_args = (
             inp,
             labels,

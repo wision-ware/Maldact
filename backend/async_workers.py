@@ -1,4 +1,4 @@
-from learn_network import LearnNetwork
+from backend.learn_network import LearnNetwork
 from state_enums import ProcessTerminationState as Term
 
 import numpy as np

@@ -68,10 +68,19 @@ class Training(qtw.QWidget):
         self.key = 'train'
         self.exclusion = ["threshold", "time_limit", "fixed_iter"]
 
+        self.subs: list = [
+            ("switch_channel1", self.switch_func1),
+            ("store_tr", self.store_user_input),
+            ("start_training", self.start_training)
+        ]
+
+        for sub in self.subs:
+            eb.subscribe(*sub)
+
         # sub layout assembling
         # sub layout 1
 
-        self.sub_layout1.addWidget(TitledDropdown(
+        self.sub_layout1.addWidget(t := TitledDropdown(
             labels="Select gradient descent type:",
             layout='v',
             option_changed=('store_tr', {"attr": "GD"}),
@@ -81,6 +90,7 @@ class Training(qtw.QWidget):
                 "Stochastic"
             )
         ))
+        t.trigger()
 
         self.sub_layout1.addWidget(TitledLineEdit(
             labels=("Set architecture:", "example: [:,50,50,50,5]"),
@@ -113,10 +123,11 @@ class Training(qtw.QWidget):
         self.main_layout.addWidget(CustomHeader("Model training mode"))
 
         # content
-        self.main_layout.addWidget(TitledLineEdit(
+        self.main_layout.addWidget(t := TitledLineEdit(
             line_edited=("store_tr", {"attr": "model_name"}),
             labels=("Select model name:", "model1"),
         ))
+        t.trigger()
 
         self.file_selection_container = DefaultWidget(
             border="grey_round",
@@ -155,14 +166,6 @@ class Training(qtw.QWidget):
         self.switch_func1 = lambda key, old_widget, parent=self.sub_layout2, stored="termination_options": \
             self.switch_termination_input(key, old_widget, parent=parent, stored=stored)
 
-        self.subs: list = [
-            ("switch_channel1", self.switch_func1),
-            ("store_tr", self.store_user_input),
-            ("start_training", self.start_training)
-        ]
-
-        for sub in self.subs:
-            eb.subscribe(*sub)
 
     def switch_termination_input(self, key: str, old_widget=None, parent=None, stored=None) -> None:
 
