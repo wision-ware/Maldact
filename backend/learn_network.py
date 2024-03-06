@@ -291,14 +291,14 @@ class LearnNetwork:
         # PU variable setup
 
         if self.GPU:
-            labels = cp.asarray(labels,dtype='f')
-            inp = cp.asarray(inp,dtype='f')
+            labels = cp.asarray(labels, dtype='f')
+            inp = cp.asarray(inp, dtype='f')
 
         # --
 
         gradient = self.weight_like[:]
         partial_bias = self.bias_like[:]
-        output = self.get_output(inp,layer=True,label=labels)
+        output = self.get_output(inp, layer=True, label=labels)
 
         # output layer
 
@@ -307,8 +307,8 @@ class LearnNetwork:
         deltas = dsigmoid*dif
         partial_bias_0 = deltas[:]
 
-        m_deltas = xp.tile(deltas,(self.N[-2],1))
-        m_output = xp.full((self.N[-1],self.N[-2]),output[1][-2])
+        m_deltas = xp.tile(deltas, (self.N[-2],1))
+        m_output = xp.full((self.N[-1], self.N[-2]), output[1][-2])
         grad_0 = m_deltas*xp.transpose(m_output)
 
         gradient[-1] = grad_0[:]
@@ -349,9 +349,9 @@ class LearnNetwork:
             GD='mini_b',
             batch_size=50,
             eta=0.005,
+            fixed_iter=0,
             live_monitor=False,
             as_text=False,
-            fixed_iter=0,
             dia_data=False,
             save_params=True,
             overwrite=True,

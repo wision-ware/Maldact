@@ -16,6 +16,11 @@ import traceback
 
 class TrainingManager:
 
+    __slots__ = (
+        "id", "network", "N", "GPU", "GD", "time_limit", "save_params", "data_file",
+        "model_dir", "model_name", "training_process", "term_queue", "check_timer",
+        "threshold", "batch_size", "fixed_iter"
+    )
     instance_id = 1
 
     def __init__(self, event=None, **kwargs) -> None:
@@ -37,6 +42,9 @@ class TrainingManager:
         self.GPU = False
         self.GD = None
         self.time_limit = None
+        self.threshold = None
+        self.batch_size = None
+        self.fixed_iter = None
         self.save_params = False
         self.data_file = None
         self.model_dir = None
@@ -90,16 +98,28 @@ class TrainingManager:
         exec_args = (
             inp,
             labels,
-            self.__dict__,
             self.network,
             self.id,
             self.term_queue,
             os.path.join(self.model_dir, self.model_name)
         )
 
+        kwarg_names = (
+            "threshold",
+            "time_limit",
+            "GD",
+            "batch_size",
+            "fixed_iter"
+        )
+        exec_kwargs = dict()
+        for name in kwarg_names:
+            if value := self.__dict__[name] is not None:
+                exec_kwargs[name] = value
+
         self.training_process = mp.Process(
             target=training_executor,
-            args=exec_args
+            args=exec_args,
+            kwargs=exec_kwargs
         )
 
         self.training_process.start()

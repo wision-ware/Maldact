@@ -68,6 +68,10 @@ class Training(qtw.QWidget):
         self.key = 'train'
         self.exclusion = ["threshold", "time_limit", "fixed_iter"]
 
+        # subscriptions to event bus
+        self.switch_func1 = lambda key, old_widget, parent=self.sub_layout2, stored="termination_options": \
+            self.switch_termination_input(key, old_widget, parent=parent, stored=stored)
+
         self.subs: list = [
             ("switch_channel1", self.switch_func1),
             ("store_tr", self.store_user_input),
@@ -161,10 +165,6 @@ class Training(qtw.QWidget):
 
         self.switch_termination_input(options[0], old_widget=self.switched_linedit, parent=self.sub_layout2,
                                       stored='termination_options')
-
-        # subscriptions to event bus
-        self.switch_func1 = lambda key, old_widget, parent=self.sub_layout2, stored="termination_options": \
-            self.switch_termination_input(key, old_widget, parent=parent, stored=stored)
 
 
     def switch_termination_input(self, key: str, old_widget=None, parent=None, stored=None) -> None:

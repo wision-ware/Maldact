@@ -10,15 +10,13 @@ import os
 def training_executor(
         inp: np.ndarray,
         labels: np.ndarray,
-        class_dict: dict,
         network_object: LearnNetwork,
         manager_id: int,
         termination_queue: mp.Queue,
-        save_location: str
+        save_location: str,
+        **kwargs
 ):
 
-    arg_filter = lambda x: not callable(x) and not isinstance(x, LearnNetwork)
-    kwargs = {key: value for key, value in class_dict.items() if arg_filter(value)}
     try:
 
         meta = network_object.learn(
