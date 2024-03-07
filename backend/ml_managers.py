@@ -19,7 +19,8 @@ class TrainingManager:
     __slots__ = (
         "id", "network", "N", "GPU", "GD", "time_limit", "save_params", "data_file",
         "model_dir", "model_name", "training_process", "term_queue", "check_timer",
-        "threshold", "batch_size", "fixed_iter"
+        "threshold", "batch_size", "fixed_iter", "eta", "live_monitor", "as_text",
+        "dia_data", "overwrite"
     )
     instance_id = 1
 
@@ -29,7 +30,20 @@ class TrainingManager:
         self.id = TrainingManager.instance_id
         TrainingManager.instance_id += 1
 
-        # make LearnNetwork.learn() default arguments into attributes of TrainingManager
+        # predefining `LearnNetwork.learn()` arguments as instance attributes
+        self.GD: str
+        self.time_limit: int
+        self.eta: float
+        self.threshold: float
+        self.batch_size: int
+        self.fixed_iter: int
+        self.save_params: bool
+        self.live_monitor: bool
+        self.as_text: bool
+        self.dia_data: bool
+        self.overwrite: bool
+
+        # make `LearnNetwork.learn()` default arguments into attributes of TrainingManager
         self.network = LearnNetwork([1, 1], GPU=False)
         learn_signature = inspect.signature(self.network.learn)
         default_args = {param.name: param.default for param in learn_signature.parameters.values() if
@@ -39,13 +53,7 @@ class TrainingManager:
 
         # additional attributes
         self.N = None
-        self.GPU = False
-        self.GD = None
-        self.time_limit = None
-        self.threshold = None
-        self.batch_size = None
-        self.fixed_iter = None
-        self.save_params = False
+        self.GPU: bool = False
         self.data_file = None
         self.model_dir = None
         self.model_name = None
@@ -66,8 +74,8 @@ class TrainingManager:
     def update_params(self, update_dict: dict) -> None:
 
         for key, value in update_dict.items():
-            if key in self.__dict__.keys():
-                setattr(self, key, value)
+            try: setattr(self, key, value)
+            except AttributeError: pass
 
     def start_training(self) -> None:
 
@@ -78,7 +86,9 @@ class TrainingManager:
             pass
 
         # adjusting attributes to fit `LearnNetworks` interface --------------------------------------------------------
-        self.N = [int(num) for num in self.N.replace("]", " ").replace("[", " ").replace(",", " ").split()]
+        self.N = [
+            int(num) for num in self.N.replace("]", " ").replace("[", " ").replace(" ", "").replace(",", " ").split()
+        ]
         self.time_limit = int(self.time_limit)
 
         gd_mapping = {

@@ -353,7 +353,7 @@ class LearnNetwork:
             live_monitor=False,
             as_text=False,
             dia_data=False,
-            save_params=True,
+            save_params=False,
             overwrite=True,
             **_
             ) -> dict:
