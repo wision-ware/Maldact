@@ -263,9 +263,9 @@ class Training(qtw.QWidget):
         else:
             return None
 
-    def on_training_crash(self, exception_info, id):
-        eb.emit(f"training_canceled_{id}")
-        self.training_managers.pop(id)
+    def on_training_crash(self, exception_info, manager_id):
+        eb.emit(f"training_canceled_{manager_id}")
+        self.training_managers.pop(manager_id)
         error_class = getattr(__builtins__, exception_info["type"])
         raise error_class(f"{exception_info['traceback']} \n {exception_info['message']}")
 

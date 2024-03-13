@@ -123,7 +123,7 @@ class TrainingManager:
         )
         exec_kwargs = dict()
         for name in kwarg_names:
-            if value := self.__dict__[name] is not None:
+            if value := getattr(self, name) is not None:
                 exec_kwargs[name] = value
 
         self.training_process = mp.Process(

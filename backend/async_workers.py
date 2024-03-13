@@ -36,7 +36,7 @@ def training_executor(
             'message': exc_message,
             'traceback': exc_traceback
         }
-
+        print(f"Exception in training_executor:\n{exc_traceback}")
         termination_queue.put((Term.CRASHED, exception_info, manager_id))
         return None
 
