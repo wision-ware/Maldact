@@ -16,12 +16,12 @@ import traceback
 
 class TrainingManager:
 
-    __slots__ = (
-        "id", "network", "N", "GPU", "GD", "time_limit", "save_params", "data_file",
-        "model_dir", "model_name", "training_process", "term_queue", "check_timer",
-        "threshold", "batch_size", "fixed_iter", "eta", "live_monitor", "as_text",
-        "dia_data", "overwrite"
-    )
+    # __slots__ = (
+    #     "id", "network", "N", "GPU", "GD", "time_limit", "save_params", "data_file",
+    #     "model_dir", "model_name", "training_process", "term_queue", "check_timer",
+    #     "threshold", "batch_size", "fixed_iter", "eta", "live_monitor", "as_text",
+    #     "dia_data", "overwrite"
+    # )
     instance_id = 1
 
     def __init__(self, event=None, **kwargs) -> None:
@@ -109,7 +109,6 @@ class TrainingManager:
             inp,
             labels,
             self.network,
-            self.id,
             self.term_queue,
             os.path.join(self.model_dir, self.model_name)
         )
@@ -175,13 +174,13 @@ class TrainingManager:
             match message[0]:
 
                 case Term.DONE:
-                    eb.emit(f"training_done_{self.id}")
+                    eb.emit(f"training_done_{self.id}", self.id)
                     self.check_timer.stop()
                     if self.training_process.is_alive():
                         self.training_process.terminate()
 
                 case Term.CRASHED:
-                    eb.emit(f"training_crashed_{self.id}", message[1])
+                    eb.emit(f"training_crashed_{self.id}", message[1], self.id)
                     self.check_timer.stop()
                     if self.training_process.is_alive():
                         self.training_process.terminate()

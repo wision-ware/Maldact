@@ -1,6 +1,8 @@
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
 import os, sys
+import traceback
+
 from ui.input_widgets import *
 from ui.info_widgets import *
 from ui.popups import *
@@ -52,7 +54,6 @@ class Training(qtw.QWidget):
     def __init__(self) -> None:
         super().__init__()
 
-        self.training_managers = {}
         self.training_popup = None
         self.term_cond_assoc = {}
         self.warning_state = False
@@ -166,7 +167,6 @@ class Training(qtw.QWidget):
         self.switch_termination_input(options[0], old_widget=self.switched_linedit, parent=self.sub_layout2,
                                       stored='termination_options')
 
-
     def switch_termination_input(self, key: str, old_widget=None, parent=None, stored=None) -> None:
 
         # replacement widgets
@@ -248,7 +248,7 @@ class Training(qtw.QWidget):
             new_manager.start_training()
 
             self.training_popup = LoadingWindow(
-                f'''Training of the "{self.model_name}" model in progress''',
+                f'''Training of the "{new_manager.model_name}" model in progress''',
                 f"training_done_{new_manager.id}",
                 f"training_canceled_{new_manager.id}"
             )
@@ -265,9 +265,20 @@ class Training(qtw.QWidget):
 
     def on_training_crash(self, exception_info, manager_id):
         eb.emit(f"training_canceled_{manager_id}")
-        self.training_managers.pop(manager_id)
-        error_class = getattr(__builtins__, exception_info["type"])
-        raise error_class(f"{exception_info['traceback']} \n {exception_info['message']}")
+        eb.unsubscribe(f"training_crashed_{manager_id}", self.on_training_crash)
+
+        exc_type = exception_info.get("type", "Exception")
+        exc_msg = exception_info("message", "Unknown error")
+        exc_traceback = exception_info("traceback", "")
+
+        if exc_type in __builtins__:
+            exc_class = __builtins__[exc_type]
+        else:
+            exc_class = Exception
+
+        exception_reconstruction = exc_class(exc_msg)
+        exception_reconstruction.__traceback__ = exc_traceback
+        raise exception_reconstruction
 
 
 class Sorting(qtw.QWidget):

@@ -46,7 +46,7 @@ class LoadingWindow(qtw.QDialog):
         # main layout assembly
 
         self.main_layout.addLayout(self.sub_layout_1)
-        self.main_layout.addStretch(self.sub_layout_2)
+        self.main_layout.addStretch(1)
 
         self.setLayout(self.main_layout)
 

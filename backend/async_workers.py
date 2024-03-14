@@ -11,7 +11,6 @@ def training_executor(
         inp: np.ndarray,
         labels: np.ndarray,
         network_object: LearnNetwork,
-        manager_id: int,
         termination_queue: mp.Queue,
         save_location: str,
         **kwargs
@@ -29,7 +28,7 @@ def training_executor(
 
         exc_type = type(e).__name__
         exc_message = str(e)
-        exc_traceback = traceback.format_exc()
+        exc_traceback = e.__traceback__
 
         exception_info = {
             'type': exc_type,
@@ -37,11 +36,11 @@ def training_executor(
             'traceback': exc_traceback
         }
         print(f"Exception in training_executor:\n{exc_traceback}")
-        termination_queue.put((Term.CRASHED, exception_info, manager_id))
+        termination_queue.put((Term.CRASHED, exception_info))
         return None
 
     np.save(save_location, meta, allow_pickle=True)
-    termination_queue.put((Term.DONE, manager_id))
+    termination_queue.put((Term.DONE,))
 
 
 def sorting_executor(
