@@ -128,9 +128,11 @@ class Training(qtw.QWidget):
         self.main_layout.addWidget(CustomHeader("Model training mode"))
 
         # content
+        default_model_name = "model<number>"
+
         self.main_layout.addWidget(t := TitledLineEdit(
             line_edited=("store_tr", {"attr": "model_name"}),
-            labels=("Select model name:", "model1"),
+            labels=("Select model name:", default_model_name),
         ))
         t.trigger()
 
@@ -252,6 +254,7 @@ class Training(qtw.QWidget):
                 f"training_done_{new_manager.id}",
                 f"training_canceled_{new_manager.id}"
             )
+            self.training_popup.exec()
 
         elif self.warning_state is False:
 

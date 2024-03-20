@@ -11,7 +11,7 @@ from backend.ml_managers import TrainingManager, SortingManager
 
 class LoadingWindow(qtw.QDialog):
 
-    def __init__(self, info, close_receiver, cancel_sender):
+    def __init__(self, info: str, close_receiver: str, cancel_receiver: str):
         
         super().__init__()
 
@@ -20,6 +20,7 @@ class LoadingWindow(qtw.QDialog):
         self.sub_layout_2 = qtw.QHBoxLayout(self)
         self.loading_gif_path = "../resources/loading.gif"
         self.close_receiver = close_receiver
+        self.cancel_receiver = cancel_receiver
 
         self.setWindowTitle("Loading...")
 
@@ -57,5 +58,5 @@ class LoadingWindow(qtw.QDialog):
     def terminate(self):
 
         eb.unsubscribe(self.close_receiver, self.terminate)
-        eb.emit(self.cancel_sender)
+        eb.emit(self.cancel_receiver)
         self.accept()

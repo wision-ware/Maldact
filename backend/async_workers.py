@@ -37,7 +37,7 @@ def training_executor(
         }
         print(f"Exception in training_executor:\n{exc_traceback}")
         termination_queue.put((Term.CRASHED, exception_info))
-        return None
+        return 1
 
     np.save(save_location, meta, allow_pickle=True)
     termination_queue.put((Term.DONE,))

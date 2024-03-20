@@ -12,6 +12,7 @@ import os
 import queue
 import PyQt5.QtCore as qtc
 import traceback
+from glob import glob
 
 
 class TrainingManager:
@@ -104,7 +105,7 @@ class TrainingManager:
         labels = training_data["labels"]
         # --------------------------------------------------------------------------------------------------------------
 
-        # packing the arguments for the subprocess
+        # packing the arguments for the subprocesses
         exec_args = (
             inp,
             labels,
@@ -122,7 +123,7 @@ class TrainingManager:
         )
         exec_kwargs = dict()
         for name in kwarg_names:
-            if value := getattr(self, name) is not None:
+            if (value := getattr(self, name)) is not None:
                 exec_kwargs[name] = value
 
         self.training_process = mp.Process(
