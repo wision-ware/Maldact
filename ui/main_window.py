@@ -128,11 +128,11 @@ class Training(qtw.QWidget):
         self.main_layout.addWidget(CustomHeader("Model training mode"))
 
         # content
-        default_model_name = "model<number>"
+        self.default_model_name = "model<number>"
 
         self.main_layout.addWidget(t := TitledLineEdit(
             line_edited=("store_tr", {"attr": "model_name"}),
-            labels=("Select model name:", default_model_name),
+            labels=("Select model name:", self.default_model_name),
         ))
         t.trigger()
 
@@ -240,7 +240,7 @@ class Training(qtw.QWidget):
                 self.warning_state = True
                 return None
 
-            new_manager = TrainingManager()
+            new_manager = TrainingManager(default_model_name=self.default_model_name)
             new_manager.update_params(self.input_dict)
 
             subscription = (f"training_crashed_{new_manager.id}", self.on_training_crash)
@@ -249,11 +249,9 @@ class Training(qtw.QWidget):
 
             new_manager.start_training()
 
-            self.training_popup = LoadingWindow(
-                f'''Training of the "{new_manager.model_name}" model in progress''',
-                f"training_done_{new_manager.id}",
-                f"training_canceled_{new_manager.id}"
-            )
+            self.training_popup = LoadingWindow(f'''Training of the "{new_manager.model_name}" model in progress''',
+                                                f"training_done_{new_manager.id}",
+                                                f"training_canceled_{new_manager.id}")
             self.training_popup.exec()
 
         elif self.warning_state is False:
@@ -267,12 +265,12 @@ class Training(qtw.QWidget):
             return None
 
     def on_training_crash(self, exception_info, manager_id):
-        eb.emit(f"training_canceled_{manager_id}")
+        eb.emit(f"training_done_{manager_id}")
         eb.unsubscribe(f"training_crashed_{manager_id}", self.on_training_crash)
 
         exc_type = exception_info.get("type", "Exception")
-        exc_msg = exception_info("message", "Unknown error")
-        exc_traceback = exception_info("traceback", "")
+        exc_msg = exception_info.get("message", "Unknown error")
+        exc_traceback = exception_info.get("traceback", "")
 
         if exc_type in __builtins__:
             exc_class = __builtins__[exc_type]
@@ -372,9 +370,7 @@ class Sorting(qtw.QWidget):
 
             self.sorting_popup = LoadingWindow(
                 f'''Sorting by the "{os.path.basename(self.model_dir)}" model in progress''',
-                f"sorting_done_{self.sorting_manager.id}",
-                f"sorting_canceled_{self.sorting_manager.id}"
-            )
+                f"sorting_done_{self.sorting_manager.id}", f"sorting_canceled_{self.sorting_manager.id}")
 
             self.sorting_manager = SortingManager()
 

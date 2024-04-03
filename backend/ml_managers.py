@@ -13,6 +13,7 @@ import queue
 import PyQt5.QtCore as qtc
 import traceback
 from glob import glob
+import re
 
 
 class TrainingManager:
@@ -21,7 +22,7 @@ class TrainingManager:
     #     "id", "network", "N", "GPU", "GD", "time_limit", "save_params", "data_file",
     #     "model_dir", "model_name", "training_process", "term_queue", "check_timer",
     #     "threshold", "batch_size", "fixed_iter", "eta", "live_monitor", "as_text",
-    #     "dia_data", "overwrite"
+    #     "dia_data", "overwrite", "default_model_name"
     # )
     instance_id = 1
 
@@ -61,8 +62,9 @@ class TrainingManager:
         self.training_process = None
         self.term_queue = mp.Queue()
         self.check_timer = qtc.QTimer()
+        self.default_model_name: str = "model<number>"
 
-        # overwrite the default values
+        # overwrite the default values, TODO converting to `__slots__`
         for key, value in kwargs.items():
             if key in self.__dict__.keys():
                 setattr(self, key, value)
@@ -103,6 +105,18 @@ class TrainingManager:
         training_data = np.load(self.data_file, allow_pickle=True).item()
         inp = training_data["input"]
         labels = training_data["labels"]
+        # setting the default model name
+        if self.model_name == self.default_model_name:  # whether to find the minimum unused number
+            existing_defaults = set()
+            for path in glob(os.path.join(self.model_dir, "model*.npy")):
+                wildcard_match = str(re.match("model(.*).npy", os.path.basename(path)))
+                try: existing_defaults.add(int(wildcard_match))
+                except ValueError: pass
+            num = 0
+            while num in existing_defaults:
+                num += 1
+            self.model_name = f"model{num}.npy"
+
         # --------------------------------------------------------------------------------------------------------------
 
         # packing the arguments for the subprocesses
