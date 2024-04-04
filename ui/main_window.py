@@ -276,10 +276,8 @@ class Training(qtw.QWidget):
             exc_class = __builtins__[exc_type]
         else:
             exc_class = Exception
-
-        exception_reconstruction = exc_class(exc_msg)
-        exception_reconstruction.__traceback__ = exc_traceback
-        raise exception_reconstruction
+        print(exc_traceback, file=sys.stderr)
+        raise exc_class(exc_msg) from None
 
 
 class Sorting(qtw.QWidget):

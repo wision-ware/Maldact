@@ -23,7 +23,6 @@ def training_executor(
             labels,
             **kwargs
         )
-        raise ValueError
 
     except Exception as e:
 
@@ -34,7 +33,7 @@ def training_executor(
         exception_info = {
             'type': exc_type,
             'message': exc_message,
-            'traceback': exc_traceback
+            'traceback': traceback.format_tb(exc_traceback)
         }
         termination_queue.put((Term.CRASHED, exception_info))
         return 1
@@ -67,7 +66,7 @@ def sorting_executor(
         }
 
         termination_queue.put((Term.CRASHED, exception_info, manager_id))
-        return
+        return 1
 
     dim = out.shape[0]
     for i in range(dim):

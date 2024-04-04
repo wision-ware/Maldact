@@ -1,6 +1,6 @@
 from backend.learn_network import LearnNetwork
 from backend.network import Network
-from backend.async_workers import training_executor
+from backend.async_workers import training_executor, sorting_executor
 from event_bus import EventBus as eb
 from state_enums import ProcessTerminationState as Term
 
@@ -150,58 +150,29 @@ class TrainingManager:
         self.check_timer.timeout.connect(self.check_queue)
         self.check_timer.start(100)
 
-    def executor(self, inp, labels) -> None:
-
-        arg_filter = lambda x: not callable(x) and not isinstance(x, LearnNetwork)
-        kwargs = {key: value for key, value in self.__dict__.items() if arg_filter(value)}
-        try:
-
-            meta = self.network.learn(
-                inp,
-                labels,
-                **kwargs
-            )
-
-        except Exception as e:
-
-            exc_type = type(e).__name__
-            exc_message = str(e)
-            exc_traceback = traceback.format_exc()
-
-            exception_info = {
-                'type': exc_type,
-                'message': exc_message,
-                'traceback': exc_traceback
-            }
-
-            self.term_queue.put(("crashed", exception_info, self.id))
-            return None
-
-        np.save(os.path.join(self.model_dir, self.model_name), meta, allow_pickle=True)
-        self.term_queue.put(("done",))
-
     def exit_training(self) -> None:
         pass  # TODO
 
     def check_queue(self) -> None:
         try:
-            message = self.term_queue.get()
-            match message[0]:
-
-                case Term.DONE:
-                    eb.emit(f"training_done_{self.id}", self.id)
-                    self.check_timer.stop()
-                    if self.training_process.is_alive():
-                        self.training_process.terminate()
-
-                case Term.CRASHED:
-                    eb.emit(f"training_crashed_{self.id}", message[1], self.id)
-                    self.check_timer.stop()
-                    if self.training_process.is_alive():
-                        self.training_process.terminate()
+            message = self.term_queue.get_nowait()
 
         except queue.Empty:
-            pass
+            return
+
+        match message[0]:
+
+            case Term.DONE:
+                eb.emit(f"training_done_{self.id}", self.id)
+                self.check_timer.stop()
+                if self.training_process.is_alive():
+                    self.training_process.terminate()
+
+            case Term.CRASHED:
+                eb.emit(f"training_crashed_{self.id}", message[1], self.id)
+                self.check_timer.stop()
+                if self.training_process.is_alive():
+                    self.training_process.terminate()
 
 
 class SortingManager:
@@ -254,59 +225,39 @@ class SortingManager:
             os.mkdir(os.path.join(self.dir_name, str(i)))
         exec_args = (
             data,
-            term_queue
+            self.network,
+            self.id,
+            term_queue,
+            self.dir_name
         )
         self.sorting_process = mp.Process(
-            target=self.executor,
+            target=sorting_executor,
             args=exec_args
         )
         self.sorting_process.start()
-
-    def executor(self, data, queue) -> None:
-
-        try:
-
-            out = self.network.get_output(data)
-
-        except Exception as e:
-
-            exc_type = type(e).__name__
-            exc_message = str(e)
-            exc_traceback = traceback.format_exc()
-
-            exception_info = {
-                'type': exc_type,
-                'message': exc_message,
-                'traceback': exc_traceback
-            }
-
-            self.term_queue.put(("crashed", exception_info))
-            return
-
-        dim = out.shape[0]
-        for i in range(dim):
-            np.save(os.path.join(self.dir_name, str(np.argmax(out[i, :]))), out[i, :])
-        queue.put("done")
+        self.check_timer.timeout.connect(self.check_queue)
+        self.check_timer.start(100)
 
     def check_queue(self) -> None:
         try:
-            message = self.term_queue.get()
-            match message[0]:
-
-                case Term.DONE:
-
-                    eb.emit(f"sorting_done_{self.id}")
-                    self.check_timer.stop()
-                    if self.sorting_process.is_alive():
-                        self.sorting_process.terminate()
-
-                case Term.CRASHED:
-
-                    eb.emit(f"sorting_crashed_{self.id}", message[1])
-                    self.check_timer.stop()
-                    if self.sorting_process.is_alive():
-                        self.sorting_process.terminate()
+            message = self.term_queue.get_nowait()
 
         except queue.Empty:
-            pass
+            return
+
+        match message[0]:
+
+            case Term.DONE:
+
+                eb.emit(f"sorting_done_{self.id}")
+                self.check_timer.stop()
+                if self.sorting_process.is_alive():
+                    self.sorting_process.terminate()
+
+            case Term.CRASHED:
+
+                eb.emit(f"sorting_crashed_{self.id}", message[1])
+                self.check_timer.stop()
+                if self.sorting_process.is_alive():
+                    self.sorting_process.terminate()
 
