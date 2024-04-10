@@ -32,6 +32,7 @@ class LoadingWindow(qtw.QDialog):
         self.loading_gif_label.setMovie(self.loading_gif)
         self.loading_gif.start()
         self.sub_layout_1.addWidget(self.loading_gif_label)
+        self.sub_layout_1.addWidget(self.loading_gif)
 
         self.content_text = qtw.QLabel(info)
         self.sub_layout_1.addWidget(self.content_text)

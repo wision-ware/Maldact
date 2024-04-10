@@ -244,7 +244,7 @@ class Training(qtw.QWidget):
             new_manager.update_params(self.input_dict)
 
             subscription = (f"training_crashed_{new_manager.id}", self.on_training_crash)
-            self.subs[new_manager.id] = subscription
+            self.subs.append(subscription)
             eb.subscribe(*subscription)
 
             new_manager.start_training()
@@ -302,21 +302,29 @@ class Sorting(qtw.QWidget):
 
         self.main_layout.addWidget(CustomHeader("Data classification mode"))
 
-        self.main_layout.addWidget(FileSelector(
+        self.file_selection_container = DefaultWidget(
+            border="grey_round",
+            padding=0,
+            layout="v"
+        )
+
+        self.file_selection_container.main_layout.addWidget(FileSelector(
             file_selected=("store_st", {"attr": "sort_dir"}),
             labels="Select directory for the sorting folders:",
             directory=True
         ))
 
-        self.main_layout.addWidget(FileSelector(
+        self.file_selection_container.main_layout.addWidget(FileSelector(
             file_selected=("store_st", {"attr": "model_file"}),
             labels="Select your trained model:"
         ))
 
-        self.main_layout.addWidget(FileSelector(
+        self.file_selection_container.main_layout.addWidget(FileSelector(
             file_selected=("store_st", {"attr": "data_file"}),
             labels="Select data for classification:"
         ))
+
+        self.main_layout.addWidget(self.file_selection_container)
 
         self.main_layout.addStretch(1)
 
@@ -325,10 +333,10 @@ class Sorting(qtw.QWidget):
             ("start sorting", "start_sorting")
         )))
 
-        self.subs = (
+        self.subs: list = [
             ("store_st", self.store_user_input),
             ("start_sorting", self.start_sorting)
-        )
+        ]
 
         for sub in self.subs:
             eb.subscribe(*sub)
@@ -338,9 +346,7 @@ class Sorting(qtw.QWidget):
 
     def start_sorting(self) -> None:
 
-        if self.sorting_manager.sorting_process.is_alive():
-            self.sorting_manager = SortingManager()
-        if len(self.input_dict) > 2:
+        if all(key in self.input_dict for key in ("model_file", "data_file", "dir_name")):
 
             if self.warning_state is True:
                 self.main_layout.removeWidget(self.input_warning_text)
@@ -363,14 +369,21 @@ class Sorting(qtw.QWidget):
                 self.warning_state = True
                 return None
 
-            self.sorting_manager.update_params(self.input_dict)
-            self.sorting_manager.start_sorting()
+            new_manager = SortingManager()
+            new_manager.update_params(self.input_dict)
+
+            subscription = (f"sorting_crashed_{new_manager.id}", self.on_sorting_crash)
+            self.subs.append(subscription)
+            eb.subscribe(*subscription)
+
+            new_manager.start_sorting()
 
             self.sorting_popup = LoadingWindow(
                 f'''Sorting by the "{os.path.basename(self.model_dir)}" model in progress''',
-                f"sorting_done_{self.sorting_manager.id}", f"sorting_canceled_{self.sorting_manager.id}")
-
-            self.sorting_manager = SortingManager()
+                f"sorting_done_{self.sorting_manager.id}",
+                f"sorting_canceled_{self.sorting_manager.id}"
+            )
+            self.sorting_popup.exec()
 
         elif self.warning_state is False:
 

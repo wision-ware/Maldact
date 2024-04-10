@@ -26,10 +26,11 @@ class DefaultWidget(qtw.QFrame):
         # modifying stylesheet
         match border:
             case "grey_round":
-                self.style_sheet["border"] = "0.1em solid grey"
+                self.style_sheet["border"] = "0.1em solid"
+                self.style_sheet["border-color"] = "rgba(0, 0, 0, 0.1)"
                 self.style_sheet["border-radius"] = "0.75em"
                 self.style_sheet["padding"] = f"{padding}em"
-                self.style_sheet["background-color"] = "#dddddd"
+                self.style_sheet["background-color"] = "rgba(0, 0, 0, 0.05)"
 
             case None:
                 self.style_sheet["border"] = "none"
