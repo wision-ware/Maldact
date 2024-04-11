@@ -207,13 +207,14 @@ class Network(object):
             return np.copy(p_output)
 
     def load_params(self, path):
-
-        file = np.load(path, allow_pickle=True)
+        with open(path, "rb") as f:
+            file = np.load(f, allow_pickle=True).item()
         self.weights = file["weights"]
         self.bias = file["bias"]
-        self.N = [len(vec) for vec in self.bias]
-        self.N.insert(0, self.weights[0].shape()[0])
-
+        self.N = [len(vec) for vec in self.bias[1:]]
+        self.N.insert(0, self.weights[1].shape[0])
+        self.weight_like = [None] * len(self.N)
+        self.bias_like = [None] * len(self.N)
         for l in range(1, len(self.N)):
             self.weight_like[l] = np.zeros((self.N[l-1], self.N[l]))
             self.bias_like[l] = np.zeros((self.N[l]))

@@ -16,6 +16,11 @@ from glob import glob
 import re
 
 
+class MLManager:
+
+    pass
+
+
 class TrainingManager:
 
     # __slots__ = (
@@ -106,16 +111,19 @@ class TrainingManager:
         inp = training_data["input"]
         labels = training_data["labels"]
         # setting the default model name
+        suffix = ".model"
         if self.model_name == self.default_model_name:  # whether to find the minimum unused number
             existing_defaults = set()
-            for path in glob(os.path.join(self.model_dir, "model*.npy")):
-                wildcard_match = str(re.match("model(.*).npy", os.path.basename(path)))
+            for path in glob(os.path.join(self.model_dir, f"model*{suffix}")):
+                wildcard_match = os.path.basename(path).replace(suffix, "").replace("model", "")
                 try: existing_defaults.add(int(wildcard_match))
                 except ValueError: pass
             num = 0
             while num in existing_defaults:
                 num += 1
-            self.model_name = f"model{num}.npy"
+            self.model_name = f"model{num}{suffix}"
+        elif not self.model_name.endswith(suffix):
+            self.model_name += suffix
 
         # --------------------------------------------------------------------------------------------------------------
 
@@ -209,6 +217,12 @@ class SortingManager:
                 setattr(self, key, value)
 
     def start_sorting(self) -> None:
+        def try_mkdir(dir_path) -> int:
+            try:
+                os.mkdir(dir_path)
+                return 0
+            except FileExistsError:
+                return 1
 
         try:
             if self.sorting_process.is_alive() is True:
@@ -216,19 +230,27 @@ class SortingManager:
         except AttributeError:
             pass
 
+        suffix = ".model"
+
         self.network.load_params(self.model_file)
-        self.dir_name = f"sorted_by_{self.model_file.os.path.basename(self.model_file)}"
-        os.mkdir(os.path.join(self.sort_dir, self.dir_name))
-        data = np.load(self.data_file)
+        self.dir_name = f"sorted_by_{os.path.basename(self.model_file).replace(suffix, '')}"
+        path = os.path.join(self.sort_dir, self.dir_name)
+
+        dir_differentiator = 0
+        while try_mkdir(f"{path}_{dir_differentiator}"):
+            dir_differentiator += 1
+        path = f"{path}_{dir_differentiator}"
+
+        data = np.load(self.data_file, allow_pickle=True).item()
         term_queue = mp.Queue()
         for i in range(self.network.N[-1]):
-            os.mkdir(os.path.join(self.dir_name, str(i)))
+            os.mkdir(os.path.join(path, str(i)))
         exec_args = (
             data,
             self.network,
             self.id,
             term_queue,
-            self.dir_name
+            path
         )
         self.sorting_process = mp.Process(
             target=sorting_executor,

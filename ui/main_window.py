@@ -142,17 +142,13 @@ class Training(qtw.QWidget):
             layout="v"
         )
 
-        self.file_selection_container.main_layout.addWidget(FileSelector(
-            file_selected=("store_tr", {"attr": "data_file"}),
-            labels="Select training data file:",
-            directory=False
-        ))
+        self.file_selection_container.main_layout.addWidget(
+            FileSelector(file_selected=("store_tr", {"attr": "data_file"}), labels="Select training data file:",
+                         file_type="npy"))
 
-        self.file_selection_container.main_layout.addWidget(FileSelector(
-            file_selected=("store_tr", {"attr": "model_dir"}),
-            labels="Select a directory for your model:",
-            directory=True
-        ))
+        self.file_selection_container.main_layout.addWidget(
+            FileSelector(file_selected=("store_tr", {"attr": "model_dir"}), labels="Select a directory for your model:",
+                         file_type="[DIR]"))
         self.main_layout.addWidget(self.file_selection_container)
 
         self.main_layout.addLayout(self.sub_layout1)
@@ -308,21 +304,29 @@ class Sorting(qtw.QWidget):
             layout="v"
         )
 
-        self.file_selection_container.main_layout.addWidget(FileSelector(
-            file_selected=("store_st", {"attr": "sort_dir"}),
-            labels="Select directory for the sorting folders:",
-            directory=True
-        ))
+        self.file_selection_container.main_layout.addWidget(
+            FileSelector(
+                file_selected=("store_st", {"attr": "sort_dir"}),
+                labels="Select directory for the sorting folders:",
+                file_type="[DIR]"
+            )
+        )
 
-        self.file_selection_container.main_layout.addWidget(FileSelector(
-            file_selected=("store_st", {"attr": "model_file"}),
-            labels="Select your trained model:"
-        ))
+        self.file_selection_container.main_layout.addWidget(
+            FileSelector(
+                file_selected=("store_st", {"attr": "model_file"}),
+                labels="Select your trained model:",
+                file_type="model"
+            )
+        )
 
-        self.file_selection_container.main_layout.addWidget(FileSelector(
-            file_selected=("store_st", {"attr": "data_file"}),
-            labels="Select data for classification:"
-        ))
+        self.file_selection_container.main_layout.addWidget(
+            FileSelector(
+                file_selected=("store_st", {"attr": "data_file"}),
+                labels="Select data for classification:",
+                file_type="npy"
+            )
+        )
 
         self.main_layout.addWidget(self.file_selection_container)
 
@@ -346,7 +350,7 @@ class Sorting(qtw.QWidget):
 
     def start_sorting(self) -> None:
 
-        if all(key in self.input_dict for key in ("model_file", "data_file", "dir_name")):
+        if all(key in self.input_dict for key in ("model_file", "data_file", "sort_dir")):
 
             if self.warning_state is True:
                 self.main_layout.removeWidget(self.input_warning_text)
@@ -355,11 +359,11 @@ class Sorting(qtw.QWidget):
 
             try:
 
-                test_load = np.load(self.input_dict["model_file"], allow_pickle=True)
-                _ = test_load["weights"]
-                dim = test_load["bias"][0].shape()[0]
-                test_load = np.load(self.input_dict["data_file"], allow_pickle=True)
-                assert dim == test_load.shape()[0]
+                test_load = np.load(self.input_dict["model_file"], allow_pickle=True).item()
+                dim = test_load["weights"][1].shape[0]
+                test_load = np.load(self.input_dict["data_file"], allow_pickle=True).item()
+                data_dim = test_load["input"].shape[1]
+                assert dim == data_dim
 
             except (AssertionError, AttributeError, FileNotFoundError, OSError, IOError, pickle.UnpicklingError):
 
@@ -367,6 +371,7 @@ class Sorting(qtw.QWidget):
                 last_index = self.main_layout.count()
                 self.main_layout.insertWidget(last_index - 1, self.input_warning_text, alignment=qtc.Qt.AlignRight)
                 self.warning_state = True
+                raise
                 return None
 
             new_manager = SortingManager()
@@ -398,3 +403,18 @@ class Sorting(qtw.QWidget):
     def cleanup(self) -> None:
         for sub in self.subs:
             eb.unsubscribe(sub[0], True)
+
+    def on_sorting_crash(self, exception_info, manager_id):
+        eb.emit(f"training_done_{manager_id}")
+        eb.unsubscribe(f"training_crashed_{manager_id}", self.on_sorting_crash)
+
+        exc_type = exception_info.get("type", "Exception")
+        exc_msg = exception_info.get("message", "Unknown error")
+        exc_traceback = exception_info.get("traceback", "")
+
+        if exc_type in __builtins__:
+            exc_class = __builtins__[exc_type]
+        else:
+            exc_class = Exception
+        print(exc_traceback, file=sys.stderr)
+        raise exc_class(exc_msg) from None

@@ -92,7 +92,7 @@ class LargeButtons(DefaultInputWidget):
 
 class FileSelector(DefaultInputWidget):
 
-    def __init__(self, file_selected=None, labels=None, directory=False, border=None) -> None:
+    def __init__(self, file_selected=None, labels=None, file_type: str = "*", border=None) -> None:
 
         super().__init__(layout="v", border=border)
 
@@ -113,8 +113,9 @@ class FileSelector(DefaultInputWidget):
         self.label_fselect = qtw.QLabel(self.labels[0], self)
         self.sub_layout_1.addWidget(self.label_fselect)  # 1
 
-        self.open_file_button = qtw.QPushButton("Open Directory" if directory else "Open File", self)
-        self.open_file_button.clicked.connect(self.open_directory if directory else self.open_file)
+        self.open_file_button = qtw.QPushButton("Open Directory" if file_type == "[DIR]" else "Open File", self)
+        self.open_file_button.clicked.connect(
+            self.open_directory if file_type == "[DIR]" else lambda: self.open_file(file_type=file_type))
         self.sub_layout_1.addWidget(self.open_file_button)  # 2
 
         # main layout assembling
@@ -125,14 +126,15 @@ class FileSelector(DefaultInputWidget):
 
         self.main_layout.addLayout(self.sub_layout_1)  # 2
 
-    def open_file(self) -> None:
+    def open_file(self, file_type: str) -> None:
 
         options = qtw.QFileDialog.Options()
+        if file_type[0] == ".": file_type = file_type[1:]
         file_path, _ = qtw.QFileDialog.getOpenFileName(
             self,
             "Open File",
             "",
-            "All Files (*);;Text Files (*.txt)",
+            f"Custom Files (*.{file_type});;All Files (*)",
             options=options
         )
         if self.file_path != file_path:
@@ -192,16 +194,16 @@ class TitledLineEdit(DefaultInputWidget):
         self.main_layout.addWidget(self.l_edit)
 
     def on_line_edited(self):
-        self.text_edit = self.l_edit.text()
-        if isinstance(self.line_edited[0], str):
+        self.text_edit = self.l_edit.text() if self.l_edit.text() else self.labels[1]
+        if isinstance(self.line_edited[0], str) and self.text_edit:
             eb.emit(
                 self.line_edited[0],
-                self.l_edit.text(),
+                self.text_edit,
                 self.line_edited[1]
             )
 
     def trigger(self):
-        if isinstance(self.line_edited[0], str):
+        if isinstance(self.line_edited[0], str) and self.text_edit:
             eb.emit(
                 self.line_edited[0],
                 self.text_edit,

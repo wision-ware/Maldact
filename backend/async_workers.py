@@ -38,7 +38,8 @@ def training_executor(
         termination_queue.put((Term.CRASHED, exception_info))
         return 1
 
-    np.save(save_location, meta, allow_pickle=True)
+    with open(save_location, "wb") as f:
+        np.save(f, meta, allow_pickle=True)
     termination_queue.put((Term.DONE,))
 
 
@@ -47,7 +48,7 @@ def sorting_executor(
         network_object: LearnNetwork,
         manager_id: int,
         termination_queue: mp.Queue,
-        dir_name: str
+        path: str
 ):
     try:
 
@@ -68,7 +69,6 @@ def sorting_executor(
         termination_queue.put((Term.CRASHED, exception_info, manager_id))
         return 1
 
-    dim = out.shape[0]
-    for i in range(dim):
-        np.save(os.path.join(dir_name, str(np.argmax(out[i, :]))), out[i, :])
+    for i in range(data.shape[0]):
+        np.save(os.path.join(path, f"{np.argmax(out[i, :])}.npy"), data[i, :])
     termination_queue.put((Term.DONE, manager_id))
