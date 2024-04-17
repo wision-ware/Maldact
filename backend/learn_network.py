@@ -5,6 +5,9 @@ Created on Fri Apr 14 21:49:56 2023
 @author: vavri
 """
 
+import warnings
+warnings.filterwarnings("ignore", message="CUDA path could not be detected.", category=UserWarning)
+
 import numpy as np
 import cupy as cp
 import time
@@ -224,7 +227,7 @@ class LearnNetwork:
 
             for l in range(1,(len(self.N) if type(layer) == bool else layer)):
 
-                activation = xp.matmul(p_output,self.weights[l]) + self.bias[l]
+                activation = xp.matmul(p_output, self.weights[l]) + self.bias[l]
 
                 if l < (len(self.N)-1): p_output = LearnNetwork._ReLU(activation, GPU=self.GPU)
                 else: p_output = LearnNetwork._Sigmoid(activation, GPU=self.GPU)
@@ -240,7 +243,7 @@ class LearnNetwork:
 
         if label is not None:
 
-            if layer==False or type(layer)==int: output = xp.copy(p_output)
+            if layer == False or type(layer)==int: output = xp.copy(p_output)
             else: output = xp.copy(all_out[-1])
 
             dif = label - output
@@ -606,13 +609,13 @@ class LearnNetwork:
 
         print(f'Training successful after {elapsed_learning_time}s.', end='\n')
 
-        r_weights = self.weight_like
-        r_bias = self.bias_like
+        r_weights = self.weights[:]
+        r_bias = self.bias[:]
 
         if self.GPU:
             for l in range(1, len(self.N)):
-                r_weights[l] = cp.asnumpy(self.weights[l])
-                r_bias[l] = cp.asnumpy(self.bias[l])
+                r_weights[l] = cp.asnumpy(r_weights[l])
+                r_bias[l] = cp.asnumpy(r_bias[l])
 
         return_dict = {'weights': r_weights,
                        'bias': r_bias}

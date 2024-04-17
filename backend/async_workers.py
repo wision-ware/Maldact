@@ -58,17 +58,17 @@ def sorting_executor(
 
         exc_type = type(e).__name__
         exc_message = str(e)
-        exc_traceback = traceback.format_exc()
+        exc_traceback = e.__traceback__
 
         exception_info = {
             'type': exc_type,
             'message': exc_message,
-            'traceback': exc_traceback
+            'traceback': traceback.format_tb(exc_traceback)
         }
 
         termination_queue.put((Term.CRASHED, exception_info, manager_id))
         return 1
 
     for i in range(data.shape[0]):
-        np.save(os.path.join(path, f"{np.argmax(out[i, :])}.npy"), data[i, :])
-    termination_queue.put((Term.DONE, manager_id))
+        np.save(os.path.join(path, f"{np.argmax(out[i, :])}", f"sample_{i}.npy"), data[i, :])
+    termination_queue.put((Term.DONE,))

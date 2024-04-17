@@ -241,15 +241,15 @@ class SortingManager:
             dir_differentiator += 1
         path = f"{path}_{dir_differentiator}"
 
-        data = np.load(self.data_file, allow_pickle=True).item()
-        term_queue = mp.Queue()
+        data = np.load(self.data_file, allow_pickle=True).item()["input"]  # TODO
+        self.term_queue = mp.Queue()
         for i in range(self.network.N[-1]):
             os.mkdir(os.path.join(path, str(i)))
         exec_args = (
             data,
             self.network,
             self.id,
-            term_queue,
+            self.term_queue,
             path
         )
         self.sorting_process = mp.Process(
@@ -278,7 +278,7 @@ class SortingManager:
 
             case Term.CRASHED:
 
-                eb.emit(f"sorting_crashed_{self.id}", message[1])
+                eb.emit(f"sorting_crashed_{self.id}", message[1], self.id)
                 self.check_timer.stop()
                 if self.sorting_process.is_alive():
                     self.sorting_process.terminate()

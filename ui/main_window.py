@@ -248,6 +248,7 @@ class Training(qtw.QWidget):
             self.training_popup = LoadingWindow(f'''Training of the "{new_manager.model_name}" model in progress''',
                                                 f"training_done_{new_manager.id}",
                                                 f"training_canceled_{new_manager.id}")
+            self.training_popup.setModal(False)
             self.training_popup.exec()
 
         elif self.warning_state is False:
@@ -384,10 +385,11 @@ class Sorting(qtw.QWidget):
             new_manager.start_sorting()
 
             self.sorting_popup = LoadingWindow(
-                f'''Sorting by the "{os.path.basename(self.model_dir)}" model in progress''',
-                f"sorting_done_{self.sorting_manager.id}",
-                f"sorting_canceled_{self.sorting_manager.id}"
+                f'''Sorting by the "{os.path.basename(self.input_dict["model_file"])}" model in progress''',
+                f"sorting_done_{new_manager.id}",
+                f"sorting_canceled_{new_manager.id}"
             )
+            self.sorting_popup.setModal(False)
             self.sorting_popup.exec()
 
         elif self.warning_state is False:
@@ -405,8 +407,8 @@ class Sorting(qtw.QWidget):
             eb.unsubscribe(sub[0], True)
 
     def on_sorting_crash(self, exception_info, manager_id):
-        eb.emit(f"training_done_{manager_id}")
-        eb.unsubscribe(f"training_crashed_{manager_id}", self.on_sorting_crash)
+        eb.emit(f"sorting_done_{manager_id}")
+        eb.unsubscribe(f"sorting_crashed_{manager_id}", self.on_sorting_crash)
 
         exc_type = exception_info.get("type", "Exception")
         exc_msg = exception_info.get("message", "Unknown error")
