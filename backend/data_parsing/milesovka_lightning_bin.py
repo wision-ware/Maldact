@@ -1,7 +1,8 @@
 import numpy as np
+import scipy.integrate as integrate
 import re
 
-# from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt
 
 
 class MilBinParser:
@@ -40,27 +41,37 @@ class MilBinParser:
         data = np.zeros((channels, sample_count))
 
         with open(file_name, "rb") as f:
-            for i in range(sample_count*channels):
-                value = int.from_bytes(f.read(2), byteorder="little") - value_bias
-                data[i % channels, i // channels] = value
+            for i in range(channels):
+                for j in range(sample_count):
+                    value = int.from_bytes(f.read(2), byteorder="little", signed=False) - value_bias
+                    data[i, j] = value
 
         if raw: return data
-        else: return np.cumsum(data, axis=1)
+        else: return integrate.cumulative_simpson(data, axis=1)
 
 
-# def main():
-#     config_file = r"C:\Users\vavri\Documents\OKF\Testing\parse_data\20190731_191113.txt"
-#     data_file = r"C:\Users\vavri\Documents\OKF\Testing\parse_data\20190731_191113.bin"
-#
-#     parser = MilBinParser(config_file)
-#     output = parser.read_binary(data_file)
-#
-#     x_ax = np.arange(output.shape[1])
-#
-#     fig, ax = plt.subplots(1, 1)
-#     ax.plot(x_ax, np.sqrt(output[0,:]**2 + output[1,:]**2))
-#
-#     plt.show()
-#
-# if __name__ == "__main__":
-#     main()
+# just for testing ----------------------------------------------------------------------------------
+
+def main():
+    config_file = r"C:\Users\vavri\Documents\OKF\Testing\parse_data\20190731_191113.txt"
+    data_file = r"C:\Users\vavri\Documents\OKF\Testing\parse_data\20190731_191113.bin"
+
+    parser = MilBinParser(config_file)
+    output = parser.read_binary(data_file)
+
+    correction0 = np.linspace(output[0, 0], output[0, -1], output.shape[1])
+    correction1 = np.linspace(output[1, 0], output[1, -1], output.shape[1])
+
+    x_ax = np.arange(output.shape[1])
+
+    fig, ax = plt.subplots(2, 1)
+    # ax[0].plot(x_ax, output[0, :] - correction0)
+    # ax[1].plot(x_ax, output[1, :] - correction1)
+    ax[0].plot(x_ax, output[0, :])
+    ax[1].plot(x_ax, output[1, :])
+
+    plt.show()
+
+
+if __name__ == "__main__":
+    main()
