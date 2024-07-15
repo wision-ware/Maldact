@@ -2,7 +2,7 @@ from backend.learn_network import LearnNetwork
 from backend.network import Network
 from backend.async_workers import training_executor, sorting_executor
 from event_bus import EventBus as eb
-from state_enums import ProcessTerminationState as Term
+from state_enums import ProcessReport as Term
 
 import numpy as np
 # import cupy as cp
