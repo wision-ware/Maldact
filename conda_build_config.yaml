@@ -1,0 +1,6 @@
+channels:
+  - conda-forge
+  - defaults
+  - https://pypi.org/simple
+
+numpy: 1.26

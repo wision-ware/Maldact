@@ -41,7 +41,7 @@ def write_meta_yaml(packages, meta_yaml_path):
 
     meta_yaml_content = f"""
 package:
-  name: Maldact
+  name: maldact
   version: "0.1.0"
 
 source:
@@ -53,6 +53,10 @@ build:
   
   entry_points:
     - maldact = main:main
+    
+  channels:
+    - defaults
+    - conda-forge
 
 requirements:
   build:
@@ -78,6 +82,8 @@ about:
 extra:
   recipe-maintainers:
     - Vavrinec Kavan
+  conda_build_config_files:
+    - conda_build_config.yaml
 """
 
 # ----------------------------------------------------------------------------------------------------------------------
