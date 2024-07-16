@@ -37,17 +37,22 @@ def write_meta_yaml(packages, meta_yaml_path):
     run_requirements = [f"{name}={version}" for name, version in packages]
     requirement_string = '\n    - '.join(run_requirements)
 
+# all `meta.yaml` file changes need to be made here --------------------------------------------------------------------
+
     meta_yaml_content = f"""
 package:
   name: Maldact
   version: "0.1.0"
 
 source:
-  path: ..
+  path: ../..
 
 build:
   script: "{{{{ PYTHON }}}} -m pip install . --no-deps"
   noarch: python
+  
+  entry_points:
+    - maldact = main:main
 
 requirements:
   build:
@@ -66,7 +71,7 @@ about:
   license_file: LICENSE
   summary: "Machine learning data classification tool"
   description: |
-    A GUI and CLI tool used to train and use simple ANN models for classifying discrete and timeseries data.
+    A GUI and CLI tool used to train and use simple ANN models for classifying discrete and timeseries datasets.
   doc_url: https://github.com/wision-ware/Maldact
   dev_url: https://github.com/wision-ware/Maldact
 
@@ -74,6 +79,9 @@ extra:
   recipe-maintainers:
     - Vavrinec Kavan
 """
+
+# ----------------------------------------------------------------------------------------------------------------------
+
     with open(meta_yaml_path, 'w') as file:
         file.write(meta_yaml_content)
 

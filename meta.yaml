@@ -4,11 +4,14 @@ package:
   version: "0.1.0"
 
 source:
-  path: ..
+  path: ../..
 
 build:
   script: "{{ PYTHON }} -m pip install . --no-deps"
   noarch: python
+  
+  entry_points:
+    - maldact = main:main
 
 requirements:
   build:
@@ -160,7 +163,7 @@ about:
   license_file: LICENSE
   summary: "Machine learning data classification tool"
   description: |
-    A GUI and CLI tool used to train and use simple ANN models for classifying discrete and timeseries data.
+    A GUI and CLI tool used to train and use simple ANN models for classifying discrete and timeseries datasets.
   doc_url: https://github.com/wision-ware/Maldact
   dev_url: https://github.com/wision-ware/Maldact
 
