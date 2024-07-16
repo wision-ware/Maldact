@@ -1,5 +1,7 @@
+import os
+
 # Read requirements.txt
-with open('requirements.txt', 'r') as file:
+with open(os.path.join('..', 'requirements.txt'), 'r') as file:
     requirements = file.readlines()
 
     # Format the dependencies for setup.cfg
@@ -46,7 +48,7 @@ console_scripts =
 """
 
 # Write the updated setup.cfg
-with open('setup.cfg', 'w') as file:
+with open(os.path.join('..', 'setup.cfg'), 'w') as file:
     file.write(setup_cfg_content)
 
 print("setup.cfg file has been updated with dependencies.")
