@@ -45,7 +45,7 @@ package:
   version: "0.1.0"
 
 source:
-  path: ../..
+  path: ..
 
 build:
   script: "{{{{ PYTHON }}}} -m pip install . --no-deps"

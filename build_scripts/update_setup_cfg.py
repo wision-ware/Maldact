@@ -28,6 +28,8 @@ classifiers =
     Operating System :: OS Independent
 
 [options]
+package_dir =
+    = ..
 packages = find:
 python_requires = >=3.6
 install_requires =
@@ -37,10 +39,7 @@ install_requires =
 dev =
     pytest
     black
-
-[options.package_data]
-* = *.txt, *.rst
-my_package = example/*.dat
+    
 
 [options.entry_points]
 console_scripts =
