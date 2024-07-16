@@ -1,4 +1,4 @@
-cupy
-matplotlib
-numpy
-pytest
+cupy==12.2.0
+matplotlib==3.8.0
+numpy==1.26.0
+pytest==7.4.0
