@@ -1,7 +1,7 @@
-__pycache__/
-ui/__pycache__/
-backend/__pycache__/
-tests/__pycache__/
-tests/test_backend/__pycache__/
+src/maldact/__pycache__/
+src/maldact/ui/__pycache__/
+src/maldact/backend/__pycache__/
+src/maldact/tests/__pycache__/
+src/maldact/tests/test_backend/__pycache__/
 .idea/
-tests/.pytest_cache/
+src/maldact/tests/.pytest_cache/
