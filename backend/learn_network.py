@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 14 21:49:56 2023
-
-@author: vavri
-"""
 
 import warnings
 warnings.filterwarnings("ignore", message="CUDA path could not be detected.", category=UserWarning)
@@ -14,7 +8,6 @@ import time
 import os
 from glob import glob
 from decimal import Decimal
-import warnings
 import inspect
 
 
