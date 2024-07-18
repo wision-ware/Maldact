@@ -2,13 +2,15 @@
 
 ## Overview
 
-This project is an attempt to crate a universal tool to aid scientists with classifying large amounts of data quickly and efficiently. Focusing on simplicity, maintainability, modularity and automation. It features a from scratch custom built feedforward ANN backend that allows for training custom models and then using them on actual data. The project is funded and led by the Department of Space Physics, Institute of Atmospheric Physics, CAS and developed by Vavřinec Kavan, a university student of Computer Science on the Faculty of Mathematics and Physics, CUNI.
+Maldact is a versatile tool designed to assist scientists in classifying large datasets quickly and efficiently. It emphasizes simplicity, maintainability, modularity, and automation. At its core, Maldact features a custom-built feedforward artificial neural network (ANN) backend, allowing users to train custom models and apply them to actual data. This project is funded and led by the Department of Space Physics, Institute of Atmospheric Physics, CAS, and developed by Vavřinec Kavan, a Computer Science bachelors student at the Faculty of Mathematics and Physics, Charles University (CUNI).
 
 ## Installation
 
 ### Step 1. - Install Anaconda
 
 To install the app, you will firstly need to install Anaconda, preferably the newest version possible.
+
+- [Download Anaconda](https://www.anaconda.com/products/individual)
 
 ### Step 2. - Create and activate a Virtual Environment
 
@@ -26,9 +28,9 @@ conda activate myenv
 
 Alternatively you can install it into the `base` environment, but that's generally not recommended.
 
-### Step 3. - Download a wheel
+### Step 3. - Download a relase
 
-You need to download a `.wheel` file from the `dist/` directory of the repository to a known location.
+You need to download a `.tar.bz` file from the `dist/` directory of the repository to a known location.
 
 ### Step 4. - Install the package
 
