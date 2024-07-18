@@ -3,11 +3,11 @@ import PyQt5.QtCore as qtc
 import os, sys
 import traceback
 
-from ui.input_widgets import *
-from ui.info_widgets import *
-from ui.popups import *
-from event_bus import EventBus as eb
-from backend.ml_managers import TrainingManager, SortingManager
+from maldact.ui.input_widgets import *
+from maldact.ui.info_widgets import *
+from maldact.ui.popups import *
+from maldact.event_bus import EventBus as eb
+from maldact.backend.ml_managers import TrainingManager, SortingManager
 import numpy as np
 import pickle
 

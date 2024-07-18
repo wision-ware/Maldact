@@ -3,10 +3,10 @@ import PyQt5.QtWidgets as qtw
 import PyQt5.QtGui as qtg
 import PyQt5.QtCore as qtc
 import os, sys
-from ui.input_widgets import *
-from ui.info_widgets import *
-from event_bus import EventBus as eb
-from backend.ml_managers import TrainingManager, SortingManager
+from maldact.ui.input_widgets import *
+from maldact.ui.info_widgets import *
+from maldact.event_bus import EventBus as eb
+from maldact.backend.ml_managers import TrainingManager, SortingManager
 
 
 class LoadingWindow(qtw.QDialog):

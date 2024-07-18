@@ -4,16 +4,18 @@ package:
   version: "0.1.0"
 
 source:
-  path: ..
+  path: .
 
 build:
-  entry_points:
-    - maldact = main:main
-    
   channels:
     - conda-forge
 
   number: 0
+
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv"
+
+  entry_points:
+    - maldact = maldact.main:main
 
 requirements:
   build:
@@ -31,7 +33,7 @@ requirements:
 
 test:
   imports:
-    - pytest
+    - maldact
 
 about:
   home: https://github.com/wision-ware/Maldact
@@ -40,11 +42,17 @@ about:
   summary: "Machine learning data classification tool"
   description: |
     A GUI and CLI tool used to train and use simple ANN models for classifying discrete and timeseries datasets.
+    Specifically developed for the Department Of Space Physics ÚFA CAS.
   doc_url: https://github.com/wision-ware/Maldact
   dev_url: https://github.com/wision-ware/Maldact
+  maintainers:
+    - wision-ware
+  authors:
+    - name: Vavrinec Kavan
+      email: kavan.vavrinec@gmail.com
 
 extra:
   recipe-maintainers:
-    - Vavrinec Kavan
+    - wision-ware
   conda_build_config_files:
     - conda_build_config.yaml

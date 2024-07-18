@@ -1,5 +1,5 @@
-from backend.learn_network import LearnNetwork
-from state_enums import ProcessReport as Term
+from maldact.backend.learn_network import LearnNetwork
+from maldact.state_enums import ProcessReport as Term
 
 import numpy as np
 import traceback

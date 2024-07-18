@@ -1,9 +1,9 @@
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
-from ui.ui_tools import dict_to_css, add_target
-from event_bus import EventBus as eb
+from maldact.ui.ui_tools import dict_to_css, add_target
+from maldact.event_bus import EventBus as eb
 from functools import partial
-from ui.default_widget import DefaultWidget, DefaultInputWidget
+from maldact.ui.default_widget import DefaultWidget, DefaultInputWidget
 
 
 class CustomHeader(DefaultInputWidget):

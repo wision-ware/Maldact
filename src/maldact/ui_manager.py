@@ -1,15 +1,15 @@
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtCore as qtc
 import os, sys
-from ui.ui_builder import Transitions
-from event_bus import EventBus as eb
+from maldact.ui.ui_builder import Transitions
+from maldact.event_bus import EventBus as eb
 
 
 class UIManager:
 
     @classmethod
     def initialize(cls, main_window):
-        from ui.main_window import Menu
+        from maldact.ui.main_window import Menu
         cls.main_window = main_window
         cls.active_ui = cls.main_window.centralWidget()
         cls.transitions = Transitions(main_window, cls.active_ui)
@@ -48,14 +48,14 @@ class UIManager:
 
     @classmethod
     def disconnect_signals(cls, ui):
-        from signal_manager import SignalManager as sm
+        from maldact.signal_manager import SignalManager as sm
         # Disconnect any signals that were connected to the previous UI
         try: sm.disconnect_signals(ui.key)
         except: pass
 
     @classmethod
     def connect_signals(cls, ui):
-        from signal_manager import SignalManager as sm
+        from maldact.signal_manager import SignalManager as sm
         # Disconnect any signals that were connected to the previous UI
         try: sm.connect_signals(ui.key)
         except: pass

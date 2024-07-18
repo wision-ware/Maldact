@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Aug 15 12:55:38 2021
 
-@author: vavri
-"""
 import warnings
 warnings.filterwarnings("ignore", message="CUDA path could not be detected.", category=UserWarning)
 

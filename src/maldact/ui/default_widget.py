@@ -1,5 +1,5 @@
 import PyQt5.QtWidgets as qtw
-from ui.ui_tools import dict_to_css, add_target
+from maldact.ui.ui_tools import dict_to_css, add_target
 from copy import copy
 
 
