@@ -2,7 +2,7 @@
 
 ## Overview
 
-Maldact is a versatile tool designed to assist scientists in classifying large datasets quickly and efficiently. It emphasizes simplicity, maintainability, modularity, and automation. At its core, Maldact features a custom-built feedforward artificial neural network (ANN) backend, allowing users to train custom models and apply them to actual data. This project is funded and led by the Department of Space Physics, Institute of Atmospheric Physics, CAS, and developed by Vavřinec Kavan, a Computer Science bachelors student at the Faculty of Mathematics and Physics, Charles University (CUNI).
+Maldact is a versatile tool designed to assist scientists in classifying large datasets quickly and efficiently. It emphasizes simplicity, maintainability, modularity, and automation. At its core, Maldact features a custom-built feedforward artificial neural network (ANN) backend, allowing users to train custom models and apply them to actual data. This project is funded and led by the Department of Space Physics, Institute of Atmospheric Physics, CAS, and developed by Vavřinec Kavan, a Computer Science bachelors student at the Faculty of Mathematics and Physics, Charles University (CUNI) in Prague.
 
 ## Installation
 
@@ -28,19 +28,24 @@ conda activate myenv
 
 Alternatively you can install it into the `base` environment, but that's generally not recommended.
 
-### Step 3. - Download a relase
+### Step 3. - Clone the repository
 
-You need to download a `.tar.bz` file from the `dist/` directory of the repository to a known location.
-
-### Step 4. - Install the package
-
-Now simply run 
+You can download the repo directly from the GitHub website or run 
 
 ```bash
-conda install path/to/your/build
+git clone https://github.com/wision-ware/Maldact.git
 ```
 
-then you can verify the installation by running
+### Step 4. - Build the package and install it
+
+Now simply navigate to the repository on your machine and run 
+
+```bash
+conda build .
+conda install --use-local maldact
+```
+
+You can then verify your installation by running
 
 ```bash
 maldact
