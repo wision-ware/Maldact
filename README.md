@@ -41,8 +41,8 @@ git clone https://github.com/wision-ware/Maldact.git
 Now simply navigate to the repository on your machine and run 
 
 ```bash
-conda build .
-conda install --use-local maldact
+conda build --channel conda-forge .
+conda install --channel conda-forge --use-local maldact
 ```
 
 You can then verify your installation by running
