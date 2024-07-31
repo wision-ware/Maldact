@@ -55,6 +55,60 @@ def get_parser() -> argparse.ArgumentParser:
     parser.add_argument('-o', '--output-file', type=str,
                         help='File to store the classification results')
 
+    subparsers = parser.add_subparsers(dest='command', help='Subcommand to run')
+
+    # Server subcommand parsing configuration
+    server_parser = subparsers.add_parser('server', help='Handles local server management')
+
+    server_parser.add_argument('--status', action='store_true',
+                               help='Reports the status of the locally running servers')
+
+    server_subparsers = server_parser.add_subparsers(dest='subcommand', help='Subcommand to run')
+
+    # Start sub subcommand parsing config
+    start_parser = server_subparsers.add_parser('start', help='Starts the server')
+    start_parser.add_argument('port', type=int, help='Port for the communication')
+
+    # Config sub subcommand parsing config
+    config_parser = server_subparsers.add_parser('config',
+                                                 help='Edits the starting configuration for a newly started server')
+    config_parser.add_argument('--config-file', '-f', type=str,
+                               help='whether to pull the config from a yaml file')
+    config_parser.add_argument('--running-port', '-p', type=int,
+                               help='Reconfigure a locally running server')
+
+    # Stop sub subcommand parsing config
+    stop_parser = server_subparsers.add_parser('stop',
+                                               help='Stops a running server')
+    stop_parser.add_argument('--port', type=int,
+                             help='Attempts to identify a locally running server by its corresponding port')
+    stop_parser.add_argument('--pid', type=int,
+                             help='Checks for a server on a given PID')
+    stop_parser.add_argument('--all', '-a', action='store_true',
+                             help='Stops all known locally running servers')
+    stop_parser.add_argument('--hard', '-h', action='store_true',
+                             help='Doesnt wait for finishing pending requests')
+
+    # Client subcommand parsing configuration
+    client_parser = subparsers.add_parser('client', help='Handles all server requests')
+
+    client_subparsers = client_parser.add_subparsers(dest='subcommand', help='Subcommand to run')
+
+    # Training requests parser configuration
+    training_request_parser = client_subparsers.add_parser('train-request')
+    training_request_parser.add_argument('--local-port', type=int,
+                                         help='Send the request to a locally running server')
+    training_request_parser.add_argument('--socket', type=str,
+                                         help='Specify the exact communication socket')
+
+    # Training requests parser configuration
+    sorting_request_parser = client_subparsers.add_parser('sort-request')
+    sorting_request_parser.add_argument('--local-port', type=int,
+                                        help='Send the request to a locally running server')
+    sorting_request_parser.add_argument('--socket', type=str,
+                                        help='Specify the exact communication socket')
+
+
     return parser
 
 
