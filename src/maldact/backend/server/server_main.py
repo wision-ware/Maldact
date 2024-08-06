@@ -20,11 +20,15 @@ def run_server(host, port):
         response = f"Processed: {message}"
         socket.send_string(response)
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description="Run the server with the specified configuration.")
     parser.add_argument('--config', type=str, default="config.yaml", help="Path to the configuration file")
-    
+
     args = parser.parse_args()
     config = load_config(args.config)
-    
+
     run_server(config['server']['host'], config['server']['port'])
+
+
+if __name__ == "__main__":
+    main()
