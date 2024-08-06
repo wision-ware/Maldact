@@ -14,19 +14,26 @@ To install the app, you will firstly need to install Anaconda, preferably the ne
 
 ### Step 2. - Create and activate a Virtual Environment
 
-Then you create a new environment by running: 
+Create a new environment by running: 
 
 ```bash
 conda create -n myenv
 ```
 
-inside the `Anaconda Prompt`. Then activate it by running 
+inside the `Anaconda Prompt` or your Linux Terminal. Then activate it by running 
 
 ```bash
 conda activate myenv
 ```
 
 Alternatively you can install it into the `base` environment, but that's generally not recommended.
+
+> **Warning:**
+> Please ensure that you have `conda-build` correctly installed in your environment.
+> Else you will need to install it manually as
+> ```bash
+> conda install conda-build
+> ```
 
 ### Step 3. - Clone the repository
 
