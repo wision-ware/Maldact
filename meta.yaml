@@ -23,7 +23,7 @@ requirements:
     - pip
   run:
     # vanilla conda
-    - python
+    - python <= 3.10
     - numpy
     - matplotlib
     - pyqt
