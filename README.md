@@ -30,7 +30,7 @@ conda activate myenv
 
 Alternatively you can install it into the `base` environment, but that's generally not recommended.
 
-> ⚠️ **Warning:**
+> [!NOTE]
 > Please ensure that you have `conda-build` correctly installed in your environment.
 > Else you will need to install it manually as
 > ```bash
