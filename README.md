@@ -4,6 +4,8 @@
 
 Maldact is a versatile tool designed to assist scientists in classifying large datasets quickly and efficiently. It emphasizes simplicity, maintainability, modularity, and automation. At its core, Maldact features a custom-built feedforward artificial neural network (ANN) backend, allowing users to train custom models and apply them to actual data. This project is funded and led by the Department of Space Physics, Institute of Atmospheric Physics, CAS, and developed by Vavřinec Kavan, a Computer Science bachelors student at the Faculty of Mathematics and Physics, Charles University (CUNI) in Prague.
 
+---
+
 ## Installation
 
 ### Step 1. - Install Anaconda
@@ -57,6 +59,8 @@ You can then verify your installation by running
 ```bash
 maldact
 ```
+
+---
 
 ## Usage
 
