@@ -177,7 +177,7 @@ def main() -> None:
             return
 
         # run the server script
-        server_main(**server_script_params)
+        server_main.main(**server_script_params)
 
     elif args.command == 'client':
 
@@ -209,7 +209,7 @@ def main() -> None:
             return
 
         # run the server script
-        server_main(**client_script_params)
+        server_main.main(**client_script_params)
 
     else:
         print_help()

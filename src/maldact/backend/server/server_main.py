@@ -1,6 +1,7 @@
 import zmq
 import yaml
 import argparse
+import multiprocessing
 
 def load_config(config_path):
     with open(config_path, "r") as f:
@@ -20,7 +21,11 @@ def run_server(host, port):
         response = f"Processed: {message}"
         socket.send_string(response)
 
-def main():
+
+def main(**kwargs):
+
+    command = kwargs.get('action', '')
+
     parser = argparse.ArgumentParser(description="Run the server with the specified configuration.")
     parser.add_argument('--config', type=str, default="config.yaml", help="Path to the configuration file")
 
@@ -28,7 +33,3 @@ def main():
     config = load_config(args.config)
 
     run_server(config['server']['host'], config['server']['port'])
-
-
-if __name__ == "__main__":
-    main()
