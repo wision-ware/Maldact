@@ -1,0 +1,24 @@
+---
+
+# mandatory for training
+
+## training dataset .npy file path containing the dataset along with classification labels specified in the docs
+training_dataset: "path/to/the/dataset.npy"
+
+## at least one of the following
+cost_threshold: 1e-5  # float number giving the exact threshold at which the calculation gets terminated
+time_limit: 69  # time in seconds until termination, termination occours after the ongoing iteration has finished
+iterations: 666  # fixed number of iterations to be performed
+
+# optional for training
+
+## name of the outputted model file
+model_name: example1
+
+
+# mandatory for classification
+
+## trained model file path
+model_file: "path/to/example.model"
+## directory containing output sorted files
+sorting_directory: "path/to/example"

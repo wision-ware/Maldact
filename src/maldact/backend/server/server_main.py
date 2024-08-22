@@ -1,11 +1,14 @@
 import zmq
 import yaml
+import os
 import argparse
-import multiprocessing
+import multiprocessing as mp
+
 
 def load_config(config_path):
     with open(config_path, "r") as f:
         return yaml.safe_load(f)
+
 
 def run_server(host, port):
     context = zmq.Context()
@@ -25,11 +28,21 @@ def run_server(host, port):
 def main(**kwargs):
 
     command = kwargs.get('action', '')
+    static_config = os.path.join('..', '..', 'config', 'config_server.yaml')
 
-    parser = argparse.ArgumentParser(description="Run the server with the specified configuration.")
-    parser.add_argument('--config', type=str, default="config.yaml", help="Path to the configuration file")
+    with open(static_config) as scf:
+        pass
 
-    args = parser.parse_args()
-    config = load_config(args.config)
+    if 'from_config_file' in kwargs:
+        with open(kwargs.get('from_config_file')) as icf:
+            pass
 
     run_server(config['server']['host'], config['server']['port'])
+
+    server_kwargs = {}
+
+    server_proc = mp.Process(target=server_worker, kwargs=server_kwargs)
+
+
+def server_worker():
+
