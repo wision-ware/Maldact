@@ -19,17 +19,17 @@ def main_worker(**kwargs) -> None:
             os.setsid()  # Detach from parent process
         print(f"Worker process started with PID: {os.getpid()}")
 
-    detach()
+    with open()
+
+    detach()  # If not already detached from the main process, this is the time
 
     HOST = '127.0.01'
     context = zmq.Context()
     socket = context.socket(zmq.REP)
     socket.bind(f"tcp://{HOST}:{kwargs.get('port')}")
 
-
-
     while True:
         message = socket.recv_string()
 
-        # message handling logic
+        # Message handling logic
         pass

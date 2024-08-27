@@ -1,5 +1,6 @@
 import zmq
 import yaml
+import json
 import os
 import argparse
 import multiprocessing as mp
@@ -27,8 +28,7 @@ def run_server(host, port):
 
 def main(**kwargs):
 
-    command = kwargs.get('action', '')
-    static_config = os.path.join('..', '..', 'config', 'config_server.yaml')
+
 
     with open(static_config) as scf:
         pass
