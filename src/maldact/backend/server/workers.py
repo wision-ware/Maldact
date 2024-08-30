@@ -2,9 +2,10 @@ import os
 import multiprocessing as mp
 import zmq
 import platform
+import json
 
 
-def main_worker(**kwargs) -> None:
+def main_worker(config_file) -> None:
 
     def parse_message(msg: str) -> tuple:
         pass
@@ -19,7 +20,10 @@ def main_worker(**kwargs) -> None:
             os.setsid()  # Detach from parent process
         print(f"Worker process started with PID: {os.getpid()}")
 
-    with open()
+    with open(config_file, 'r') as cf:
+        config = json.load(cf)
+
+
 
     detach()  # If not already detached from the main process, this is the time
 

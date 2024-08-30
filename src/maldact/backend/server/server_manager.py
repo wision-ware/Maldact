@@ -11,22 +11,46 @@ import subprocess
 import tempfile
 import json
 import portalocker
+import time
 
 
 class ServerManager:
 
     sif_path = os.path.join('..', '..', 'data', 'server_instances.json')
+    static_config = os.path.join('..', '..', 'config', 'config_server.yaml')
 
     @classmethod
-    def ping_server(cls) -> bool:
+    def ping_local_server(cls, port) -> dict:
         """
         Used to check if a recorded server instance is still running or responsive/accessible
 
-        :return: success of the action
+        :return: dict containing the success acknowledgement and latency
         """
-        # ping implementation here ---
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect(f"tcp://localhost:{port}")
 
-        return False
+        timeout = 5000  # Timeout in milliseconds (5 seconds)
+        start_time = time.time()
+
+        # Send ping
+        socket.send_string("ping")
+
+        while True:
+            try:
+                # Nonblocking check to poll for an answer
+                pong = socket.recv_string(flags=zmq.NOBLOCK)
+                # Terminate polling after successfully receiving the 'pong' answer
+                if pong == "pong":
+                    return {"success": True, "latency": (time.time() - start_time) * 1000}
+            except zmq.Again:
+                # No message received yet
+                if (time.time() - start_time) * 1000 > timeout:
+                    break
+                time.sleep(0.01)  # Briefly sleep to avoid busy-waiting
+
+        return {"success": False, "latency": None}
+
 
     @classmethod
     def update_records(cls, file) -> None:
@@ -36,6 +60,7 @@ class ServerManager:
         :param file: opened file containing the server instance records
         :return: None
         """
+        servers = json.load(file)
 
         pass
 
@@ -51,17 +76,58 @@ class ServerManager:
         with portalocker.Lock(ServerManager.sif_path, 'r+', timeout=10) as sif:
             servers = json.load(sif)
 
+            for instance in servers['instances']:
+                # Example check
+                if ServerManager.ping_local_server(instance['port']):
+                    instance['status'] = "active"
+                else:
+                    instance['status'] = "inactive"
+                instance['last_checked'] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+
     @classmethod
-    def get_pids(cls, port) -> list[int]:
+    def get_pid(cls, port) -> int:
         """
-        Finds the PIDs of the running servers that listen on a specific port
+        Finds the PID of the running server that listens on a specific port
 
         :param port: selected port
-        :return: list of PIDs
+        :return: process ID
         """
         # future implementation here ---
 
-        return []
+        return 0
+
+    @classmethod
+    def process_cli_command(cls, **kwargs) -> None:
+        """
+        Processes the server CLI command. Accepts already parsed arguments as keyword arguments.
+
+        :param kwargs: keyword arguments of the command
+        :return: None
+        """
+        # extract the command
+        command = kwargs.get('action', '')
+
+        match command:
+            case 'start':
+                ServerManager.start_server(**kwargs)
+            case 'stop':
+                hard = kwargs.get('hard_stop', False)
+                if kwargs.get('stop_all', False):
+                    with portalocker.Lock(ServerManager.sif_path, 'r+', timeout=10) as sif:
+                        servers = json.load(sif)
+                        pids = []
+                        for instance in servers['instances']:
+                            pids.append(instance['pid'])
+                    for pid in pids:
+                        ServerManager.shut_down(pid, force=hard)
+                    return
+                pid = kwargs.get('running_server_pid', None)
+                if not pid:
+                    pid = ServerManager.get_pid(kwargs.get('running_server_port'))
+
+                ServerManager.shut_down(pid)
+            case 'config':
+                pass  # TODO
 
     @classmethod
     def start_server(cls, **kwargs) -> int:
@@ -69,42 +135,44 @@ class ServerManager:
         Manages the startup sequence of a newly configured server instance
 
         :param kwargs: server configuration
-        :return: PID of the server
+        :return: server process PID
         """
 
-        command = kwargs.get('action', '')
-        static_config = os.path.join('..', '..', 'config', 'config_server.yaml')
-
-        try:
+        try:  # load the correct yaml loader
             from yaml import CLoader as Loader
         except ImportError:
             from yaml import Loader
 
-        with open(static_config) as scf:
-            loaded_static_config = yaml.load_all(scf, Loader)
-
+        # if requested, the configuratioin will be read from a supplied .yaml file
         if 'from_config_file' in kwargs:
-
             with open(kwargs.get('from_config_file')) as icf:
-                loaded_config = yaml.load_all(icf, Loader)
+                server_kwargs = yaml.load_all(icf, Loader)
 
-        server_kwargs = {}
+        else:
+            with open(ServerManager.static_config) as scf:
+                server_kwargs = yaml.load_all(scf, Loader)
 
-        # argument parsing
-
+        # pack the configuration inside a temporary file to pass the starting arguments for the server
         with tempfile.NamedTemporaryFile('w', delete=False) as temp_file:
             json.dump(server_kwargs, temp_file)
             temp_file_name = temp_file.name
-            temp_file_name = f""  # TODO server identification
 
         if platform.system() == 'Windows':
             # Windows-specific: start a detached process using subprocess
             DETACHED_PROCESS = 0x00000008
-            subprocess.Popen([sys.executable, __file__, 'main_worker'], close_fds=True, creationflags=DETACHED_PROCESS)
+            process = subprocess.Popen(
+                [sys.executable, __file__, 'main_worker', temp_file_name],
+                close_fds=True,
+                creationflags=DETACHED_PROCESS
+            )
+            pid = process.pid
         else:
-            # Unix-like systems: use multiprocessing and detach with `setsid` after fork
-            p = mp.Process(target=main_worker)
+            # Unix-like systems: use multiprocessing and detach with `setsid` after a fork
+            p = mp.Process(target=main_worker, args=(temp_file_name,))
             p.start()
+            pid = p.pid
+
+        return pid
 
     @classmethod
     def shut_down(cls, pid, force=False) -> None:

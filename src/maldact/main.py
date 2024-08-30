@@ -177,7 +177,7 @@ def main() -> None:
             return
 
         # run the server script
-        server_main.main(**server_script_params)
+        ServerManager.process_cli_command(**server_script_params)
 
     elif args.command == 'client':
 
@@ -209,7 +209,7 @@ def main() -> None:
             return
 
         # run the server script
-        server_main.main(**client_script_params)
+        ClientManager.process_cli_command(**client_script_params)
 
     else:
         print_help()
