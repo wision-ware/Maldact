@@ -1,3 +1,6 @@
+import os
+import zmq
+import time
 
 
 class ClientManager:
@@ -5,13 +8,36 @@ class ClientManager:
     @classmethod
     def ping_server(cls, ip, port) -> dict:
         """
-        Pings any Maldact server on a given socket
+        Check the accessibility of any Maldact server on a given socket
 
-        :param ip:
-        :param port:
-        :return:
+        :param ip: server machine IP
+        :param port: server comm port
+        :return: dict containing the success acknowledgement and latency
         """
-        return {}
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect(f"tcp://{ip}:{port}")
+
+        timeout = 5000  # Timeout in milliseconds (5 seconds)
+        start_time = time.time()
+
+        # Send ping
+        socket.send_string("ping")
+
+        while True:
+            try:
+                # Nonblocking check to poll for an answer
+                pong = socket.recv_string(flags=zmq.NOBLOCK)
+                # Terminate polling after successfully receiving the 'pong' answer
+                if pong == "pong":
+                    return {"success": True, "latency": (time.time() - start_time) * 1000}
+            except zmq.Again:
+                # No message received yet
+                if (time.time() - start_time) * 1000 > timeout:
+                    break
+                time.sleep(0.01)  # Briefly sleep to avoid busy-waiting
+
+        return {"success": False, "latency": None}
 
     @classmethod
     def initialize(cls) -> None:
