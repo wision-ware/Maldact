@@ -5,3 +5,4 @@ src/maldact/tests/__pycache__/
 src/maldact/tests/test_backend/__pycache__/
 .idea/
 src/maldact/tests/.pytest_cache/
+/src/maldact/data/
