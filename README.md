@@ -47,6 +47,12 @@ git clone https://github.com/wision-ware/Maldact.git
 
 ### Step 4. - Build the package and install it
 
+We will firstly need to strictly prioritize the `conda-forge` source channel to avoid potential version conflicts. That's because `conda-forge` typically contains newer versions of packages. Do so by running
+
+```bash
+conda config --set channel_priority strict
+```
+
 Now simply navigate to the repository on your machine and run 
 
 ```bash
