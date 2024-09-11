@@ -164,7 +164,17 @@ class ServerManager:
         :param pid: Process ID of the server's main process
         :return: None
         """
-        pass  # TODO
+        current_time = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+        instance = {
+            'ip': ip,
+            'port': port,
+            'pid': pid,
+            'status': 'active',
+            'inactive_counter': 0,
+            'created': current_time,
+            'last_checked': current_time
+        }
+        cls.server_records['instances'].append(instance)
 
     @classmethod
     def start_server(cls, **kwargs) -> int:
