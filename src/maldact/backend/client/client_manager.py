@@ -1,3 +1,4 @@
+import json
 import os
 import zmq
 import time
@@ -49,15 +50,32 @@ class ClientManager:
         pass
 
     @classmethod
-    def send_request(cls, port, message) -> None:
+    def create_request(cls, request_type, **kwargs) -> str:
+        """
+        Bundles all request datat into a .JSON request with a creation timestamp
+
+        :param request_type: type of the request is the only mandatory parameter
+        :param kwargs: all the other request parameters
+        :return: request in form of a .json string
+        """
+        current_time = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+        kwargs['request_type'] = request_type
+        kwargs['time'] = current_time
+        return json.dumps(kwargs)
+
+    @classmethod
+    def send_request(cls, port, message, ip='localhost') -> None:
         """
         Sends a preprocessed request (.json format) to a server on a given socket.
 
         :param port: assigned port of the server
         :param message: request to the server containing a .json message
-        :return:
+        :param ip: IP address if needed
+        :return: None
         """
-        pass
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect(f"tcp://{ip}:{port}")
 
     @classmethod
     def process_cli_command(cls, **kwargs) -> None:
@@ -67,4 +85,16 @@ class ClientManager:
         :param kwargs: keyword arguments of the command
         :return: None
         """
-        pass
+        match kwargs.get('action'):
+
+            case 'train-request':
+                req = cls.create_request(
+                    'TrainingRequest',
+                    **kwargs
+                )
+
+            case 'sort-request':
+                req = cls.create_request(
+                    'SortingRequest',
+                    **kwargs
+                )

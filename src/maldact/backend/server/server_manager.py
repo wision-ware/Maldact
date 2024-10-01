@@ -12,6 +12,7 @@ import tempfile
 import json
 import portalocker
 import time
+import secrets
 
 
 class ServerManager:
@@ -78,6 +79,7 @@ class ServerManager:
                           f" and stopped tracking")
                     continue
             instance['last_checked'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+        cls.flush_records()
 
     @classmethod
     def flush_records(cls) -> None:
@@ -103,7 +105,6 @@ class ServerManager:
             cls.server_records = json.load(sif)
 
         cls.update_records()
-        cls.flush_records()
 
     @classmethod
     def get_pid(cls, port) -> int:
@@ -155,24 +156,23 @@ class ServerManager:
                 pass  # TODO
 
     @classmethod
-    def record_new(cls, ip, port, pid) -> None:
+    def record_new(cls, server_kwargs, pid) -> None:
         """
         Create a new server record about a newly launched server
 
-        :param ip: IP address of the new server
-        :param port: comm port
-        :param pid: Process ID of the server's main process
+        :param server_kwargs: keyword arguments loaded from the config file
+        :param pid: Process ID of the new server instance
         :return: None
         """
         current_time = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         instance = {
-            'ip': ip,
-            'port': port,
+            'port': server_kwargs['port'],
             'pid': pid,
             'status': 'active',
             'inactive_counter': 0,
             'created': current_time,
-            'last_checked': current_time
+            'last_checked': current_time,
+            'mode': server_kwargs['mode']
         }
         cls.server_records['instances'].append(instance)
 
@@ -199,6 +199,10 @@ class ServerManager:
             with open(cls.static_config) as scf:
                 server_kwargs = yaml.load_all(scf, Loader)
 
+        server_kwargs = dict(server_kwargs)  # convert to dictionary to become mutable
+        api_key = cls.generate_key()
+        server_kwargs['api_key'] = api_key  # the api key is only known by the server itself and gets released as stdout
+
         # pack the configuration inside a temporary file to pass the starting arguments for the server
         with tempfile.NamedTemporaryFile('w', delete=False) as temp_file:
             json.dump(server_kwargs, temp_file)
@@ -219,7 +223,13 @@ class ServerManager:
             p.start()
             pid = p.pid
 
-        cls.record_new()
+        cls.record_new('localhost', server_kwargs['port'])
+
+        print(f'''Server successfully launched on localhost
+key: {api_key}
+port: {server_kwargs.get('port')}
+pid: {pid}
+        ''')
 
         return pid
 
@@ -254,6 +264,11 @@ class ServerManager:
                     print(f"No process found with PID {pid}.")
                 except PermissionError:
                     print(f"Permission denied to terminate process with PID {pid}.")
+            for instance in cls.server_records:
+                if instance["pid"] == pid:
+                    instance["inactive_counter"] = cls.max_inactive
+            cls.flush_records()
+            print("Force termination successful")
         else:
             # terminate the process using a request
             request = {
@@ -261,7 +276,8 @@ class ServerManager:
             }
             ClientManager.send_request(pid, request)
 
-        for instance in cls.server_records:
-            if instance["pid"] == pid:
-                instance["inactive_counter"] = cls.max_inactive
-        cls.flush_records()
+            print("Termination request sent successfully")
+
+    @staticmethod
+    def generate_key() -> int:
+        return secrets.token_hex(32)
