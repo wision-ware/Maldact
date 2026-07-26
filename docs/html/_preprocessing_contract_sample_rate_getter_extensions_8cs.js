@@ -1,0 +1,4 @@
+var _preprocessing_contract_sample_rate_getter_extensions_8cs =
+[
+    [ "Maldact.Common.Configuration.Extensions.PreprocessingContractSampleRateGetterExtensions", "class_maldact_1_1_common_1_1_configuration_1_1_extensions_1_1_preprocessing_contract_sample_rate_getter_extensions.html", "class_maldact_1_1_common_1_1_configuration_1_1_extensions_1_1_preprocessing_contract_sample_rate_getter_extensions" ]
+];

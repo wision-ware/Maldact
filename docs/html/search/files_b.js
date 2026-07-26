@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['maldact_2ebackend_2eassemblyinfo_2ecs_0',['Maldact.Backend.AssemblyInfo.cs',['../_debug_2net8_80_2_maldact_8_backend_8_assembly_info_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2_maldact_8_backend_8_assembly_info_8cs.html',1,'(Global Namespace)']]],
+  ['maldact_2ebackend_2eglobalusings_2eg_2ecs_1',['Maldact.Backend.GlobalUsings.g.cs',['../_debug_2net8_80_2_maldact_8_backend_8_global_usings_8g_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2_maldact_8_backend_8_global_usings_8g_8cs.html',1,'(Global Namespace)']]],
+  ['maldact_2ecli_2eassemblyinfo_2ecs_2',['Maldact.CLI.AssemblyInfo.cs',['../_debug_2net8_80_2_maldact_8_c_l_i_8_assembly_info_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2linux-x64_2_maldact_8_c_l_i_8_assembly_info_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2_maldact_8_c_l_i_8_assembly_info_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2win-x64_2_maldact_8_c_l_i_8_assembly_info_8cs.html',1,'(Global Namespace)']]],
+  ['maldact_2ecli_2eglobalusings_2eg_2ecs_3',['Maldact.CLI.GlobalUsings.g.cs',['../_debug_2net8_80_2_maldact_8_c_l_i_8_global_usings_8g_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2linux-x64_2_maldact_8_c_l_i_8_global_usings_8g_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2_maldact_8_c_l_i_8_global_usings_8g_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2win-x64_2_maldact_8_c_l_i_8_global_usings_8g_8cs.html',1,'(Global Namespace)']]],
+  ['maldact_2eclient_2eassemblyinfo_2ecs_4',['Maldact.Client.AssemblyInfo.cs',['../_debug_2net8_80_2_maldact_8_client_8_assembly_info_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2_maldact_8_client_8_assembly_info_8cs.html',1,'(Global Namespace)']]],
+  ['maldact_2eclient_2eglobalusings_2eg_2ecs_5',['Maldact.Client.GlobalUsings.g.cs',['../_debug_2net8_80_2_maldact_8_client_8_global_usings_8g_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2_maldact_8_client_8_global_usings_8g_8cs.html',1,'(Global Namespace)']]],
+  ['maldact_2ecommon_2eassemblyinfo_2ecs_6',['Maldact.Common.AssemblyInfo.cs',['../_debug_2net8_80_2_maldact_8_common_8_assembly_info_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2_maldact_8_common_8_assembly_info_8cs.html',1,'(Global Namespace)']]],
+  ['maldact_2ecommon_2eglobalusings_2eg_2ecs_7',['Maldact.Common.GlobalUsings.g.cs',['../_debug_2net8_80_2_maldact_8_common_8_global_usings_8g_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2_maldact_8_common_8_global_usings_8g_8cs.html',1,'(Global Namespace)']]],
+  ['maldact_2ecore_2eassemblyinfo_2ecs_8',['Maldact.Core.AssemblyInfo.cs',['../_debug_2net8_80_2_maldact_8_core_8_assembly_info_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2_maldact_8_core_8_assembly_info_8cs.html',1,'(Global Namespace)']]],
+  ['maldact_2ecore_2eglobalusings_2eg_2ecs_9',['Maldact.Core.GlobalUsings.g.cs',['../_debug_2net8_80_2_maldact_8_core_8_global_usings_8g_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2_maldact_8_core_8_global_usings_8g_8cs.html',1,'(Global Namespace)']]],
+  ['maldact_2etests_2eassemblyinfo_2ecs_10',['Maldact.Tests.AssemblyInfo.cs',['../_debug_2net8_80_2_maldact_8_tests_8_assembly_info_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2_maldact_8_tests_8_assembly_info_8cs.html',1,'(Global Namespace)']]],
+  ['maldact_2etests_2eglobalusings_2eg_2ecs_11',['Maldact.Tests.GlobalUsings.g.cs',['../_debug_2net8_80_2_maldact_8_tests_8_global_usings_8g_8cs.html',1,'(Global Namespace)'],['../_release_2net8_80_2_maldact_8_tests_8_global_usings_8g_8cs.html',1,'(Global Namespace)']]],
+  ['maldactclient_2ecs_12',['MaldactClient.cs',['../_maldact_client_8cs.html',1,'']]],
+  ['maldactclienttests_2ecs_13',['MaldactClientTests.cs',['../_maldact_client_tests_8cs.html',1,'']]],
+  ['manifestdataset_2ecs_14',['ManifestDataset.cs',['../_manifest_dataset_8cs.html',1,'']]],
+  ['manifestdatasettests_2ecs_15',['ManifestDatasetTests.cs',['../_manifest_dataset_tests_8cs.html',1,'']]],
+  ['maxmerger_2ecs_16',['MaxMerger.cs',['../_max_merger_8cs.html',1,'']]],
+  ['minmaxnormalizer_2ecs_17',['MinMaxNormalizer.cs',['../_min_max_normalizer_8cs.html',1,'']]],
+  ['minmaxnormalizertests_2ecs_18',['MinMaxNormalizerTests.cs',['../_min_max_normalizer_tests_8cs.html',1,'']]],
+  ['modelspecification_2ecs_19',['ModelSpecification.cs',['../_model_specification_8cs.html',1,'']]],
+  ['modelspecificationframerategetterextensions_2ecs_20',['ModelSpecificationFrameRateGetterExtensions.cs',['../_model_specification_frame_rate_getter_extensions_8cs.html',1,'']]],
+  ['modeltraincommand_2ecs_21',['ModelTrainCommand.cs',['../_model_train_command_8cs.html',1,'']]],
+  ['movingaveragesmoother_2ecs_22',['MovingAverageSmoother.cs',['../_moving_average_smoother_8cs.html',1,'']]],
+  ['movingaveragesmoothertests_2ecs_23',['MovingAverageSmootherTests.cs',['../_moving_average_smoother_tests_8cs.html',1,'']]]
+];

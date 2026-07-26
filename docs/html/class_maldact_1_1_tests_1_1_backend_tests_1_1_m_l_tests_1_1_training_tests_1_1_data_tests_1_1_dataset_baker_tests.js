@@ -1,0 +1,8 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_data_tests_1_1_dataset_baker_tests =
+[
+    [ "DatasetBakerTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_data_tests_1_1_dataset_baker_tests.html#af4c23a2d9b2df5747dde11eed324238d", null ],
+    [ "Dispose", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_data_tests_1_1_dataset_baker_tests.html#af72b8bc89fab3f700474c9ed81c8faab", null ],
+    [ "ProcessDatasetAsync_MissingSourceManifest_ThrowsFileNotFoundException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_data_tests_1_1_dataset_baker_tests.html#aa9eb1da0001b7a2210eb33740d6803c0", null ],
+    [ "ProcessDatasetAsync_UndefinedContractInputDimension_ThrowsInvalidOperationException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_data_tests_1_1_dataset_baker_tests.html#add57afb3d5a009b5ed78efbc8ae01c82", null ],
+    [ "ProcessDatasetAsync_ValidWorkspace_ExecutesBakingAndOutputsStampedManifest", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_data_tests_1_1_dataset_baker_tests.html#aacfe3e3348f1bb5a8d6da7b199b849fb", null ]
+];

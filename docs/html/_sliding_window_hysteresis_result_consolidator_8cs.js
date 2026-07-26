@@ -1,0 +1,5 @@
+var _sliding_window_hysteresis_result_consolidator_8cs =
+[
+    [ "Maldact.Backend.ML.Consolidation.SlidingWindowScorer", "struct_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_sliding_window_scorer.html", "struct_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_sliding_window_scorer" ],
+    [ "Maldact.Backend.ML.Consolidation.SlidingWindowHysteresisResultConsolidator", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_sliding_window_hysteresis_result_consolidator.html", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_sliding_window_hysteresis_result_consolidator" ]
+];

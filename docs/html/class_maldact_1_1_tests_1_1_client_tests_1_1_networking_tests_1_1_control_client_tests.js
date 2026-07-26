@@ -1,0 +1,6 @@
+var class_maldact_1_1_tests_1_1_client_tests_1_1_networking_tests_1_1_control_client_tests =
+[
+    [ "ConnectAsync_CancellationRequested_ThrowsOperationCanceledException", "class_maldact_1_1_tests_1_1_client_tests_1_1_networking_tests_1_1_control_client_tests.html#a7aa1b2d37ea0611b2958c21e71769be8", null ],
+    [ "SendCommandAsync_MultilinePayloadResponse_ReadsUntilPayloadEnd", "class_maldact_1_1_tests_1_1_client_tests_1_1_networking_tests_1_1_control_client_tests.html#aaedee5a262a30363634e52097164df44", null ],
+    [ "SendCommandAsync_SingleLineResponse_ReturnsParsedResponse", "class_maldact_1_1_tests_1_1_client_tests_1_1_networking_tests_1_1_control_client_tests.html#a8fb0f37ed45323adfc2276c7e2c10893", null ]
+];

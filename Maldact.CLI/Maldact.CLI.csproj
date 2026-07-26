@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
+
+        <AssemblyName>maldact</AssemblyName>
+        <Version>1.0.0</Version>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Maldact.Backend\Maldact.Backend.csproj" />
+      <ProjectReference Include="..\Maldact.Client\Maldact.Client.csproj" />
+      <ProjectReference Include="..\Maldact.Common\Maldact.Common.csproj" />
+      <ProjectReference Include="..\Maldact.Core\Maldact.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Spectre.Console.Cli" Version="0.55.1-alpha.0.7" />
+      <PackageReference Include="Spectre.Console.Testing" Version="0.55.3-alpha.0.17" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Maldact.Tests" />
+    </ItemGroup>
+
+</Project>

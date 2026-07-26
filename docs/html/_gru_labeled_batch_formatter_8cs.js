@@ -1,0 +1,4 @@
+var _gru_labeled_batch_formatter_8cs =
+[
+    [ "Maldact.Backend.ML.Training.BatchFormatting.GruLabeledBatchFormatter", "class_maldact_1_1_backend_1_1_m_l_1_1_training_1_1_batch_formatting_1_1_gru_labeled_batch_formatter.html", "class_maldact_1_1_backend_1_1_m_l_1_1_training_1_1_batch_formatting_1_1_gru_labeled_batch_formatter" ]
+];

@@ -1,0 +1,4 @@
+var _cnn_training_loop_tests_8cs =
+[
+    [ "Maldact.Tests.BackendTests.MLTests.TrainingTests.LoopsTests.CnnTrainingLoopTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_loops_tests_1_1_cnn_training_loop_tests.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_loops_tests_1_1_cnn_training_loop_tests" ]
+];

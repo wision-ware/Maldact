@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>preview</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Maldact.Common\Maldact.Common.csproj" />
+      <ProjectReference Include="..\Maldact.Core\Maldact.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MathNet.Numerics" Version="6.0.0-beta2" />
+      <PackageReference Include="Microsoft.ML" Version="6.0.0-preview.26160.2" />
+      <PackageReference Include="Microsoft.ML.FastTree" Version="6.0.0-preview.26160.2" />
+      <PackageReference Include="Microsoft.ML.LightGbm" Version="6.0.0-preview.26160.2" />
+      <PackageReference Include="System.CommandLine" Version="2.0.0-beta6.25358.103" />
+      <PackageReference Include="TorchSharp-cpu" Version="0.105.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ML\Training\Data\Builders\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Maldact.Tests" />
+    </ItemGroup>
+
+</Project>

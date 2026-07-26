@@ -1,0 +1,6 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_command_router_tests =
+[
+    [ "CommandRouter_DoesNotLeakMemory_WhenSessionsDisconnect", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_command_router_tests.html#aec920fd029d3872db47db7ab545edef3", null ],
+    [ "ExecuteAsync_ConcurrentInvocations_MaintainsThreadSafety", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_command_router_tests.html#a6310134ce4db5cb19dabca1b477ed923", null ],
+    [ "ExecuteAsync_NullContext_ThrowsArgumentNullException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_command_router_tests.html#a0d733ec241e00546e4d41ba154bd31a0", null ]
+];

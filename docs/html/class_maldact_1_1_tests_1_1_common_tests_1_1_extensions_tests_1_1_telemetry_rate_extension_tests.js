@@ -1,0 +1,9 @@
+var class_maldact_1_1_tests_1_1_common_tests_1_1_extensions_tests_1_1_telemetry_rate_extension_tests =
+[
+    [ "GetFrameRate_MissingAlgorithm_ThrowsException", "class_maldact_1_1_tests_1_1_common_tests_1_1_extensions_tests_1_1_telemetry_rate_extension_tests.html#ace0107eec6b7a707da5bad994396a258", null ],
+    [ "GetFrameRate_StandardAlgorithm_ReturnsUnmodifiedSampleRate", "class_maldact_1_1_tests_1_1_common_tests_1_1_extensions_tests_1_1_telemetry_rate_extension_tests.html#a13f83a2f80365853ebdee24251096b08", null ],
+    [ "GetFrameRate_TreeEnsemble_CalculatesCorrectly", "class_maldact_1_1_tests_1_1_common_tests_1_1_extensions_tests_1_1_telemetry_rate_extension_tests.html#af61f8453d937ab09f7b8f9c32f018de7", null ],
+    [ "GetSampleRate_MissingInputRate_ThrowsException", "class_maldact_1_1_tests_1_1_common_tests_1_1_extensions_tests_1_1_telemetry_rate_extension_tests.html#a12e104b0f6cbd9e1a2a71f3827df189c", null ],
+    [ "GetSampleRate_NoResampling_ReturnsInputRate", "class_maldact_1_1_tests_1_1_common_tests_1_1_extensions_tests_1_1_telemetry_rate_extension_tests.html#a46f2c8c7deb1761ab3c7ef7718267f77", null ],
+    [ "GetSampleRate_PipelineWithResampling_ReturnsTerminalRate", "class_maldact_1_1_tests_1_1_common_tests_1_1_extensions_tests_1_1_telemetry_rate_extension_tests.html#a583dba3a930b4c259d767fa76425d61e", null ]
+];

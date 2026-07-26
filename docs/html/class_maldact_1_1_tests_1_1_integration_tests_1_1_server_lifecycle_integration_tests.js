@@ -1,0 +1,5 @@
+var class_maldact_1_1_tests_1_1_integration_tests_1_1_server_lifecycle_integration_tests =
+[
+    [ "ServerLifecycleIntegrationTests", "class_maldact_1_1_tests_1_1_integration_tests_1_1_server_lifecycle_integration_tests.html#a4f84e53976a2a8a928f8225a92bce9bc", null ],
+    [ "ServerStartCommand_BootSequence_StartsAndStopsGracefully", "class_maldact_1_1_tests_1_1_integration_tests_1_1_server_lifecycle_integration_tests.html#a3c22a34360b027d17d5ea900f32c1d88", null ]
+];

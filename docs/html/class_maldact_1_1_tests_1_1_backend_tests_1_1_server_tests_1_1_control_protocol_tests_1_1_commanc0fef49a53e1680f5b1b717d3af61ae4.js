@@ -1,0 +1,6 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_commanc0fef49a53e1680f5b1b717d3af61ae4 =
+[
+    [ "Execute_InvalidToken_WritesFailureMessage", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_commanc0fef49a53e1680f5b1b717d3af61ae4.html#a6ab4e90859674c7a5c9e0d9f489f214b", null ],
+    [ "Execute_MissingToken_WritesErrorAndBypassesAuth", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_commanc0fef49a53e1680f5b1b717d3af61ae4.html#a82e549645c7a8baee0c48fece23b1926", null ],
+    [ "Execute_ValidToken_MutatesContextState", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_commanc0fef49a53e1680f5b1b717d3af61ae4.html#a8602bc4f52adfb3b218feabb57494b2d", null ]
+];

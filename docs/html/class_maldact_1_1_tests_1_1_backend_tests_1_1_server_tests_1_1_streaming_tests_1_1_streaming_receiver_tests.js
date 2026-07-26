@@ -1,0 +1,7 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_receiver_tests =
+[
+    [ "Constructor_NullDependencies_ThrowsArgumentNullException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_receiver_tests.html#aecbc92d53891acae6dcdbd4f5450b586", null ],
+    [ "RunAsync_ConcurrentInvocations_ThrowsInvalidOperationException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_receiver_tests.html#a53ef3b5f26986c225f3baed329fe3d4a", null ],
+    [ "RunAsync_DecodesBytePayloadsCorrectly", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_receiver_tests.html#a0b518bfda951b29188bf4f7a355afc72", null ],
+    [ "RunAsync_EndOfStream_TerminatesCleanly", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_receiver_tests.html#ab72eca3a7a76873864fb87baebf73385", null ]
+];

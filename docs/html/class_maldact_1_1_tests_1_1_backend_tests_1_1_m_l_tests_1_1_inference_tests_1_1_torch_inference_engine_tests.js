@@ -1,0 +1,7 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_torch_inference_engine_tests =
+[
+    [ "Classify_EmptyChunk_BypassesNativePipeline", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_torch_inference_engine_tests.html#ad9a2f63ca125f60c1f4df18bb5c960e5", null ],
+    [ "Classify_InsufficientFrames_BuffersWithoutPredicting", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_torch_inference_engine_tests.html#a8e2ddbf804f56b4da1b53031405acdd7", null ],
+    [ "Classify_SequenceMet_StridesAndCachesUnresolvedTail", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_torch_inference_engine_tests.html#a446ce5148d43dbef59c05997c22c739c", null ],
+    [ "Constructor_InvalidParameters_ThrowsExceptions", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_torch_inference_engine_tests.html#a53708a93357ee2437f4fc075fd483b52", null ]
+];

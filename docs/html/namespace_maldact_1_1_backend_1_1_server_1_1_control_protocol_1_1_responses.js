@@ -1,0 +1,5 @@
+var namespace_maldact_1_1_backend_1_1_server_1_1_control_protocol_1_1_responses =
+[
+    [ "CommandResponseExtensions", "class_maldact_1_1_backend_1_1_server_1_1_control_protocol_1_1_responses_1_1_command_response_extensions.html", "class_maldact_1_1_backend_1_1_server_1_1_control_protocol_1_1_responses_1_1_command_response_extensions" ],
+    [ "CommandResponse", "namespace_maldact_1_1_backend_1_1_server_1_1_control_protocol_1_1_responses.html#a3a15ef536ec5370fc9f5d368e02d8be1", null ]
+];

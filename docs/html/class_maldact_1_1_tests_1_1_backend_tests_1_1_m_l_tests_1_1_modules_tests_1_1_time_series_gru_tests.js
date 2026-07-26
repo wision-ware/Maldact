@@ -1,0 +1,5 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_modules_tests_1_1_time_series_gru_tests =
+[
+    [ "Constructor_InvalidDimensions_ThrowsArgumentOutOfRangeException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_modules_tests_1_1_time_series_gru_tests.html#a805556734d9ba06da7dff5f4d3360817", null ],
+    [ "Forward_ValidInput_ReturnsCorrectlyShapedTargetTensor", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_modules_tests_1_1_time_series_gru_tests.html#a9654472d7bdee2740f8c45086c5aef67", null ]
+];

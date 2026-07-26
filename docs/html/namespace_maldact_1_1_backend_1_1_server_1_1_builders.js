@@ -1,0 +1,4 @@
+var namespace_maldact_1_1_backend_1_1_server_1_1_builders =
+[
+    [ "AuthenticatorBuilderExtensions", "class_maldact_1_1_backend_1_1_server_1_1_builders_1_1_authenticator_builder_extensions.html", "class_maldact_1_1_backend_1_1_server_1_1_builders_1_1_authenticator_builder_extensions" ]
+];

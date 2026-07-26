@@ -1,0 +1,6 @@
+var namespace_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests =
+[
+    [ "StreamingManagerTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_manager_tests.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_manager_tests" ],
+    [ "StreamingReceiverTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_receiver_tests.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_receiver_tests" ],
+    [ "StreamingSlotTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_slot_tests.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_slot_tests" ]
+];

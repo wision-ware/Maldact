@@ -1,0 +1,4 @@
+var _target_labeling_math_tests_8cs =
+[
+    [ "Maldact.Tests.BackendTests.MLTests.TrainingTests.BatchFormattingTests.TargetLabelingMathTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_batch_formatting_1be4863017b5d25cb7fcede5725e44db.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_batch_formatting_1be4863017b5d25cb7fcede5725e44db" ]
+];

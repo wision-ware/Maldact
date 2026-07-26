@@ -1,0 +1,7 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_packaging_tests_1_1_artifact_manager_tests =
+[
+    [ "CreateAndLoad_ValidArtifact_MaintainsDataIntegrity", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_packaging_tests_1_1_artifact_manager_tests.html#a8ab78e2c61501fabcc395bd40777a666", null ],
+    [ "CreateDeploymentZipAsync_InvalidSpecification_ThrowsValidationException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_packaging_tests_1_1_artifact_manager_tests.html#a976c7feef66d12c33f1940c1887e3bcf", null ],
+    [ "LoadDeploymentZipAsync_FileNotFound_ThrowsFileNotFoundException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_packaging_tests_1_1_artifact_manager_tests.html#abb9858ee76d16de29414173d80420f28", null ],
+    [ "LoadDeploymentZipAsync_MissingWeightsEntry_ThrowsInvalidDataException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_packaging_tests_1_1_artifact_manager_tests.html#ad6132e71653a7f9bc0e2945df7d39b8a", null ]
+];

@@ -1,0 +1,4 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_integration_1_1_data_loading_1_1_data_loader_integration_tests =
+[
+    [ "GenerateBatches_WithIdenticalSeeds_YieldsStrictlyDeterministicTensors", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_integration_1_1_data_loading_1_1_data_loader_integration_tests.html#a2e9e692e8701cfd9bb83d2faddd7f8d3", null ]
+];

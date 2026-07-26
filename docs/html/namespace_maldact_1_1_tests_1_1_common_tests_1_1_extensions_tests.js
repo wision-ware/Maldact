@@ -1,0 +1,4 @@
+var namespace_maldact_1_1_tests_1_1_common_tests_1_1_extensions_tests =
+[
+    [ "TelemetryRateExtensionTests", "class_maldact_1_1_tests_1_1_common_tests_1_1_extensions_tests_1_1_telemetry_rate_extension_tests.html", "class_maldact_1_1_tests_1_1_common_tests_1_1_extensions_tests_1_1_telemetry_rate_extension_tests" ]
+];

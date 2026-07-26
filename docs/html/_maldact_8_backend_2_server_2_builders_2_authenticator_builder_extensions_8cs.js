@@ -1,0 +1,4 @@
+var _maldact_8_backend_2_server_2_builders_2_authenticator_builder_extensions_8cs =
+[
+    [ "Maldact.Backend.Server.Builders.AuthenticatorBuilderExtensions", "class_maldact_1_1_backend_1_1_server_1_1_builders_1_1_authenticator_builder_extensions.html", "class_maldact_1_1_backend_1_1_server_1_1_builders_1_1_authenticator_builder_extensions" ]
+];

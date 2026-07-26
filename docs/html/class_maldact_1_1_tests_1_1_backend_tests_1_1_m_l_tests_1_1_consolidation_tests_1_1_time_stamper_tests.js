@@ -1,0 +1,6 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_consolidation_tests_1_1_time_stamper_tests =
+[
+    [ "GetTime_AbsoluteOrigin_CalculatesCorrectOffsets", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_consolidation_tests_1_1_time_stamper_tests.html#a0b007390734c786a2f6517c3e6d16dd5", null ],
+    [ "GetTime_HighFrequencyRate_MaintainsPrecision", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_consolidation_tests_1_1_time_stamper_tests.html#a431380135a48cd779493f32ae44cd21c", null ],
+    [ "GetTime_RelativeOrigin_CalculatesCorrectOffsets", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_consolidation_tests_1_1_time_stamper_tests.html#a50919a171edddad2cade3046295e52d3", null ]
+];

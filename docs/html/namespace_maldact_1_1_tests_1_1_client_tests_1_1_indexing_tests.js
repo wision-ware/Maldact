@@ -1,0 +1,5 @@
+var namespace_maldact_1_1_tests_1_1_client_tests_1_1_indexing_tests =
+[
+    [ "GlobalIndexingManagerTests", "class_maldact_1_1_tests_1_1_client_tests_1_1_indexing_tests_1_1_global_indexing_manager_tests.html", "class_maldact_1_1_tests_1_1_client_tests_1_1_indexing_tests_1_1_global_indexing_manager_tests" ],
+    [ "TestEnvironmentFixture", "class_maldact_1_1_tests_1_1_client_tests_1_1_indexing_tests_1_1_test_environment_fixture.html", "class_maldact_1_1_tests_1_1_client_tests_1_1_indexing_tests_1_1_test_environment_fixture" ]
+];

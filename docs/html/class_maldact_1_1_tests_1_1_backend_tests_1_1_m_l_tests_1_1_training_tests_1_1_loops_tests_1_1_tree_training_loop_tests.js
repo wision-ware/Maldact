@@ -1,0 +1,6 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_loops_tests_1_1_tree_training_loop_tests =
+[
+    [ "RunAsync_ProgressReporting_CallsReportOnStartAndFinish", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_loops_tests_1_1_tree_training_loop_tests.html#a5fe32ece9f9fd0dd300e120025bde0a2", null ],
+    [ "RunAsync_StochasticSampling_DistributesMultiHotLabels", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_loops_tests_1_1_tree_training_loop_tests.html#abbe1be6df7835e19a6cff933639a110d", null ],
+    [ "TreePrediction_Initialization_HasEmptyProbabilities", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_loops_tests_1_1_tree_training_loop_tests.html#aba9be6d5dc2b88133f23f8bc7c43c378", null ]
+];

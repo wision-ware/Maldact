@@ -1,0 +1,4 @@
+var _artifact_manager_tests_8cs =
+[
+    [ "Maldact.Tests.BackendTests.MLTests.PackagingTests.ArtifactManagerTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_packaging_tests_1_1_artifact_manager_tests.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_packaging_tests_1_1_artifact_manager_tests" ]
+];

@@ -1,0 +1,4 @@
+var _linear_pipeline_composite_preprocessor_tests_8cs =
+[
+    [ "Maldact.Tests.BackendTests.PreprocessingTests.PipelinesTests.ZScoreNormalizerTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_pipelines_tests_1_1_z_score_normalizer_tests.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_pipelines_tests_1_1_z_score_normalizer_tests" ]
+];

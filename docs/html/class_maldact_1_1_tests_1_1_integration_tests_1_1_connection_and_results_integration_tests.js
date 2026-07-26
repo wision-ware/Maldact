@@ -1,0 +1,5 @@
+var class_maldact_1_1_tests_1_1_integration_tests_1_1_connection_and_results_integration_tests =
+[
+    [ "ResultsCommand_WithNoActiveConnectionState_InterceptsFailureCleanly", "class_maldact_1_1_tests_1_1_integration_tests_1_1_connection_and_results_integration_tests.html#a758207d207c6651ae6f57a52757e4983", null ],
+    [ "Run_DisconnectCommand_PurgesActiveConnectionStateIndexFile", "class_maldact_1_1_tests_1_1_integration_tests_1_1_connection_and_results_integration_tests.html#a57352ce7d41fbb3f8417f3e50e405c99", null ]
+];

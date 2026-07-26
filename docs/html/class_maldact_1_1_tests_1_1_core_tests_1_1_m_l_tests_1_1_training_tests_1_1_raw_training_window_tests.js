@@ -1,0 +1,5 @@
+var class_maldact_1_1_tests_1_1_core_tests_1_1_m_l_tests_1_1_training_tests_1_1_raw_training_window_tests =
+[
+    [ "Constructor_EndBeforeStart_ThrowsArgumentException", "class_maldact_1_1_tests_1_1_core_tests_1_1_m_l_tests_1_1_training_tests_1_1_raw_training_window_tests.html#a079574cf4ba819a2e28b6478d728bde4", null ],
+    [ "DurationProperty_CalculatesCorrectLength", "class_maldact_1_1_tests_1_1_core_tests_1_1_m_l_tests_1_1_training_tests_1_1_raw_training_window_tests.html#a095aca92f1aa057b0f275da4098cf482", null ]
+];

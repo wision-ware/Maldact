@@ -1,0 +1,5 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_commands_tests_1_1_stop_command_tests =
+[
+    [ "Execute_AdminRole_TripsServerCancellationToken", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_commands_tests_1_1_stop_command_tests.html#ad719d708737929cbd20eb13fbbdd9a7d", null ],
+    [ "Execute_UserRole_ReturnsUnauthorized", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_commands_tests_1_1_stop_command_tests.html#a08ed83d3612fdd7daf7bcb320e283ff4", null ]
+];

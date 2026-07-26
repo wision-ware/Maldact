@@ -1,0 +1,4 @@
+var _sequential_composite_optimizer_tests_8cs =
+[
+    [ "Maldact.Tests.BackendTests.MLTests.ConsolidationTests.TuningTests.OptimizersTests.SequentialCompositeOptimizerTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_consolidation_tests_1_1_tuning_tests2b593e3f538217946582051fdab2b5e8.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_consolidation_tests_1_1_tuning_tests2b593e3f538217946582051fdab2b5e8" ]
+];

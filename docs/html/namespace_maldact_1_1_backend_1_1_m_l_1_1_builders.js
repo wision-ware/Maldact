@@ -1,0 +1,10 @@
+var namespace_maldact_1_1_backend_1_1_m_l_1_1_builders =
+[
+    [ "ConsolidatorBuilderExtensions", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_consolidator_builder_extensions.html", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_consolidator_builder_extensions" ],
+    [ "ConsolidatorOptimizerBuilderExtensions", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_consolidator_optimizer_builder_extensions.html", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_consolidator_optimizer_builder_extensions" ],
+    [ "DataLoaderBuilderExtensions", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_data_loader_builder_extensions.html", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_data_loader_builder_extensions" ],
+    [ "InferenceEngineFactory", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_inference_engine_factory.html", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_inference_engine_factory" ],
+    [ "RawInferenceBuilderExtensions", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_raw_inference_builder_extensions.html", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_raw_inference_builder_extensions" ],
+    [ "TorchModuleBuilderExtensions", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_torch_module_builder_extensions.html", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_torch_module_builder_extensions" ],
+    [ "TrainingLoopBuilderExtensions", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_training_loop_builder_extensions.html", "class_maldact_1_1_backend_1_1_m_l_1_1_builders_1_1_training_loop_builder_extensions" ]
+];

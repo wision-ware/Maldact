@@ -1,0 +1,4 @@
+var class_maldact_1_1_common_1_1_configuration_1_1_extensions_1_1_preprocessing_contract_sample_rate_getter_extensions =
+[
+    [ "GetSampleRate", "class_maldact_1_1_common_1_1_configuration_1_1_extensions_1_1_preprocessing_contract_sample_rate_getter_extensions.html#a33bce1dbdcec10f1003638880b830f28", null ]
+];

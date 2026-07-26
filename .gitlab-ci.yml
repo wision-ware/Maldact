@@ -1,0 +1,19 @@
+stages:
+  - ci_pipeline
+
+variables:
+  DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1"
+  DOTNET_NOLOGO: "1"
+
+default:
+  image: mcr.microsoft.com/dotnet/sdk:8.0
+
+build_and_test:
+  stage: ci_pipeline
+  script:
+    - echo "Restoring, Building, and Testing Maldact..."
+    - cd Maldact
+    - dotnet restore Maldact.sln
+    - dotnet build Maldact.sln -c Release --no-restore
+    - dotnet test Maldact.sln -c Release --no-build --logger "console;verbosity=normal" --filter "Category!=SaturationStress&Category!=IsolationProfiling" -- RunConfiguration.DisableParallelization=true

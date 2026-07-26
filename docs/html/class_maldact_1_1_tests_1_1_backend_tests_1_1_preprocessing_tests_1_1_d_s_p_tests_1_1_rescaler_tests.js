@@ -1,0 +1,7 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_rescaler_tests =
+[
+    [ "Constructor_NullFunction_ThrowsArgumentNullException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_rescaler_tests.html#a1f9a6cf74e8f369299551e9ad0032e09", null ],
+    [ "Process_EmptyChunk_ReturnsEmptyArray", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_rescaler_tests.html#a366e71de76f836fb22b8fba4d7cd9772", null ],
+    [ "Process_ValidChunk_AppliesRescalingFunction", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_rescaler_tests.html#a4ec90a60fe9a0b4a5c0352f758f5d953", null ],
+    [ "Process_ValidChunk_DoesNotMutateOriginalData", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_rescaler_tests.html#a072f9cb71feff905a0d1289c36ef838b", null ]
+];

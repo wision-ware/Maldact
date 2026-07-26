@@ -1,0 +1,4 @@
+var class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_config_get_model_specification_command =
+[
+    [ "ExecuteAsync", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_config_get_model_specification_command.html#a6ab97acc222a37062586142f66aa2bba", null ]
+];

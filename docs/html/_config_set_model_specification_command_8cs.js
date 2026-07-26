@@ -1,0 +1,4 @@
+var _config_set_model_specification_command_8cs =
+[
+    [ "Maldact.CLI.Commands.Config.Set.ConfigSetModelSpecificationCommand", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_config_set_model_specification_command.html", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_config_set_model_specification_command" ]
+];

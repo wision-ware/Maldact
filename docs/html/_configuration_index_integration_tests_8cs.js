@@ -1,0 +1,4 @@
+var _configuration_index_integration_tests_8cs =
+[
+    [ "Maldact.Tests.IntegrationTests.ConfigurationIndexIntegrationTests", "class_maldact_1_1_tests_1_1_integration_tests_1_1_configuration_index_integration_tests.html", "class_maldact_1_1_tests_1_1_integration_tests_1_1_configuration_index_integration_tests" ]
+];

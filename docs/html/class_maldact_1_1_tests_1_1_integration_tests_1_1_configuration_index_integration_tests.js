@@ -1,0 +1,6 @@
+var class_maldact_1_1_tests_1_1_integration_tests_1_1_configuration_index_integration_tests =
+[
+    [ "ConfigSet_WithInvalidSchemaFile_ShortCircuitsAndReturnsErrorStatus", "class_maldact_1_1_tests_1_1_integration_tests_1_1_configuration_index_integration_tests.html#a1b1837358f06e0aa2b6b36032eb2fe90", null ],
+    [ "ConfigSet_WithNullKeyword_PurgesSlotFromIndexState", "class_maldact_1_1_tests_1_1_integration_tests_1_1_configuration_index_integration_tests.html#a043567298107c9c59ad014f6f5ffb3b0", null ],
+    [ "ConfigSetAndGet_WithValidModelSpecification_UpdatesIndexAndPrintsRoute", "class_maldact_1_1_tests_1_1_integration_tests_1_1_configuration_index_integration_tests.html#a089bbc2dcfc035bfa13cc67ab56619a2", null ]
+];

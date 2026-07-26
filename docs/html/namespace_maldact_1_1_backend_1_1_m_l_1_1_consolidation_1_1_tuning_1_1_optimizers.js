@@ -1,0 +1,5 @@
+var namespace_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers =
+[
+    [ "BruteForce", "namespace_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force.html", "namespace_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force" ],
+    [ "SequentialCompositeOptimizer", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_sequential_composite_optimizer.html", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_sequential_composite_optimizer" ]
+];

@@ -1,0 +1,6 @@
+var class_maldact_1_1_tests_1_1_client_tests_1_1_networking_tests_1_1_maldact_client_tests =
+[
+    [ "ConnectAsync_AuthenticationRejected_ThrowsAndDisposesSocket", "class_maldact_1_1_tests_1_1_client_tests_1_1_networking_tests_1_1_maldact_client_tests.html#a4f0b4dcbe371c4383a253f5302506897", null ],
+    [ "ConnectStreamChannelAsync_DuplicateCall_ThrowsInvalidOperationException", "class_maldact_1_1_tests_1_1_client_tests_1_1_networking_tests_1_1_maldact_client_tests.html#a39c4b9bf6ffe274537bc54787370111d", null ],
+    [ "SendDataAsync_BeforeStreamChannelConnected_ThrowsInvalidOperationException", "class_maldact_1_1_tests_1_1_client_tests_1_1_networking_tests_1_1_maldact_client_tests.html#aeb2deca17cea8b7b4df7cd96f5efa7a9", null ]
+];

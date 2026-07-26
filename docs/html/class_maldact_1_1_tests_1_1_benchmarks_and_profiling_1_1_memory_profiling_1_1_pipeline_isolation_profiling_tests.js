@@ -1,0 +1,9 @@
+var class_maldact_1_1_tests_1_1_benchmarks_and_profiling_1_1_memory_profiling_1_1_pipeline_isolation_profiling_tests =
+[
+    [ "Profile_0_BareReceiverIngestion", "class_maldact_1_1_tests_1_1_benchmarks_and_profiling_1_1_memory_profiling_1_1_pipeline_isolation_profiling_tests.html#a060ae21ab2e6d6deae4ffcc8d08954b6", null ],
+    [ "Profile_1_OrchestrationBaseline", "class_maldact_1_1_tests_1_1_benchmarks_and_profiling_1_1_memory_profiling_1_1_pipeline_isolation_profiling_tests.html#a0a02a479d6116419f6550fcd92dd286b", null ],
+    [ "Profile_2_DspPipeline", "class_maldact_1_1_tests_1_1_benchmarks_and_profiling_1_1_memory_profiling_1_1_pipeline_isolation_profiling_tests.html#a51d17dc45e58c7200ec58f64973989c5", null ],
+    [ "Profile_3_ResultConsolidator", "class_maldact_1_1_tests_1_1_benchmarks_and_profiling_1_1_memory_profiling_1_1_pipeline_isolation_profiling_tests.html#a7faa0462aef0bd2d543f46ff6d4a6bbe", null ],
+    [ "Profile_4_ClassicalML", "class_maldact_1_1_tests_1_1_benchmarks_and_profiling_1_1_memory_profiling_1_1_pipeline_isolation_profiling_tests.html#a68975d8a0c6f96f12e2f79123de53314", null ],
+    [ "Profile_5_DeepLearning", "class_maldact_1_1_tests_1_1_benchmarks_and_profiling_1_1_memory_profiling_1_1_pipeline_isolation_profiling_tests.html#ac97c53d76b05f8b1682ae2dbfc159cb1", null ]
+];

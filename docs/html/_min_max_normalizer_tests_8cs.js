@@ -1,0 +1,4 @@
+var _min_max_normalizer_tests_8cs =
+[
+    [ "Maldact.Tests.BackendTests.PreprocessingTests.DSPTests.MinMaxNormalizerTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_min_max_normalizer_tests.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_min_max_normalizer_tests" ]
+];

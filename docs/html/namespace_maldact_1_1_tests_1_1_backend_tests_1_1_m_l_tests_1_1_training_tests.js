@@ -1,0 +1,6 @@
+var namespace_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests =
+[
+    [ "BatchFormattingTests", "namespace_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_batch_formatting_tests.html", "namespace_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_batch_formatting_tests" ],
+    [ "DataTests", "namespace_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_data_tests.html", "namespace_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_data_tests" ],
+    [ "LoopsTests", "namespace_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_loops_tests.html", "namespace_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_loops_tests" ]
+];

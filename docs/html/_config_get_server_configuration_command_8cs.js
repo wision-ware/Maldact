@@ -1,0 +1,4 @@
+var _config_get_server_configuration_command_8cs =
+[
+    [ "Maldact.CLI.Commands.Config.Get.ConfigGetServerConfigurationCommand", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_config_get_server_configuration_command.html", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_config_get_server_configuration_command" ]
+];

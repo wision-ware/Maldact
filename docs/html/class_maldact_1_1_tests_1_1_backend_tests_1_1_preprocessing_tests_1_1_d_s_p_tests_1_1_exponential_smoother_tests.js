@@ -1,0 +1,9 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_exponential_smoother_tests =
+[
+    [ "Constructor_InvalidGamma_ThrowsArgumentOutOfRangeException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_exponential_smoother_tests.html#aee3c3479772f3b0f6d5f733834741e07", null ],
+    [ "Process_ContinuousChunk_AppliesExponentialSmoothing", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_exponential_smoother_tests.html#a5f0465ac43823d508fe5900721a89373", null ],
+    [ "Process_EmptyChunk_ReturnsEmptyArray", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_exponential_smoother_tests.html#a4adcc8efba5f0d1d368f5b0d2e7bd47f", null ],
+    [ "Process_MultidimensionalData_SmoothsIndependentFeatures", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_exponential_smoother_tests.html#a5f6356ac6e1a01fd681bfe6d7066d7d2", null ],
+    [ "Process_MultipleChunks_MaintainsStateAcrossBoundaries", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_exponential_smoother_tests.html#a09115533944f410b177c101ccd387259", null ],
+    [ "Process_NullGamma_CalculatesDefaultGammaCorrectly", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_exponential_smoother_tests.html#a35848578788f11903c975382ece35195", null ]
+];

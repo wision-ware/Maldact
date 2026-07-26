@@ -1,0 +1,8 @@
+var namespace_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get =
+[
+    [ "ConfigGetModelSpecificationCommand", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_config_get_model_specification_command.html", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_config_get_model_specification_command" ],
+    [ "ConfigGetPreprocessingContractCommand", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_config_get_preprocessing_contract_command.html", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_config_get_preprocessing_contract_command" ],
+    [ "ConfigGetServerConfigurationCommand", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_config_get_server_configuration_command.html", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_config_get_server_configuration_command" ],
+    [ "ConfigGetTrainingConfigurationCommand", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_config_get_training_configuration_command.html", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_config_get_training_configuration_command" ],
+    [ "GetSettings", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_get_settings.html", null ]
+];

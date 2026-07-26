@@ -1,0 +1,7 @@
+var class_maldact_1_1_tests_1_1_client_tests_1_1_indexing_tests_1_1_global_indexing_manager_tests =
+[
+    [ "GlobalIndexingManagerTests", "class_maldact_1_1_tests_1_1_client_tests_1_1_indexing_tests_1_1_global_indexing_manager_tests.html#a151abdbf6e9358bf9219fcaa501afdb1", null ],
+    [ "ConfigurationIndexManager_SetAndGetState_RoundTripsSuccessfully", "class_maldact_1_1_tests_1_1_client_tests_1_1_indexing_tests_1_1_global_indexing_manager_tests.html#a0cabebb8ab6d3885688b162d235e02cf", null ],
+    [ "ConfigurationIndexManager_SetNullState_ClearsFile", "class_maldact_1_1_tests_1_1_client_tests_1_1_indexing_tests_1_1_global_indexing_manager_tests.html#a416462799b2ce3b39290326277f436b0", null ],
+    [ "ConnectionStateIndexManager_SetAndGetState_RoundTripsSuccessfully", "class_maldact_1_1_tests_1_1_client_tests_1_1_indexing_tests_1_1_global_indexing_manager_tests.html#a9c861642f4cb86d4f2e3b49928ba45f2", null ]
+];

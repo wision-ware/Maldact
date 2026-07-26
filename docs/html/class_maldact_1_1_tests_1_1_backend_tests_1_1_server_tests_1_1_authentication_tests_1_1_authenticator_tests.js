@@ -1,0 +1,10 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_authentication_tests_1_1_authenticator_tests =
+[
+    [ "AccessPass_Equality_IsBasedOnIdAndIdentity", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_authentication_tests_1_1_authenticator_tests.html#a34e5d4475d3bf10395d2d8c98d042f17", null ],
+    [ "Authenticate_UnknownToken_ReturnsFalseAndNullPass", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_authentication_tests_1_1_authenticator_tests.html#a6d23a0c43a9b6030212b333e83a22c0d", null ],
+    [ "Authenticate_ValidAdminToken_ReturnsTrueAndAdminPass", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_authentication_tests_1_1_authenticator_tests.html#a11cff3e94e40e8e3636c9d3750bed796", null ],
+    [ "Authenticate_ValidUserToken_ReturnsTrueAndUserPass", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_authentication_tests_1_1_authenticator_tests.html#ad620a8be90383837b092972c0057003c", null ],
+    [ "Constructor_NullTokenSets_ThrowsArgumentNullException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_authentication_tests_1_1_authenticator_tests.html#a976277a0247bdbb6fe0026b424db237f", null ],
+    [ "Constructor_OverlappingTokens_ThrowsInvalidOperationException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_authentication_tests_1_1_authenticator_tests.html#af7084d2afb1ab4f57fb140f4cb1f48bf", null ],
+    [ "SessionId_Generation_IsThreadSafeUnderLoad", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_authentication_tests_1_1_authenticator_tests.html#a75d492130fb448d6308d342be5893c48", null ]
+];

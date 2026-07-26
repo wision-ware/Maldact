@@ -1,0 +1,6 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_modules_tests_1_1_time_series_cnn_tests =
+[
+    [ "Constructor_EmptyChannelSizes_ThrowsArgumentException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_modules_tests_1_1_time_series_cnn_tests.html#a52494bf9d0b29f69c4f534c173c16938", null ],
+    [ "Constructor_NullChannelSizes_ThrowsArgumentNullException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_modules_tests_1_1_time_series_cnn_tests.html#af700e754328ef546b4143916ae338452", null ],
+    [ "Forward_ValidInput_ReturnsCorrectlyPermutedTargetShape", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_modules_tests_1_1_time_series_cnn_tests.html#ae19727ed75c4f6d3a16151f3e1135c82", null ]
+];

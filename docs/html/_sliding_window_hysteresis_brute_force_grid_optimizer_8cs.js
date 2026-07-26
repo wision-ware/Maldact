@@ -1,0 +1,4 @@
+var _sliding_window_hysteresis_brute_force_grid_optimizer_8cs =
+[
+    [ "Maldact.Backend.ML.Consolidation.Tuning.Optimizers.BruteForce.SlidingWindowHysteresisBruteForceGridOptimizer", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_0ad1dfeda9cda6765069fdd9b8b05479.html", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_0ad1dfeda9cda6765069fdd9b8b05479" ]
+];

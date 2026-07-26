@@ -1,0 +1,4 @@
+var _get_settings_8cs =
+[
+    [ "Maldact.CLI.Commands.Config.Get.GetSettings", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_get_1_1_get_settings.html", null ]
+];

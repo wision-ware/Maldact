@@ -1,0 +1,5 @@
+var class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_sequential_composite_optimizer =
+[
+    [ "SequentialCompositeOptimizer", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_sequential_composite_optimizer.html#a7e44e4d0e4e52c3bdb435d16d4bd68c3", null ],
+    [ "SuggestNext", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_sequential_composite_optimizer.html#ab827097b2435814a2c5f2b118e650697", null ]
+];

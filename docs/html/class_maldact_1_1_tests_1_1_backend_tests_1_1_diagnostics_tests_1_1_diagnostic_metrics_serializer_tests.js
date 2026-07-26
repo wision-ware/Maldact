@@ -1,0 +1,9 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_diagnostics_tests_1_1_diagnostic_metrics_serializer_tests =
+[
+    [ "Deserialize_MalformedJsonString_ThrowsJsonException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_diagnostics_tests_1_1_diagnostic_metrics_serializer_tests.html#a9f74a7c7689f16d0dbce40306ffa89b7", null ],
+    [ "Deserialize_MalformedUtf8Bytes_ThrowsJsonException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_diagnostics_tests_1_1_diagnostic_metrics_serializer_tests.html#ae7db5734b2c68c47c893091cf7dc629c", null ],
+    [ "Roundtrip_StringSerialization_MaintainsExactStructuralEquality", "class_maldact_1_1_tests_1_1_backend_tests_1_1_diagnostics_tests_1_1_diagnostic_metrics_serializer_tests.html#a3fcae90a1d17eab081fdab3d8b81a7ef", null ],
+    [ "Roundtrip_Utf8BytesSerialization_MaintainsExactStructuralEquality", "class_maldact_1_1_tests_1_1_backend_tests_1_1_diagnostics_tests_1_1_diagnostic_metrics_serializer_tests.html#ad1090764440281572aaff76ed8d86e63", null ],
+    [ "Serialize_EnumValues_AreWrittenAsStrings", "class_maldact_1_1_tests_1_1_backend_tests_1_1_diagnostics_tests_1_1_diagnostic_metrics_serializer_tests.html#aec16bd32d5f7ad52c960d81c00c85aba", null ],
+    [ "Serialize_PropertyNaming_AppliesCamelCasePolicy", "class_maldact_1_1_tests_1_1_backend_tests_1_1_diagnostics_tests_1_1_diagnostic_metrics_serializer_tests.html#aaf3db359c345b2e24325d2eccbff2278", null ]
+];

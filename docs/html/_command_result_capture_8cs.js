@@ -1,0 +1,4 @@
+var _command_result_capture_8cs =
+[
+    [ "Maldact.Backend.Server.ControlProtocol.Utils.CommandResultCapture", "class_maldact_1_1_backend_1_1_server_1_1_control_protocol_1_1_utils_1_1_command_result_capture.html", "class_maldact_1_1_backend_1_1_server_1_1_control_protocol_1_1_utils_1_1_command_result_capture" ]
+];

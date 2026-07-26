@@ -1,0 +1,5 @@
+var class_maldact_1_1_tests_1_1_common_tests_1_1_configuration_tests_1_1_json_configuration_tests_1_48dc42506ad0ebec56694b5147acfd59 =
+[
+    [ "Host", "class_maldact_1_1_tests_1_1_common_tests_1_1_configuration_tests_1_1_json_configuration_tests_1_48dc42506ad0ebec56694b5147acfd59.html#a98c3d93d27233111c2eb65b4d911a68d", null ],
+    [ "Port", "class_maldact_1_1_tests_1_1_common_tests_1_1_configuration_tests_1_1_json_configuration_tests_1_48dc42506ad0ebec56694b5147acfd59.html#a7fedb011f49619d3325f498ea527e74c", null ]
+];

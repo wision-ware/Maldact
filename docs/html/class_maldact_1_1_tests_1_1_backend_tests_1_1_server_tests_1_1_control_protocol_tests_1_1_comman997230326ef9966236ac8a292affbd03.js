@@ -1,0 +1,5 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_comman997230326ef9966236ac8a292affbd03 =
+[
+    [ "Execute_SlotBookingFails_WritesErrorMessage", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_comman997230326ef9966236ac8a292affbd03.html#a9c9ff71562d22f7cd93d27df6150a611", null ],
+    [ "Execute_ValidSlot_RegistersStreamAndOutputsConnectionInfo", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_comman997230326ef9966236ac8a292affbd03.html#ae80d6a3c13ead36c4769f61f2885abda", null ]
+];

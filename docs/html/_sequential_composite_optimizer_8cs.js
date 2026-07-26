@@ -1,0 +1,4 @@
+var _sequential_composite_optimizer_8cs =
+[
+    [ "Maldact.Backend.ML.Consolidation.Tuning.Optimizers.SequentialCompositeOptimizer", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_sequential_composite_optimizer.html", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_sequential_composite_optimizer" ]
+];

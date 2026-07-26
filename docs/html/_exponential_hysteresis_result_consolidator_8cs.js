@@ -1,0 +1,5 @@
+var _exponential_hysteresis_result_consolidator_8cs =
+[
+    [ "Maldact.Backend.ML.Consolidation.ExponentialScorer", "struct_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_exponential_scorer.html", "struct_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_exponential_scorer" ],
+    [ "Maldact.Backend.ML.Consolidation.ExponentialHysteresisResultConsolidator", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_exponential_hysteresis_result_consolidator.html", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_exponential_hysteresis_result_consolidator" ]
+];

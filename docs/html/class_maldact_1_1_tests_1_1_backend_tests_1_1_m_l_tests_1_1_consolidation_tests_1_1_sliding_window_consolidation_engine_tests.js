@@ -1,0 +1,5 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_consolidation_tests_1_1_sliding_window_consolidation_engine_tests =
+[
+    [ "Consolidate_EarlyActivation_SafelyClampsBoundariesToZero", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_consolidation_tests_1_1_sliding_window_consolidation_engine_tests.html#a5be93a9f0362e1c825b3902609d5dfa2", null ],
+    [ "Consolidate_EmptyResults_ReturnsEmptyArray", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_consolidation_tests_1_1_sliding_window_consolidation_engine_tests.html#a19b4f8e40a8bae3ee294097f076f9406", null ]
+];

@@ -1,0 +1,8 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_inference_engine_tests =
+[
+    [ "ClassifyAsync_CancellationRequested_AbortsPipelineSafely", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_inference_engine_tests.html#ada691082a94b710f6fa6ffe3b88626b8", null ],
+    [ "ClassifyAsync_ExecutesPipelineInStrictOrder", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_inference_engine_tests.html#a7bff20682c97c2b5d0be9212b4e609ce", null ],
+    [ "Constructor_NullDependencies_ThrowsArgumentNullException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_inference_engine_tests.html#a23c33723fd3ff62572e81b75bbac7cbc", null ],
+    [ "Dispose_ForwardsToRawInferenceEngine", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_inference_engine_tests.html#a1e3d62bbbc8c4d18cb1e279397a5184f", null ],
+    [ "InputDimension_PassesThroughFromPreprocessor", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_inference_engine_tests.html#a90ba7dc413a3a58ce32f7a20354d34b8", null ]
+];

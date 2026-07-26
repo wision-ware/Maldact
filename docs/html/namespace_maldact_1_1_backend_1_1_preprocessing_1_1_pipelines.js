@@ -1,0 +1,5 @@
+var namespace_maldact_1_1_backend_1_1_preprocessing_1_1_pipelines =
+[
+    [ "LinearPipelineCompositePreprocessor", "class_maldact_1_1_backend_1_1_preprocessing_1_1_pipelines_1_1_linear_pipeline_composite_preprocessor.html", "class_maldact_1_1_backend_1_1_preprocessing_1_1_pipelines_1_1_linear_pipeline_composite_preprocessor" ],
+    [ "PreprocessingContractPipelineBuilderExtensions", "class_maldact_1_1_backend_1_1_preprocessing_1_1_pipelines_1_1_preprocessing_contract_pipeline_builder_extensions.html", "class_maldact_1_1_backend_1_1_preprocessing_1_1_pipelines_1_1_preprocessing_contract_pipeline_builder_extensions" ]
+];

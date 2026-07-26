@@ -1,0 +1,5 @@
+var class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_0ad1dfeda9cda6765069fdd9b8b05479 =
+[
+    [ "SlidingWindowHysteresisBruteForceGridOptimizer", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_0ad1dfeda9cda6765069fdd9b8b05479.html#a8bea790d66889c53e3051b567fb7dffc", null ],
+    [ "GenerateGrid", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_0ad1dfeda9cda6765069fdd9b8b05479.html#ae35c291ae4b9f75c56b5c09e4e2736db", null ]
+];

@@ -1,0 +1,9 @@
+var namespace_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set =
+[
+    [ "BaseConfigSetCommand&lt; TSettings, TConfig &gt;", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_base_config_set_command-2-g.html", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_base_config_set_command-2-g" ],
+    [ "ConfigSetModelSpecificationCommand", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_config_set_model_specification_command.html", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_config_set_model_specification_command" ],
+    [ "ConfigSetPreprocessingContractCommand", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_config_set_preprocessing_contract_command.html", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_config_set_preprocessing_contract_command" ],
+    [ "ConfigSetServerConfigurationCommand", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_config_set_server_configuration_command.html", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_config_set_server_configuration_command" ],
+    [ "ConfigSetTrainingConfigurationCommand", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_config_set_training_configuration_command.html", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_config_set_training_configuration_command" ],
+    [ "SetSettings", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_set_settings.html", "class_maldact_1_1_c_l_i_1_1_commands_1_1_config_1_1_set_1_1_set_settings" ]
+];

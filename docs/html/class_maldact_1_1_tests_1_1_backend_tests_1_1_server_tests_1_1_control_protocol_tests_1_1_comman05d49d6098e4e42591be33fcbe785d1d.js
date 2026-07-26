@@ -1,0 +1,5 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_comman05d49d6098e4e42591be33fcbe785d1d =
+[
+    [ "Execute_Authenticated_SerializesMetricsPayload", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_comman05d49d6098e4e42591be33fcbe785d1d.html#a2091ad1eaaaa9e0109c59e1ecf6e8fb4", null ],
+    [ "Execute_Unauthenticated_ReturnsUnauthorized", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_comman05d49d6098e4e42591be33fcbe785d1d.html#a18363bbb23ea12c7ec61a288e0b09324", null ]
+];

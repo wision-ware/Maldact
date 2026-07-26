@@ -1,0 +1,4 @@
+var _authenticate_command_tests_8cs =
+[
+    [ "Maldact.Tests.BackendTests.ServerTests.ControlProtocolTests.CommandsTests.AuthenticateCommandTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_commanc0fef49a53e1680f5b1b717d3af61ae4.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_control_protocol_tests_1_1_commanc0fef49a53e1680f5b1b717d3af61ae4" ]
+];

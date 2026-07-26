@@ -1,0 +1,6 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_slot_tests =
+[
+    [ "StreamingSlot_Deactivate_TransitionsToInactiveWithTimestamp", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_slot_tests.html#adfb8ee35b51010314f16c5d6bf142b75", null ],
+    [ "StreamingSlot_NullRepository_ThrowsArgumentNullException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_slot_tests.html#a774cbd88e5ee684123dcc18fb89da3f7", null ],
+    [ "StreamingSlot_TryActivate_LocksAtomicallyAndRejectsDuplicates", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_slot_tests.html#a1db1b0631f0f7532a8e78a1284c12084", null ]
+];

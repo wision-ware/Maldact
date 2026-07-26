@@ -1,0 +1,4 @@
+var _training_loop_builder_extensions_tests_8cs =
+[
+    [ "Maldact.Tests.BackendTests.MLTests.BuildersTests.TrainingLoopBuilderExtensionsTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_builders_tests_1_1_training_loop_builder_extensions_tests.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_builders_tests_1_1_training_loop_builder_extensions_tests" ]
+];

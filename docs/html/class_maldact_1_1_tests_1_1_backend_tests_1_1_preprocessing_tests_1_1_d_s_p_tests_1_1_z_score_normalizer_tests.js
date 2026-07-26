@@ -1,0 +1,10 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_z_score_normalizer_tests =
+[
+    [ "Constructor_InvalidGlobalMeansLength_ThrowsArgumentException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_z_score_normalizer_tests.html#af7d4a674aff4351acd00597828261876", null ],
+    [ "Constructor_InvalidGlobalStdDevsLength_ThrowsArgumentException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_z_score_normalizer_tests.html#a6e21e03f524d83c5fee2e03a9b810d30", null ],
+    [ "Process_EmptyChunk_ReturnsEmptyArray", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_z_score_normalizer_tests.html#a6d526be0b32a5fa44382e03a4ba0253a", null ],
+    [ "Process_GlobalStats_UsesProvidedValues", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_z_score_normalizer_tests.html#aed063cbc69817ed2ef7c6f7cce02c224", null ],
+    [ "Process_LocalStats_CalculatesAndScalesCorrectly", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_z_score_normalizer_tests.html#a76bccd70708b8c1c0e4e26c2d5451fa2", null ],
+    [ "Process_MultipleDimensions_ScalesIndependently", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_z_score_normalizer_tests.html#a51125680fb9339a26086cf54643540bf", null ],
+    [ "Process_ZeroVariance_SafelyReturnsZeroes", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_z_score_normalizer_tests.html#aeb9577f4afea4eb515a47462edbb982a", null ]
+];

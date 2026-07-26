@@ -1,0 +1,4 @@
+var _average_merger_8cs =
+[
+    [ "Maldact.Backend.ML.Inference.OverlapMerging.AverageMerger", "struct_maldact_1_1_backend_1_1_m_l_1_1_inference_1_1_overlap_merging_1_1_average_merger.html", "struct_maldact_1_1_backend_1_1_m_l_1_1_inference_1_1_overlap_merging_1_1_average_merger" ]
+];

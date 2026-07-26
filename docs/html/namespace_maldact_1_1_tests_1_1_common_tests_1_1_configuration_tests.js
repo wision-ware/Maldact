@@ -1,0 +1,4 @@
+var namespace_maldact_1_1_tests_1_1_common_tests_1_1_configuration_tests =
+[
+    [ "JsonConfigurationTests", "namespace_maldact_1_1_tests_1_1_common_tests_1_1_configuration_tests_1_1_json_configuration_tests.html", "namespace_maldact_1_1_tests_1_1_common_tests_1_1_configuration_tests_1_1_json_configuration_tests" ]
+];

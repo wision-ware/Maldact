@@ -1,0 +1,4 @@
+var _preprocessing_contract_pipeline_builder_extensions_tests_8cs =
+[
+    [ "Maldact.Tests.BackendTests.PreprocessingTests.PipelinesTests.PreprocessingContractPipelineBuilderExtensionsTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_pipelines_tests_1_1_preprocb957793e9b69530a847b9675bf402e9.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_pipelines_tests_1_1_preprocb957793e9b69530a847b9675bf402e9" ]
+];

@@ -1,0 +1,10 @@
+var class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_1_brute_force_grid_optimizer =
+[
+    [ "BruteForceGridOptimizer", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_1_brute_force_grid_optimizer.html#ad47401fcb808180240e44f482d879e83", null ],
+    [ "Dispose", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_1_brute_force_grid_optimizer.html#a8581deb1640603b89753d6aa646eaab2", null ],
+    [ "GenerateGrid", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_1_brute_force_grid_optimizer.html#abd241f84890e646c9ee2d872f65e1caf", null ],
+    [ "SuggestNext", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_1_brute_force_grid_optimizer.html#acd76d3fe3a59352351183477a3853ad0", null ],
+    [ "Classes", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_1_brute_force_grid_optimizer.html#a70d8c8a80c930f9750407d32b32bbce9", null ],
+    [ "FrameRateHz", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_1_brute_force_grid_optimizer.html#a7cd0c55d2ebc27b76badac636780d57f", null ],
+    [ "FrameWindows", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_1_brute_force_grid_optimizer.html#a097b4f572fc05532df87f82bbedb7d3c", null ]
+];

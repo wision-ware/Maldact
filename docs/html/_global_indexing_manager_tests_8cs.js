@@ -1,0 +1,4 @@
+var _global_indexing_manager_tests_8cs =
+[
+    [ "Maldact.Tests.ClientTests.IndexingTests.GlobalIndexingManagerTests", "class_maldact_1_1_tests_1_1_client_tests_1_1_indexing_tests_1_1_global_indexing_manager_tests.html", "class_maldact_1_1_tests_1_1_client_tests_1_1_indexing_tests_1_1_global_indexing_manager_tests" ]
+];

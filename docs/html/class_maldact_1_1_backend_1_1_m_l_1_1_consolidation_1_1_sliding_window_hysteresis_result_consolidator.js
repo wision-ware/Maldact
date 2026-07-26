@@ -1,0 +1,6 @@
+var class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_sliding_window_hysteresis_result_consolidator =
+[
+    [ "SlidingWindowHysteresisResultConsolidator", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_sliding_window_hysteresis_result_consolidator.html#afc261def112ea04ec33defc2c6c082a3", null ],
+    [ "Consolidate", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_sliding_window_hysteresis_result_consolidator.html#a7ec981ac71253740bfa516cc5af80842", null ],
+    [ "GetConsolidatorConfiguration", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_sliding_window_hysteresis_result_consolidator.html#ad7818c52b6f66152876a3b91624f63c8", null ]
+];

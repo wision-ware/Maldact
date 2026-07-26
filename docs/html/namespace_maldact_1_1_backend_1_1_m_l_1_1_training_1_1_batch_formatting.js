@@ -1,0 +1,7 @@
+var namespace_maldact_1_1_backend_1_1_m_l_1_1_training_1_1_batch_formatting =
+[
+    [ "CnnLabeledBatchFormatter", "class_maldact_1_1_backend_1_1_m_l_1_1_training_1_1_batch_formatting_1_1_cnn_labeled_batch_formatter.html", "class_maldact_1_1_backend_1_1_m_l_1_1_training_1_1_batch_formatting_1_1_cnn_labeled_batch_formatter" ],
+    [ "GruLabeledBatchFormatter", "class_maldact_1_1_backend_1_1_m_l_1_1_training_1_1_batch_formatting_1_1_gru_labeled_batch_formatter.html", "class_maldact_1_1_backend_1_1_m_l_1_1_training_1_1_batch_formatting_1_1_gru_labeled_batch_formatter" ],
+    [ "TargetLabelingMath", "class_maldact_1_1_backend_1_1_m_l_1_1_training_1_1_batch_formatting_1_1_target_labeling_math.html", "class_maldact_1_1_backend_1_1_m_l_1_1_training_1_1_batch_formatting_1_1_target_labeling_math" ],
+    [ "TreeLabeledBatchFormatter", "class_maldact_1_1_backend_1_1_m_l_1_1_training_1_1_batch_formatting_1_1_tree_labeled_batch_formatter.html", "class_maldact_1_1_backend_1_1_m_l_1_1_training_1_1_batch_formatting_1_1_tree_labeled_batch_formatter" ]
+];

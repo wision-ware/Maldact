@@ -1,0 +1,8 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_tree_inference_engine_tests =
+[
+    [ "Classify_EmptyOrNullChunk_BypassesNativePipeline", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_tree_inference_engine_tests.html#acc2a20574acb81dc4c3b0dddf1df9115", null ],
+    [ "Classify_FlattensTargetedSequenceCorrectlyIntoSharedBuffer", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_tree_inference_engine_tests.html#a67e79640419d55a251f049b491676739", null ],
+    [ "Classify_InsufficientFrames_BuffersWithoutPredicting", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_tree_inference_engine_tests.html#acbdf8109a4e069f208afa2e93b152be6", null ],
+    [ "Classify_StreamExceedsSequence_StridesAndYieldsMultiplePredictions", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_tree_inference_engine_tests.html#ae570874c9e83109c5fa01da5fd7935bb", null ],
+    [ "Constructor_InvalidParameters_ThrowsArgumentExceptions", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_inference_tests_1_1_tree_inference_engine_tests.html#a6b59767e6f08b3361e48d7765a73ae7e", null ]
+];

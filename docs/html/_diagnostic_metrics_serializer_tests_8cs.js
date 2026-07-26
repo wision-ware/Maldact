@@ -1,0 +1,4 @@
+var _diagnostic_metrics_serializer_tests_8cs =
+[
+    [ "Maldact.Tests.BackendTests.DiagnosticsTests.DiagnosticMetricsSerializerTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_diagnostics_tests_1_1_diagnostic_metrics_serializer_tests.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_diagnostics_tests_1_1_diagnostic_metrics_serializer_tests" ]
+];

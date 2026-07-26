@@ -1,0 +1,5 @@
+var class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_5c8d47540ea42e792ba8609045bd7f35 =
+[
+    [ "ThresholdAttentionBruteForceGridOptimizer", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_5c8d47540ea42e792ba8609045bd7f35.html#af268f2fbdfe7af9cb7d724320547e457", null ],
+    [ "GenerateGrid", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers_1_1_brute_force_1_5c8d47540ea42e792ba8609045bd7f35.html#a06666efbf887bbe645a5eca3561245aa", null ]
+];

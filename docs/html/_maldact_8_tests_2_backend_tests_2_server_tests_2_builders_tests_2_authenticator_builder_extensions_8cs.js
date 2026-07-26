@@ -1,0 +1,4 @@
+var _maldact_8_tests_2_backend_tests_2_server_tests_2_builders_tests_2_authenticator_builder_extensions_8cs =
+[
+    [ "Maldact.Tests.BackendTests.ServerTests.BuildersTests.AuthenticatorBuilderExtensionsTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_builders_tests_1_1_authenticator_builder_extensions_tests.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_builders_tests_1_1_authenticator_builder_extensions_tests" ]
+];

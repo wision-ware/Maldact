@@ -1,0 +1,10 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_fft_transformer_tests =
+[
+    [ "Constructor_CalculatesOutputDimensionCorrectly", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_fft_transformer_tests.html#a584c1b92d5be5a36d799aa9a87f1001a", null ],
+    [ "Process_EmptyChunk_ReturnsEmptyArray", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_fft_transformer_tests.html#a4e6c73864be134e67104275e023ce1e3", null ],
+    [ "Process_MultipleDimensions_TransformsIndependently", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_fft_transformer_tests.html#a52a53be3475ef9317481b16dc1bb994a", null ],
+    [ "Process_StreamingChunks_MaintainsCircularBufferProperly", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_fft_transformer_tests.html#ad8447d54cf7a2f81f47c4cec28d57e59", null ],
+    [ "Process_WindowFull_ComputesFftCorrectly", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_fft_transformer_tests.html#a331be79612a01db90d3be3e86657f2c3", null ],
+    [ "Process_WindowNotFull_YieldsZeroes", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_fft_transformer_tests.html#a9b1c20cfa21f1a3a277bce4d069bb076", null ],
+    [ "Process_WithPhase_AppendsPhaseDataProperly", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_fft_transformer_tests.html#a58687b28b78886dd87baa2b97f173868", null ]
+];

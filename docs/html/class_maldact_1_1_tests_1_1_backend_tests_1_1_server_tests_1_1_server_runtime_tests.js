@@ -1,0 +1,6 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_server_runtime_tests =
+[
+    [ "RunAsync_WhenCancelled_GracefullyShutsDownListeners", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_server_runtime_tests.html#a7e6b84addd49912c0fd6c6d5f81a5b83", null ],
+    [ "TelemetryLoop_CalculatesEstimatedMemoryAccurately", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_server_runtime_tests.html#aa37c0c8a66b53eb9effb726aa7f081c0", null ],
+    [ "TryBookSlot_ExistingActiveSlot_PreventsDuplicateBooking", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_server_runtime_tests.html#ac62a3ae2da33fd6874d6d0c93913668a", null ]
+];

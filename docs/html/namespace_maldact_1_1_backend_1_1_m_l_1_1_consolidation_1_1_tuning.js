@@ -1,0 +1,5 @@
+var namespace_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning =
+[
+    [ "Optimizers", "namespace_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers.html", "namespace_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_optimizers" ],
+    [ "ConsolidatorTuningLoop", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_consolidator_tuning_loop.html", "class_maldact_1_1_backend_1_1_m_l_1_1_consolidation_1_1_tuning_1_1_consolidator_tuning_loop" ]
+];

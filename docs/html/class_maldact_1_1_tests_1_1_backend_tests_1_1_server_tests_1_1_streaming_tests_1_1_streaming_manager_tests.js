@@ -1,0 +1,6 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_manager_tests =
+[
+    [ "RegisterPendingStream_ValidSlot_ReturnsGuidToken", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_manager_tests.html#a1e73cefbdaf7fe43989e9c632c634264", null ],
+    [ "StartAsync_CancellationRequested_GracefullyTerminatesLoop", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_manager_tests.html#af56e1a531ce643f3913941e49fe23fd5", null ],
+    [ "StreamingManager_NullDependencies_ThrowsArgumentNullException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_streaming_tests_1_1_streaming_manager_tests.html#aa760470db9ecf9e764012c1c04c2a897", null ]
+];

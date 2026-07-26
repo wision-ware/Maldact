@@ -1,0 +1,7 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_session_context_tests =
+[
+    [ "Constructor_NullDependencies_ThrowsArgumentNullException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_session_context_tests.html#a92e0f843650218f4e5aa404cbd552490", null ],
+    [ "RequestServerShutdown_AdminRole_TriggersCancellation", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_session_context_tests.html#a883af5f5184c97baa55cd5f8ce8b5eb0", null ],
+    [ "RequestServerShutdown_UserRole_ThrowsUnauthorizedAccessException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_session_context_tests.html#adfb2d6f19073a367ba507be3b9de454d", null ],
+    [ "SetAuthenticatedState_ValidPass_LocksInClaims", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_session_context_tests.html#a9258fd3dde8a4fe7842f3c9a092c8753", null ]
+];

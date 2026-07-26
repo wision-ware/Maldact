@@ -1,0 +1,12 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_resampler_tests =
+[
+    [ "Constructor_InvalidFrequencies_ThrowsArgumentOutOfRangeException", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_resampler_tests.html#a3e8cb93848caa6a9d373f816c5700a22", null ],
+    [ "Process_Downsample_AppliesCorrectAggregationFunction", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_resampler_tests.html#a5d4e0d45f1c1056aed235fba8bf19926", null ],
+    [ "Process_Downsample_MaintainsStateAcrossStreamingChunks", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_resampler_tests.html#a6b630bd8d3370679777ca62bada9c383", null ],
+    [ "Process_DownsampleMean_AggregatesBucketsCorrectly", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_resampler_tests.html#a50ba7c33f00fa5e8073297326596d5f4", null ],
+    [ "Process_EmptyChunk_ReturnsEmptyArray", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_resampler_tests.html#a04c1f97bcf24f8b5736f053c89b780e0", null ],
+    [ "Process_MatchingFrequencies_ReturnsOriginalChunkBypassingLogic", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_resampler_tests.html#abe45876c56f31ca5bbd6cc909fd5c77d", null ],
+    [ "Process_MultipleDimensions_CalculatesIndependently", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_resampler_tests.html#a4e51f9ef5a9174b5ebd82962cc33c6ac", null ],
+    [ "Process_Upsample_InterpolatesFramesCorrectly", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_resampler_tests.html#a0158a7d5a9e9a99a95fd382ae51255c5", null ],
+    [ "Process_Upsample_MaintainsStateAcrossStreamingChunks", "class_maldact_1_1_tests_1_1_backend_tests_1_1_preprocessing_tests_1_1_d_s_p_tests_1_1_resampler_tests.html#a8bd172fb089b8f0ae371431120090444", null ]
+];

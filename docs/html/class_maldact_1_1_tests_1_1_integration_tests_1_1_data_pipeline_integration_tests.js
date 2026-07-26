@@ -1,0 +1,6 @@
+var class_maldact_1_1_tests_1_1_integration_tests_1_1_data_pipeline_integration_tests =
+[
+    [ "DatasetProcessCommand_WithValidManifestAndContract_SuccessfullyBakesDataset", "class_maldact_1_1_tests_1_1_integration_tests_1_1_data_pipeline_integration_tests.html#a0b83202bc4d5110e5b85ac6f5cec89c0", null ],
+    [ "LiveInference_WhenStreamingActiveData_ProcessesFramesAndStoresResults", "class_maldact_1_1_tests_1_1_integration_tests_1_1_data_pipeline_integration_tests.html#aec99dbda82968dfe590ee8ff6ec37d31", null ],
+    [ "ModelTrainCommand_WithValidConfigurations_SuccessfullyAssemblesDeploymentBundle", "class_maldact_1_1_tests_1_1_integration_tests_1_1_data_pipeline_integration_tests.html#a83de6ca2a42fbab2ef0900c9e3b21a51", null ]
+];

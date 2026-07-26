@@ -1,0 +1,4 @@
+var _gru_labeled_batch_formatter_tests_8cs =
+[
+    [ "Maldact.Tests.BackendTests.MLTests.TrainingTests.BatchFormattingTests.GruLabeledBatchFormatterTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_batch_formatting_fe1b943e5bc3027caeeea5dde7607c77.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_training_tests_1_1_batch_formatting_fe1b943e5bc3027caeeea5dde7607c77" ]
+];

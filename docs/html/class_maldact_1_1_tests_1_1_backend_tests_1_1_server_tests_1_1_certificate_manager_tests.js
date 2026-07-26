@@ -1,0 +1,5 @@
+var class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_certificate_manager_tests =
+[
+    [ "GetCertificate_CustomParameters_AppliesOverridesProperly", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_certificate_manager_tests.html#aa4d4ce410cd677223ead697e41ee3363", null ],
+    [ "GetCertificate_DefaultParameters_GeneratesValidPfxWithPrivateKey", "class_maldact_1_1_tests_1_1_backend_tests_1_1_server_tests_1_1_certificate_manager_tests.html#a130814b8238dc3baf22e31d8a7112ded", null ]
+];

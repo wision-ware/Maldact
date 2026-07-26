@@ -1,0 +1,25 @@
+var struct_maldact_1_1_core_1_1_results_1_1_stream_time =
+[
+    [ "StreamTime", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a367e341ae8d22909d172b4fe7066775e", null ],
+    [ "StreamTime", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a8f8f967485d7d85fdc8d3a4917abc42a", null ],
+    [ "StreamTime", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a26a7f021fa986eb25d264b0d9f259ed2", null ],
+    [ "AsAbsolute", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#acb840b6bf4453dddd666cb9b08e2c2ff", null ],
+    [ "AsRelative", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a5de630313a43abbe57361c9328dda941", null ],
+    [ "CompareTo", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a19e3e342aed8e423d6c7d7381873e945", null ],
+    [ "Equals", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a98ea8ab65f25e405ab4b1a2a5793fda3", null ],
+    [ "Equals", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#af0ef453fef03179cfc7433c8f6fbaa7f", null ],
+    [ "GetHashCode", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a78fd15cd3549866d8a142c7b62b54df1", null ],
+    [ "operator!=", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a57fd7d22ce503d4e842cdfefa8115f6d", null ],
+    [ "operator+", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a4b162385a4d5e87e22d4e851a9fb73d1", null ],
+    [ "operator-", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#afa6b0da4180379b118c7589e3677209b", null ],
+    [ "operator-", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a23fdf1ecb1221c443c08ae6b7b3959db", null ],
+    [ "operator<", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a727c4f1ad665f06f2eef0ee4bcdd7196", null ],
+    [ "operator<=", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#af534b3b30a06a9119815a7f0425ca5e5", null ],
+    [ "operator==", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a0e523b884b46126f3b385698e6155fd2", null ],
+    [ "operator>", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a4d7402f0698c359a4ba54d3ab6150e87", null ],
+    [ "operator>=", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a93ab2b39cd232d1a1d1d2743b357b84b", null ],
+    [ "ToString", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a108f9388654cf317210fee23fed74bed", null ],
+    [ "IsAbsolute", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a548302f01ce055c2a15c85f1fb61203d", null ],
+    [ "IsRelative", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a3d9d92ded2f664f8a9cda9404c2c7c90", null ],
+    [ "TotalMilliseconds", "struct_maldact_1_1_core_1_1_results_1_1_stream_time.html#a8c66f36af68913778aa3c5e1685c7dcd", null ]
+];

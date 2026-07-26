@@ -1,0 +1,4 @@
+var _preprocessing_contract_pipeline_builder_extensions_8cs =
+[
+    [ "Maldact.Backend.Preprocessing.Pipelines.PreprocessingContractPipelineBuilderExtensions", "class_maldact_1_1_backend_1_1_preprocessing_1_1_pipelines_1_1_preprocessing_contract_pipeline_builder_extensions.html", "class_maldact_1_1_backend_1_1_preprocessing_1_1_pipelines_1_1_preprocessing_contract_pipeline_builder_extensions" ]
+];

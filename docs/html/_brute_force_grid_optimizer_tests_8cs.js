@@ -1,0 +1,4 @@
+var _brute_force_grid_optimizer_tests_8cs =
+[
+    [ "Maldact.Tests.BackendTests.MLTests.ConsolidationTests.TuningTests.OptimizersTests.BruteForceTests.BruteForceGridOptimizerTests", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_consolidation_tests_1_1_tuning_tests0a7014b542271fd8fc8e3a591d9c0f94.html", "class_maldact_1_1_tests_1_1_backend_tests_1_1_m_l_tests_1_1_consolidation_tests_1_1_tuning_tests0a7014b542271fd8fc8e3a591d9c0f94" ]
+];
